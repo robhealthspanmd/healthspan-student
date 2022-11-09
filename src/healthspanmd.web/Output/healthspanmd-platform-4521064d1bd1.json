@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "healthspanmd-platform",
+  "private_key_id": "4521064d1bd18c3151d01ead08b86500f6843b13",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCFewSHu6WXuCjM\nIRnSnq+Rzx2AcOd//0YDM4rYbGHeHTsm3smcBl2fvi3KozQ/zUgkAaI15q6FrcjG\ngvuY5qSglqc8oHpJXJv4034IEYpml3DJFHQb2AACIbnBrmH4rqLty8BYLHuSbC7J\nWGMSuQaC9ydsytWkiEczabwCmmOmmNbGCr44lFekPLBDkM63jTkSrg+lz2pZCl8L\nYdA7tvrgGLMOtbNU1LTTBj4xaLOCjlLZDeNAKOY+XcbqJglJKWWCVekVBRAugM1h\n4EyxWmzxMBi2s7ebZgmR4lrQBjB7Ps2qCKDpNTzCggaLWTb8ZaosGyKupBfijkNl\nupRX5uQvAgMBAAECggEAKddjlqa4JESKqV5Q6Whr0bGSZmI99y4OhM9h3TCwRv9z\nvN4GZb3LGFl1ojkhlkRjskG+1tWebHIK50tE0euuvFYtS0BkxN1eWRP2xFG3SCx9\notKiCN5fNkvbHj7rIBiiIxeFDj63Z7E4w03NFJ/iTihqd9xnNwGvDAs/b7N0vFJl\n0EtAjhnAZES9IlFPBZQNMw7DJfm1qkITFRqDisIw995ksiGOv0WlhQBCoiKGWJZe\nMBnf9ePVF1li+ZKR3nz2QjcSdIrZpWMxabssXbGkwkTAbyZGPX8yqErwSI9gUZ3K\nI7aU46Yjzva8ZxPMCyXxYijRMY4GBAbeSSB0tLsfrQKBgQC5YH0FpATpIyYIHJFO\nIzQ7MtcqT8oG6ED/LxY336d2tRRyE+uiAQGZ4YXKmzzh5YHWjJAHz3ks1Y7TE/K7\niFps6JCQ1j3igJgqhoCzmS4wcGCV0QIsKSS7Of4o7/yTKbjtNTE+6NNQ+vvuyUWh\nik/Qf0XRBN3Wx/qTwG7blQPENQKBgQC4VSjsRZnsmbxGmqV9V0ehKq03XCdgA5wR\nIjb9DN2hcGQH8y2yors2kxjjwkUcAAufTZsr+YPHjQCxt50KAzE4OebIW9JZAsEB\nWjXYUzVYn5JC3aJ5XIq9KY8QZ2jaHH4F3yJONCi66S5vXSMQxSvxoxYDlPYUhDUD\nZHAHrUALUwKBgCz1H5z8mExKP/D7rKm8k/A/djtGuoJOVWUN8F+AmEaLx/eaqSzS\n/aZqMV5fo7ZNSN3VnSCnyoV7DXZXgijE+tkq1dSqgLur4Dt//zqPTcpllqb+134K\nRGQ7vk4DVcgC+Fxe6CCPqqAbHnpcycxRlOXF2BLHEV4DhdvLcZdDXnR5AoGAaNVF\n6NnMqJrmUOEyrQ4uVqKG0K1AV4K2B6iFzXS7t0zMFxleK/IQtwEBbsbVtw7vjTH9\nxgypvZubgXcDgOY/39JORjSydJz0V2iOpvDrrfNSo2SZOpw+60Xvb0zgfOsnYP99\n6ywO3f4vwnYdszPvwgUWSAM30INAAyXj8Pm/KrECgYEAl9s3WbG/JspMcTTcl96S\ndhJWhwxjvgFsC2gsd1N7i5kQYJZBcMAMmYyKgBeVetCt5s+8BpkiFkMM1imEceQz\ncw09cm1dEajylcz4SCHnGESkLLHVMgi7YGc7MBR/RnPXWPjqp+paKfbz9Nj0lMtG\n7yW7qa5m9e0TyvjOSCI23co=\n-----END PRIVATE KEY-----\n",
+  "client_email": "healthspanmd-platform-service@healthspanmd-platform.iam.gserviceaccount.com",
+  "client_id": "109542258370205605469",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/healthspanmd-platform-service%40healthspanmd-platform.iam.gserviceaccount.com"
+}

@@ -1,0 +1,80 @@
+﻿
+<h1>ApexChart Test and Demo</h1>
+
+<h3 class="text-info mt-8">This is the metric name</h3>
+<div id="chart" ></div>
+
+@section Scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var options = {
+          chart: {
+            type: 'line',
+          },
+          stroke: {
+              curve: 'smooth'
+          },
+          markers: {
+              size: 4
+          },
+          series: [{
+            name: 'sales',
+            data: [30,40,35,null,49,60,70,91,125]
+          }],
+          xaxis: {
+            categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+          },
+          annotations: {
+              yaxis: [
+                {
+                  y: 30,
+                  y2: 50,
+                  borderColor: '#000',
+                  fillColor: '#FEB019',
+                  label: {
+                    text: 'could do better'
+                  }
+                },
+                {
+                  y: 0,
+                  y2: 30,
+                  borderColor: '#000',
+                  fillColor: '#F9C1B5',
+                  label: {
+                    text: 'uh oh'
+                  }
+                },
+                {
+                  y: 50,
+                  y2: 125,
+                  borderColor: '#000',
+                  fillColor: '#9BFCA4',
+                  label: {
+                    text: 'great!'
+                  }
+                }
+              ]
+            },
+          //title: {
+          //      text: "This is the chart title",
+          //      align: 'left',
+          //      margin: 0,
+          //      offsetX: 0,
+          //      offsetY: 0,
+          //      floating: false,
+          //      style: {
+          //        fontSize:  '16px',
+          //        fontWeight:  'bold',
+          //        fontFamily:  undefined,
+          //        color:  '#263238'
+          //      },
+          //  }
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    });
+</script>
+
+
+}

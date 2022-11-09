@@ -1,0 +1,59 @@
+﻿@model healthspanmd.core.CQRS.Content.ContentCardModel
+<div class="row row-cols-1 g-10 min-h-200px draggable-zone" id="contentCardItems">
+    @foreach (var member in Model.ContentCardMembers.OrderBy(m => m.SortOrder))
+    {
+        var contentItem = member.ContentItem;
+        <div class="col draggable" id="contentItem_@member.ContentItemId">
+            <div class="card bg-light-primary">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">@member.ContentItem.ItemType [@member.ContentItemId]</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-hover-light-primary" 
+                            onclick="confirmRemoveItem(@contentItem.ContentItemId);">
+                            <img src="/assets/media/icons/duotune/abstract/abs012.svg"/>
+                        </a>
+                        
+                        <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-hover-light-primary draggable-handle">
+                            <span class="svg-icon svg-icon-2x">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
+                                    <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                @switch (contentItem.ItemType)
+                {
+            
+                    case healthspanmd.core.CQRS.Content.ContentItemType.Text:
+                        <span>
+                            <i>Text: </i>@contentItem.Text
+                        </span>
+                        break;
+
+                    case healthspanmd.core.CQRS.Content.ContentItemType.WebLink:
+                        <i>Caption: </i> @contentItem.Text <br />
+                        <i>Url:</i> @contentItem.Url
+                        break;
+
+                    case healthspanmd.core.CQRS.Content.ContentItemType.Video:
+                        <i>Title:</i> @contentItem.Name<br />
+                        <i>Description: </i> @contentItem.Text<br />
+                        <i>YouTube ID: </i> @contentItem.Url
+                        break;
+
+                    case healthspanmd.core.CQRS.Content.ContentItemType.PDFDocument:
+                        <i>Title:</i> @contentItem.ContentFile.Title<br />
+                        <i>Description: </i> @contentItem.ContentFile.Description<br />
+                        <i>Filename: </i> @contentItem.ContentFile.Filename <a href="/Content/DownloadFile/@contentItem.ContentFile.ContentFileId" target="_blank">View File</a>
+                        break;
+                }
+                </div>
+            </div>
+        </div>
+    }
+</div>

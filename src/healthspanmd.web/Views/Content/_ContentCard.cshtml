@@ -1,0 +1,98 @@
+﻿@model healthspanmd.core.CQRS.Content.ContentCardModel
+
+<div>
+
+    @foreach (var member in Model.ContentCardMembers.OrderBy(m => m.SortOrder))
+    {
+        var item = member.ContentItem;
+
+        <div class="row">
+
+        @switch (item.ItemType)
+        {
+            
+
+            case healthspanmd.core.CQRS.Content.ContentItemType.Text:
+                if (item.IsCaption)
+                {
+                    <h2>@item.Text</h2>
+                }
+                else
+                {
+                    <p>@item.Text</p>
+                }
+                break;
+
+
+
+
+            case healthspanmd.core.CQRS.Content.ContentItemType.WebLink:
+                <p>
+                    <a href="@item.Url" class="btn btn-primary w-100">
+                        @item.Text
+                    </a>
+                </p>
+                break;
+
+
+
+
+            case healthspanmd.core.CQRS.Content.ContentItemType.Video:
+                <p>
+                    <div id="ytplayer_@item.ContentItemId" class="content_item_video"></div>
+                    @*
+                        <iframe id="ytplayer_@item.ContentItemId" allow="fullscreen" class="content_item_video"
+                        src="https://www.youtube.com/embed/@item.Url?controls=1&playsinline=1&modestbranding=1"
+                    ></iframe>
+                    <script type="text/javascript">
+                        window.addEventListener("resize", function(){
+                            var dheight = (document.getElementById("cardContainer").offsetWidth - 40) * .5625;
+                            var dwidth = document.getElementById("cardContainer").offsetWidth - 40;
+                            $("#ytplayer_@item.ContentItemId").width(dwidth);
+                            $("#ytplayer_@item.ContentItemId").height(dheight);
+                        });
+                        var dheight = (document.getElementById("cardContainer").offsetWidth - 40) * .5625;
+                        var dwidth = document.getElementById("cardContainer").offsetWidth - 40;
+
+                        var player = $("#ytplayer_@item.ContentItemId");
+                        player.width(dwidth);
+                        player.height(dheight);
+
+                        player.addEventListener("onStateChange", function(state){
+                            if (state == 0){
+                                // mark this video as watched
+                                console.log("this video has been watched");
+                            }
+                        });
+
+                    </script>*@
+                </p>
+               @* <div id="ytplayer_@item.ContentItemId"></div>*@
+                @*<script type="text/javascript">
+                    initVideo('@item.ContentItemId','@item.Url');
+                </script>*@
+                break;
+
+
+
+
+            case healthspanmd.core.CQRS.Content.ContentItemType.PDFDocument:
+            <p>
+                <a href="/Content/DownloadFile/@item.ContentFile.ContentFileId" target="_blank">
+                    <div class="rounded-2 bg-success p-5">
+                
+                            <i class="fa fa-solid fa-file-invoice fs-5tx text-danger float-start m-4"></i>
+                            <span class="fs-3"><b>@item.ContentFile.Title</b></span>
+                            <br />
+                            @item.ContentFile.Description
+                    </div>
+                </a>
+            </p>
+            break;
+
+
+        }
+        </div>
+    }
+
+</div>

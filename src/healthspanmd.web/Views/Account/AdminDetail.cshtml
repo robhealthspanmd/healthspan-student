@@ -1,0 +1,565 @@
+﻿@model healthspanmd.web.Models.Account.ClientDetailViewModel
+@{
+	var title = "Client Detail";
+	var caption = "Add a Client";
+	if (Model.Client.UserId == 0)
+	{
+		title += ": New Client";
+	}
+	else
+	{
+		title += ": " + Model.Client.FirstName + " " + Model.Client.LastName;
+		caption = "Edit Client";
+	}
+
+	string selectedTimeZoneId = "-1";
+	if (!string.IsNullOrEmpty(Model.Client.TimeZoneId))
+	{
+		selectedTimeZoneId = Model.Client.TimeZoneId;
+	}
+
+
+	ViewData["Title"] = title;
+	ViewData["LeftNav_ActiveItem"] = "Clients";
+
+
+	var programStartDate = Model.Client.ProgramStartDate;
+	if (programStartDate.Year == 1)
+	{
+		programStartDate = DateTime.Today;
+	}
+	var programStartDateStr = programStartDate.ToString("yyyy-MM-dd");
+
+	DateTime? programEndDate = Model.Client.ProgramEndDate;
+	if (programEndDate.Value.Year == 1)
+	{
+		programEndDate = null;
+	}
+	var programEndDateStr = "";
+	if (programEndDate.HasValue){
+		programEndDateStr = programEndDate.Value.ToString("yyyy-MM-dd");
+	}
+
+
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	
+	<div class="container-xxl">
+
+		<h2>@caption</h2>
+		
+		<form class="form" id="formUser">
+			<input type="hidden" id="userId" value="@Model.Client.UserId" />
+			<div class="py-10 px-lg-17 row">
+				<div class="col-md-6">
+					<div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">First Name</label>
+						<input id="userFirstName" type="text" class="form-control form-control-solid" placeholder="First Name" value="@Model.Client.FirstName" />
+						<span id="userFirstName_Invalid" class="text-danger d-none">First Name is required.</span>
+					</div>
+					<div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Last Name</label>
+						<input id="userLastName" type="text" class="form-control form-control-solid" placeholder="Last Name" value="@Model.Client.LastName" />
+						<span id="userLastName_Invalid" class="text-danger d-none">Last Name is required.</span>
+					</div>
+					<div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Email</label>
+						<input id="userEmail" type="text" class="form-control form-control-solid" placeholder="Email" value="@Model.Client.Email" />
+						<span id="userEmail_Invalid" class="text-danger d-none">Email is required.</span>
+					</div>
+					<div class="row mb-7">
+						<div class="col-md-4">
+							<label class="required fs-6 fw-bold mb-2">Phone Country Code</label>
+							<input id="userPhoneCountryCode" type="text" class="form-control form-control-solid" placeholder="Country Code" inputmode="text" value="@Model.Client.PhoneCountryCode" />
+							<span id="userPhoneCountryCode_Invalid" class="text-danger d-none">Country Code is required.</span>
+						</div>
+						<div class="col-md-8">
+							<label class="required fs-6 fw-bold mb-2">Phone</label>
+							<input id="userPhone" type="tel" class="form-control form-control-solid" placeholder="Phone" inputmode="text" value="@Model.Client.Phone" />
+							<span id="userPhone_Invalid" class="text-danger d-none">Phone is required.</span>
+						</div>
+						
+					</div>
+					
+					<div class="d-flex flex-stack">
+						<div class="me-5">
+							<label class="fs-6 fw-bold form-label">Is User Active?</label>
+							<div class="fs-7 fw-bold text-gray-400">Indicate if this is an active user</div>
+						</div>
+						<label class="form-check form-switch form-check-custom form-check-solid">
+							<input id="userIsActive" class="form-check-input" type="checkbox" value="1"  />
+							<span class="form-check-label fw-bold text-gray-400">Active</span>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Program Start Date</label>
+						<input id="userProgramStartDate" type="date" class="form-control form-control-solid" placeholder="Program Start Date" inputmode="text" value="@programStartDateStr" />
+						<span id="userProgramStartDate_Invalid" class="text-danger d-none">Program Start Date is required.</span>
+					</div>
+					<div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Program End Date</label>
+						<input id="userProgramEndDate" type="date" class="form-control form-control-solid" placeholder="Program End Date" inputmode="text" value="@programEndDateStr" />
+						<span id="userProgramEndDate_Invalid" class="text-danger d-none">Program End Date is required.</span>
+					</div>
+					<div class="d-flex flex-column mb-7 fv-row">
+						<label class="fs-6 fw-bold mb-2">
+							<span class="required">Client's Time Zone</span>
+						</label>
+						<select id="userTimeZone" name="metricDataType" aria-label="Select a Data Type" data-placeholder="Select a Time Zone ..." class="form-select form-select-solid fw-bolder" onclick="setControlState();">
+							<option value="-1" disabled selected>Select a Time Zone</option>
+							@foreach (var tz in TimeZoneInfo.GetSystemTimeZones())
+							{
+								<option value="@tz.Id">@tz.DisplayName</option>
+							}
+						</select>
+						<span id="userTimeZone_Invalid" class="text-danger d-none">Please select a Time Zone.</span>
+					</div>
+					<div class="row mb-7">
+						<div class="col-md-5">
+							<label class="required fs-6 fw-bold mb-2">Notification Time</label>
+							<input id="userNotificationTime" type="time" class="form-control form-control-solid" placeholder="Notification Time" inputmode="text" value="@Model.Client.NotificationTime.ToString("HH:mm")" />
+							<span id="userNotificationTime_Invalid" class="text-danger d-none">Notification Time is required.</span>
+						</div>
+						<div class="col-md-7">
+							<label class="required fs-6 fw-bold mb-2">Notification Delivery</label><br />
+							<div class="form-check form-check-custom form-check-solid mb-1">
+								
+								<input class="form-check-input" type="checkbox" value="" id="notificationBySMS" @(Model.Client.NotificationBySMS ? "checked" : "") />
+								<label class="form-check-label" for="checkSendNotificationBySMS">
+									SMS (Text)
+								</label>
+							</div>
+							<div class="form-check form-check-custom form-check-solid">
+								<input class="form-check-input" type="checkbox" value="" id="notificationByEmail" @(Model.Client.NotificationByEmail ? "checked" : "") />
+								<label class="form-check-label" for="checkSendNotificationByEmail">
+									Email
+								</label>
+							</div>
+							<span id="userNotificationDeliveryType_Invalid" class="text-danger d-none">Check SMS and/or Email.</span>
+							<button type="button" class="btn btn-primary mt-9" onclick="showTestNotificationDialog();">Send Test Notification</button>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="mb-6">
+				<h3>Assigned Content</h3>
+				<a href="/Account/ContentAssignments/@Model.Client.UserId" class="btn btn-primary">Manage Assigned Content</a>
+			</div>
+			<div>
+				<h3>Select Active Metrics</h3>
+				<div class="py-5 px-lg-17">
+					@foreach (var metric in Model.Metrics.Where(m => m.IsActive))
+					{
+						var isCheckedStr = Model.Client.SelectedMetrics.Where(sm => sm.MetricId == metric.MetricId).FirstOrDefault() != null ? "checked" : "";
+
+						<div class="row mb-3 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+							<div class="form-check form-check-custom form-check-solid mb-3 col-md-3">
+								<input name="checkedMetrics" class="form-check-input" type="checkbox" value="@metric.MetricId" @isCheckedStr id="checkMetric_@metric.MetricId"/>
+								<label class="form-check-label" for="checkMetric_@metric.MetricId">
+									@metric.Name
+								</label>
+							</div>
+							<div class="col-md-4">
+								<label class="required fs-6 fw-bold mb-2">Frequency</label>
+								<select id="metricFrequency_@metric.MetricId" name="metricFrequency" aria-label="Select a Data Type" 
+										@*onfocus="javascript:setDayOfWeekVisibility('@metric.MetricId');"*@
+										onchange="setDayOfWeekVisibility('@metric.MetricId');"
+										data-placeholder="Select a Frequency..." class="form-select form-select-solid fw-bolder">
+									<option value="-1" disabled selected>Select a frequency</option>
+									<option value="0">Daily</option>
+									<option value="1">Weekly</option>
+									<option value="6">Monthly</option>
+									<option value="7">OnDemand</option>
+									
+								</select>
+
+								<div id="divFrequency_DayOfWeek_@metric.MetricId" class="mt-1">
+									<select id="metricFrequency_DayOfWeek_@metric.MetricId" class="form-select form-select-solid fw-bolder">
+										<option value="1" selected>Monday</option>
+										<option value="2">Tuesday</option>
+										<option value="3">Wednesday</option>
+										<option value="4">Thursday</option>
+										<option value="5">Friday</option>
+										<option value="6">Saturday</option>
+										<option value="0">Sunday</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<label class="required fs-6 fw-bold mb-2">Goal</label>
+								<input id="metricGoal_@metric.MetricId" type="number" class="form-control form-control-solid" placeholder="Goal" value="@metric.Threshold" />
+								<span id="metricGoal_Invalid_@metric.MetricId" class="text-danger d-none">Goal is required.</span>
+							</div>
+							@if (metric.DataType == healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_2Values){
+								<div class="col-md-2">
+									<label class="required fs-6 fw-bold mb-2">Goal 2</label>
+									<input id="metricGoal2_@metric.MetricId" type="number" class="form-control form-control-solid" placeholder="Goal 2" value="@metric.Threshold2" />
+									<span id="metricGoal2_Invalid_@metric.MetricId" class="text-danger d-none">Goal 2 is required.</span>
+								</div>
+							}
+							
+							
+						</div>
+						
+					}
+					<div class="col-md-12 mb-5"></div>
+					@foreach (var metric in Model.Metrics.Where(m => !m.IsActive))
+					{
+						var isCheckedStr = Model.Client.SelectedMetrics.Where(sm => sm.MetricId == metric.MetricId).FirstOrDefault() != null ? "checked" : "";
+						<div class="form-check form-check-custom form-check-solid col-md-4 mb-3">
+							<input name="checkedMetrics" class="form-check-input" type="checkbox" value="@metric.MetricId" @isCheckedStr id="checkMetric_@metric.MetricId" onclick="this.checked=false;"/>
+							<label class="form-check-label text-muted" for="checkMetric_@metric.MetricId">
+								@metric.Name (inactive)
+							</label>
+						</div>
+					}
+					
+				</div>
+			</div>
+
+			<hr />
+			<div class="flex-center">
+				<a href="/Account/ClientList" class="btn btn-light me-3" >Cancel</a>
+				<button type="button" id="kt_modal_add_customer_submit" class="btn btn-primary" onclick="updateClient();">
+					<span id="updateClientButtonLabel" class="indicator-label">Submit</span>
+					<span id="updateClientButtonBusyLabel" class="indicator-progress">Please wait...
+					<span id="updateClientButtonBusySpinner" class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+				</button>
+				
+			</div>
+			<div>
+				<span id="submitInvalid" class="text-danger"></span>
+			</div>
+		</form>
+		
+
+	</div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalSendTestNotification">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Send Test Notification</h5>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+						</svg>
+					</span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <p>Send a Test Notification to @Model.Client.FirstName with number +@Model.Client.PhoneCountryCode @Model.Client.Phone</p>
+				<textarea id="testMessageBody" class="form-control" placeholder="Enter message body ..."></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="sendTestNotificationMessage();">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+	<script src="/lib/inputmask/jquery.inputmask.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			console.log("document.ready");
+			prepInvalidLabels(["userFirstName","userLastName","userEmail","userPhoneCountryCode","userPhone","userProgramStartDate","userProgramEndDate","userTimeZone","userNotificationTime","userNotificationDeliveryType"]);
+
+			$("#userTimeZone").val("@selectedTimeZoneId");
+			document.getElementById("userIsActive").checked = @Model.Client.IsActive.ToString().ToLower();
+
+			//Inputmask({"mask" : "+99 (999) 999-9999"}).mask("#userPhone");
+			//Inputmask({"mask" : "99/99/9999"}).mask("#userProgramStartDate");
+
+			var countryCodeInput = document.getElementById("userPhoneCountryCode");
+			countryCodeInput.addEventListener('keyup', function (e) {
+				if ($("#userPhoneCountryCode").val() == "1"){
+					console.log("masking userPhone");
+					Inputmask({"mask" : "(999) 999-9999"}).mask("#userPhone");
+				} else {
+					Inputmask.remove(document.getElementById("userPhone"));
+				}
+            });
+
+			if ($("#userPhoneCountryCode").val() == "1" || $("#userPhoneCountryCode").val().length == 0){
+				console.log("masking userPhone");
+				Inputmask({"mask" : "(999) 999-9999"}).mask("#userPhone");
+			} else {
+				Inputmask.remove(document.getElementById("userPhone"));
+			}
+
+
+			for (x = 0; x < metrics.length; x++){
+				var metric = metrics[x];
+				$("#metricFrequency_" + metric.MetricId).val(metric.Frequency.toString());				
+				$("#metricGoal_" + metric.MetricId).val(metric.Threshold);
+				$("#metricGoal2_" + metric.MetricId).val(metric.Threshold2);
+				setDayOfWeekVisibility(metric.MetricId);
+			}
+
+			for (x = 0; x < selectedMetrics.length; x++){
+				var selectedMetric = selectedMetrics[x];
+				$("#metricFrequency_" + selectedMetric.MetricId).val(selectedMetric.Frequency);
+				$("#metricFrequency_DayOfWeek_" + selectedMetric.MetricId).val(selectedMetric.DayOfWeek);
+				if (selectedMetric.Goal){
+					$("#metricGoal_" + selectedMetric.MetricId).val(selectedMetric.Goal);
+				}
+				if (selectedMetric.Goal2){
+					$("#metricGoal2_" + selectedMetric.MetricId).val(selectedMetric.Goal2);
+				}
+				setDayOfWeekVisibility(selectedMetric.MetricId);
+			}
+
+        });
+
+		var metrics = @Html.Raw(Model.MetricsJson);
+		var selectedMetrics = @Html.Raw(Model.SelectedMetricsJson);
+
+		function prepInvalidLabels(items){
+			for (i = 0; i < items.length; i++){
+				var item = items[i];
+				$("#" + item + "_Invalid").removeClass("d-none");
+				$("#" + item + "_Invalid").hide();
+			}
+		}
+
+		class client {
+			constructor(userId, firstName, lastName, email, phoneCountryCode, phone, programStartDate, programEndDate, isActive, notificationBySMS, notificationByEmail, timeZoneId, notificationTime, selectedMetrics){
+				this.userId = userId;
+				this.firstName = firstName;
+				this.lastName = lastName;
+				this.email = email;
+				this.phoneCountryCode = phoneCountryCode;
+				this.phone = phone;
+				this.programStartDate = programStartDate;
+				this.programEndDate = programEndDate;
+				this.isActive = isActive;
+				this.notificationBySMS = notificationBySMS;
+				this.notificationByEmail = notificationByEmail;
+				this.timeZoneId = timeZoneId;
+				this.notificationTime = notificationTime;
+				this.selectedMetrics = selectedMetrics;
+			}
+		}
+
+		//function updateClient(){
+		//	showBusySpinner();
+		//	setTimeout(() => { updateClientWorker(); }, 300);
+			
+		//}
+
+		function updateClient(){
+			showBusySpinner();
+
+			if (validateUserForm()){
+
+				var thisUser = new client(
+					parseInt($("#userId").val(),10),
+					$("#userFirstName").val(),
+					$("#userLastName").val(),
+					$("#userEmail").val(),
+					$("#userPhoneCountryCode").val(),
+					$("#userPhone").val(),
+					$("#userProgramStartDate").val(),
+					$("#userProgramEndDate").val(),
+					document.getElementById("userIsActive").checked,
+					document.getElementById("notificationBySMS").checked,
+					document.getElementById("notificationByEmail").checked,
+					$("#userTimeZone").find(":selected").val(),
+					"0001-01-01T" + $("#userNotificationTime").val() + ":00",
+					getCheckedMetrics()
+				);
+
+				console.log(thisUser);
+
+				var serviceUrl = "/Account/AdminDetail"
+				$.ajax({
+					url: serviceUrl,
+					type: "post",
+					data: JSON.stringify(thisUser),
+					contentType: "application/json",
+					success: function (response) {
+						if (response.success) {
+							window.location.href="/Account/ClientList";
+						} else {
+							console.log(serviceUrl + " did not succeed");
+							if (response.fieldMessages.email) {
+								$("#userEmail_Invalid").html(response.fieldMessages.email);
+								$("#userEmail_Invalid").show();
+							}
+							if (response.fieldMessages.phone) {
+								$("#userPhone_Invalid").html(response.fieldMessages.phone);
+								$("#userPhone_Invalid").show();
+							}
+						}
+						hideBusySpinner();
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(serviceUrl + " failed");
+						hideBusySpinner()
+					}
+				});
+			} else {
+				hideBusySpinner();
+			}
+			
+		}
+
+		function getCheckedMetrics(){
+			var result = [];
+
+
+			for (x = 0; x < metrics.length; x++){
+				var metric = metrics[x];
+				if (document.getElementById("checkMetric_" + metric.MetricId).checked){
+					var checkedMetric = {
+						MetricId: metric.MetricId,
+						Frequency: parseInt($("#metricFrequency_" + metric.MetricId).find(":selected").val(),10),
+						DayOfWeek: parseInt($("#metricFrequency_DayOfWeek_" + metric.MetricId).find(":selected").val(),10),
+						Goal: parseFloat($("#metricGoal_" + metric.MetricId).val()),
+						Goal2: parseFloat($("#metricGoal2_" + metric.MetricId).val())
+					};
+					if (checkedMetric.Frequency != 1){
+						checkedMetric.DayOfWeek = -1;
+					}
+					result.push(checkedMetric);
+				}
+			}
+
+			return result;
+		}
+
+		function setDayOfWeekVisibility(metricId){
+			if ($("#metricFrequency_" + metricId).find(":selected").val() == "1") {
+				$("#divFrequency_DayOfWeek_" + metricId).show();
+			} else {
+				$("#divFrequency_DayOfWeek_" + metricId).hide();
+			
+			}
+		}
+
+		function validateUserForm(){
+
+			var valid = true;
+			if ($("#userFirstName").val().length == 0){
+				$("#userFirstName_Invalid").show();
+				valid = false;
+			} else {
+				$("#userFirstName_Invalid").hide();
+			}
+			if ($("#userLastName").val().length == 0){
+				$("#userLastName_Invalid").show();
+				valid = false;
+			} else {
+				$("#userLastName_Invalid").hide();
+			}
+			if ($("#userEmail").val().length == 0){
+				$("#userEmail_Invalid").show();
+				valid = false;
+			} else {
+				$("#userEmail_Invalid").hide();
+			}
+			if ($("#userPhoneCountryCode").val().length == 0){
+				$("#userPhoneCountryCode_Invalid").show();
+				valid = false;
+			} else {
+				$("#userPhoneCountryCode_Invalid").hide();
+			}
+			if ($("#userPhone").val().length == 0){
+				$("#userPhone_Invalid").show();
+				valid = false;
+			} else {
+				$("#userPhone_Invalid").hide();
+			}
+			if ($("#userProgramStartDate").val().length == 0){
+				$("#userProgramStartDate_Invalid").show();
+				valid = false;
+			} else {
+				$("#userProgramStartDate_Invalid").hide();
+			}
+			if ($("#userProgramEndDate").val().length == 0){
+				$("#userProgramEndDate_Invalid").show();
+				valid = false;
+			} else {
+				$("#userProgramEndDate_Invalid").hide();
+			}
+			if ($("#userTimeZone").find(":selected").val() == "-1"){
+				$("#userTimeZone_Invalid").show();
+				valid = false;
+			} else {
+				$("#userTimeZone_Invalid").hide();
+			}
+			if ($("#userNotificationTime").val().length == 0){
+				$("#userNotificationTime_Invalid").show();
+				valid = false;
+			} else {
+				$("#userNotificationTime_Invalid").hide();
+			}
+			if (document.getElementById("notificationBySMS").checked == false && document.getElementById("notificationByEmail").checked == false){
+				$("#userNotificationDeliveryType_Invalid").show();
+				valid = false;
+			} else {
+				$("#userNotificationDeliveryType_Invalid").hide();
+			}
+			if (valid == true){
+				console.log("dont show error");
+				$("#submitInvalid").html("");
+			} else {
+				console.log(" show error");
+				$("#submitInvalid").html("There were problems. Please fix the problems above and re-submit.");
+			}
+			return valid;
+		}
+
+		function showTestNotificationDialog(){
+			$("#modalSendTestNotification").modal("show");
+		}
+
+		function sendTestNotificationMessage(){
+			var sendRequest = {
+				PhoneNumber: "+@Model.Client.PhoneCountryCode @Model.Client.Phone",
+				Message: $("#testMessageBody").val()
+			}
+			console.log(sendRequest);
+			var serviceUrl = "/Account/SendTestNotification"
+				$.ajax({
+					url: serviceUrl,
+					type: "post",
+					data: JSON.stringify(sendRequest),
+					contentType: "application/json",
+					success: function (response) {
+						if (response.success) {
+							$("#modalSendTestNotification").modal("hide");
+						} else {
+							console.log(serviceUrl + " did not succeed");
+							if (response.fieldMessages.email) {
+								$("#userEmail_Invalid").html(response.fieldMessages.email);
+								$("#userEmail_Invalid").show();
+							}
+							if (response.fieldMessages.phone) {
+								$("#userPhone_Invalid").html(response.fieldMessages.phone);
+								$("#userPhone_Invalid").show();
+							}
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(serviceUrl + " failed");
+					}
+				});
+		}
+
+
+	</script>
+}

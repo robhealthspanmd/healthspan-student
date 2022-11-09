@@ -1,0 +1,46 @@
+﻿@{
+	BreadCrumbViewModel breadCrumbs = null;
+	BreadCrumbViewModel.BreadCrumb lastBreadCrumb = null;
+	if (ViewData.ContainsKey("Breadcrumbs"))
+	{
+		breadCrumbs = (BreadCrumbViewModel)ViewData["Breadcrumbs"];
+		if (breadCrumbs.Items.Count > 0)
+		{
+			lastBreadCrumb = breadCrumbs.Items.Last();
+		}
+	}
+	else
+	{
+		breadCrumbs = new BreadCrumbViewModel
+		{
+			Items = new List<BreadCrumbViewModel.BreadCrumb>()
+		};
+	}
+}
+
+<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 pt-1">
+	
+	<li class="breadcrumb-item text-muted">
+		<a href="/" class="text-muted text-hover-primary">Home</a>
+	</li>
+
+	@foreach (var breadCrumb in breadCrumbs.Items)
+	{
+		if (breadCrumb.Equals(lastBreadCrumb))
+		{
+			<li class="breadcrumb-item text-dark">@breadCrumb.Caption</li>
+		}
+		else
+		{
+			if (string.IsNullOrEmpty(breadCrumb.Url))
+			{
+				<li class="breadcrumb-item text-muted">@breadCrumb.Caption</li>
+			}
+			else
+			{
+				<li class="breadcrumb-item text-muted"><a href="@breadCrumb.Url" class="text-muted text-hover-primary">@breadCrumb.Caption</a></li>
+			}
+		}
+	}
+</ul>
+

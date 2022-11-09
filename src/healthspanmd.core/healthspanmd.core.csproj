@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CQRS\MetricTypes\**" />
+    <EmbeddedResource Remove="CQRS\MetricTypes\**" />
+    <None Remove="CQRS\MetricTypes\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\healthspanmd.shared\healthspanmd.shared.csproj" />
+  </ItemGroup>
+
+</Project>

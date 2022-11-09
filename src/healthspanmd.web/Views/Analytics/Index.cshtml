@@ -1,0 +1,185 @@
+﻿@using healthspanmd.web.Models.Analytics
+@model ProgressViewModel
+@{
+    DateTime weekStartDate = Model.StartDate;
+    DateTime monthStartDate = Model.StartDate;
+    DateTime yearStartDate = Model.StartDate;
+    DateTime? forwardStartDate = null;
+    DateTime? backwardStartDate = null;
+    switch (Model.TimePeriod)
+    {
+        case healthspanmd.web.Models.Analytics.ProgressViewModel.TimePeriodType.Week:
+            monthStartDate = Model.StartDate.AddDays(-24);
+            yearStartDate = Model.StartDate.AddDays(-359);
+            backwardStartDate = Model.StartDate.AddDays(-6);
+            forwardStartDate = Model.StartDate.AddDays(6);
+            break;
+
+        case healthspanmd.web.Models.Analytics.ProgressViewModel.TimePeriodType.Month:
+            weekStartDate = Model.StartDate.AddDays(24);
+            yearStartDate = Model.StartDate.AddDays(-334);
+            backwardStartDate = Model.StartDate.AddDays(-30);
+            forwardStartDate = Model.StartDate.AddDays(30);
+            break;
+
+        case healthspanmd.web.Models.Analytics.ProgressViewModel.TimePeriodType.Year:
+            weekStartDate = Model.StartDate.AddDays(359);
+            monthStartDate = Model.StartDate.AddDays(334);
+            backwardStartDate = Model.StartDate.AddDays(-364);
+            forwardStartDate = Model.StartDate.AddDays(364);
+            break;
+    }
+    if (forwardStartDate > DateTime.Today)
+    {
+        forwardStartDate = null;
+    }
+    if (backwardStartDate < Model.ProgramStartDate)
+    {
+        backwardStartDate = Model.ProgramStartDate;
+    }
+    if (Model.StartDate == Model.ProgramStartDate)
+    {
+        backwardStartDate = null;
+    }
+    var backwardStartDateStr = backwardStartDate.HasValue ? backwardStartDate.Value.ToString("yyyy-MM-dd") : "";
+    var forwardStartDateStr = forwardStartDate.HasValue ? forwardStartDate.Value.ToString("yyyy-MM-dd") : "";
+    var backwardUrl = $"/Analytics/Progress/{Model.User.UserId}/{Model.TimePeriod.ToString()}/{backwardStartDateStr}";
+    var weekUrl = $"/Analytics/Progress/{Model.User.UserId}/{ProgressViewModel.TimePeriodType.Week.ToString()}/{weekStartDate.ToString("yyyy-MM-dd")}";
+    var monthUrl = $"/Analytics/Progress/{Model.User.UserId}/{ProgressViewModel.TimePeriodType.Month.ToString()}/{monthStartDate.ToString("yyyy-MM-dd")}";
+    var yearUrl = $"/Analytics/Progress/{Model.User.UserId}/{ProgressViewModel.TimePeriodType.Year.ToString()}/{yearStartDate.ToString("yyyy-MM-dd")}";
+    var forwardUrl = $"/Analytics/Progress/{Model.User.UserId}/{Model.TimePeriod.ToString()}/{forwardStartDateStr}";
+
+    ViewData["Title"] = "Progress";
+    ViewData["LeftNav_ActiveItem"] = "Progress";
+}
+<h1>@Model.User.FullName</h1>
+
+@*<button type="button" class="btn btn-icon btn-success btn-sm @(backwardStartDate.HasValue ? "" : "disabled")"
+    onclick="getChartData(1019,'@Model.TimePeriod.ToString()','@backwardStartDateStr')"><i class="fas fa-step-backward"></i></button>*@
+
+<a href="@backwardUrl" class="btn btn-icon btn-success btn-sm @(backwardStartDate.HasValue ? "" : "disabled")"><i class="fas fa-step-backward"></i></a>
+<a href="@weekUrl" class="btn btn-success btn-sm @(Model.TimePeriod == ProgressViewModel.TimePeriodType.Week ? "disabled" : "")">Week</a>
+<a href="@monthUrl" class="btn btn-success btn-sm @(Model.TimePeriod == ProgressViewModel.TimePeriodType.Month ? "disabled" : "")">Month</a>
+<a href="@yearUrl" class="btn btn-success btn-sm @(Model.TimePeriod == ProgressViewModel.TimePeriodType.Year ? "disabled" : "")">Year</a>
+<a href="@forwardUrl" class="btn btn-icon btn-success btn-sm @(forwardStartDate.HasValue ? "" : "disabled")"><i class="fas fa-step-forward"></i></a>
+
+<div class="row">
+    @foreach (var dataset in Model.TrackingDataSets)
+    {
+        switch (dataset.ChartType)
+        {
+            case "ChartOptions":
+                <div class="col-md-6">
+                    <h3 class="text-info mt-8">@dataset.MetricName</h3> 
+                    <div id="chart_@dataset.MetricId"></div>
+                </div>
+                break;
+
+            case "Table":
+                <div class="col-md-6">
+                    <h3 class="text-info mt-8">@dataset.MetricName</h3> 
+                    @(Html.Kendo().Grid<healthspanmd.web.Models.Analytics.TableItemViewModel>()
+                        .Name("grid_metric" + dataset.MetricId)
+                        .Columns(columns =>
+                        {
+                            columns.Bound(c => c.TrackingDate).Format("{0:MM/dd/yyyy}").Title("Date");
+                            columns.Bound(c => c.Value1).Title("Systolic");
+                                    @*.ClientTemplate(
+                                        "# if (Value1 > 85) { #" +
+                                            "<div class='bg-danger'>#= Value1 #</div>" + 
+                                        "# } else { #" + 
+                                            "<div class='bg-success'>#= Value1 #</div>" + 
+                                        "# } #"
+                                    );*@
+                            columns.Bound(c => c.Value2).Title("Diastolic");
+                        })
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Read(read => read.Action("ProgressTable_Read", "Analytics", 
+                                new { 
+                                    metricId = @dataset.MetricId, 
+                                    startDate = @Model.StartDate.ToString("yyyy-MM-dd"),
+                                    timePeriod = @Model.TimePeriod.ToString(),
+                                    userId = @Model.User.UserId
+                                } ))
+                        )
+                        .Events(events => events.DataBound("function(){updateColors('grid_metric" + dataset.MetricId  + "');}"))
+                    )
+                </div>
+                break;
+            
+        }
+        
+    }
+</div>
+
+
+
+@section Scripts {
+
+<script type="text/javascript">
+        
+
+    $(document).ready(function () {
+        
+        @foreach (var dataset in Model.TrackingDataSets){
+            if (dataset.ChartType == "ChartOptions"){
+                <text>
+                    renderChart(@dataset.MetricId,@Html.Raw(dataset.OptionsJson));
+                </text>
+            }
+        }
+    });
+
+
+    function updateColors(gridId){
+        //console.log("updateColors: " + gridId);  
+        var grid = $("#" + gridId).data("kendoGrid");
+        var data = grid.dataSource.data();
+        $.each(data, function (i, row){
+            if (row.Value1){
+                if (row.MeetsGoal) {
+                    $('tr[data-uid="' + row.uid + '"] ').css("background", "rgba(0,200,150,0.1)");
+                } else {
+                    $('tr[data-uid="' + row.uid + '"] ').css("background", "rgba(255,0,0,0.1)");
+                }
+            }
+        });
+    }
+
+    function renderChart(metricId, options){
+        console.log(options);
+        var chart = new ApexCharts(document.querySelector("#chart_" + metricId), options);
+        chart.render();
+    }
+
+
+    function getChartData(metricId, timePeriod, startDateStr){
+
+        var serviceUrl = "/Analytics/ProgressChart/" + metricId + "/" + timePeriod + "/" + startDateStr;
+        console.log(serviceUrl);
+        $.ajax({
+		    url: serviceUrl,
+		    type: "get",
+		    success: function (response) {
+			    if (response.success) {
+                    console.log(response.options);
+                    optionsObject = JSON.parse(response.options);
+                    console.log(optionsObject);
+                    renderChart(metricId, optionsObject);
+			    } else {
+				    console.log(serviceUrl + " did not succeed");
+				    
+			    }
+		    },
+		    error: function (xhr, ajaxOptions, thrownError) {
+			    console.log(serviceUrl + " failed");
+		    }
+	    });
+    }
+
+    
+</script>
+
+
+}

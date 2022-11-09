@@ -1,0 +1,807 @@
+﻿@model healthspanmd.web.Models.ContentAdmin.CardBuilderViewModel
+@{
+    ViewData["Title"] = "Card Builder";
+    ViewData["LeftNav_ActiveItem"] = "Content";
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="container-xxl">
+        <div class="py-5">
+           
+            <div class="row g-10">
+                <div class="col-md-6">
+                    <div class="card card-bordered border-primary">
+                        <div class="card-header bg-light">
+                            <h3 class="card-title">
+                                <a href="javascript:void(0);" onclick="editCardName();" id="contentCardName"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Click to Edit Name and Description">@Model.ContentCard.Name</a>
+                            </h3>
+                            <div class="card-toolbar">
+                                <a href="javascript:void(0);" onclick="editCardName();">
+                                    <img src="/assets/media/icons/duotune/general/gen055.svg" class="svg-icon-2x" />
+                                </a>
+                            </div>
+                            <div class="w-100">
+                                <div class="text-sm-start text-info">Description:</div>
+                                <div id="contentCardDescription">@Model.ContentCard.Description</div>
+                            </div>
+                            <div class="mt-1 w-100">
+                                <div class="text-sm-start text-info">Notification Message:</div>
+                                <div id="contentCardNotificationMessage">@Model.ContentCard.NotificationMessage</div>
+                            </div>                                                      
+                        </div>
+                        <div class="card-body border">
+                            <div class="w-100">
+                                <button class="btn btn-primary btn-sm w-100" type="button" onclick="addItem();">Add item</button>
+                            </div>  
+                        </div>
+                        <div class="card-body border">
+                            
+                            <a href="javascript:void(0);" onclick="editCardImage();"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" 
+                                            title="Click to Upload a Content Card Image">
+
+                                <img src="@Model.CardImageData" class="w-100" id="cardImagePreview">
+                          
+                            </a>
+                        </div>
+                        <div class="card-body" id="divCardBuilderItems">
+                            
+                        </div>
+                    </div>
+                </div>               
+
+                <div class="col-md-1">
+                    @*<div class="card card-bordered">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="card-label"></h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                           
+                        </div>
+                    </div>*@
+                </div>      
+                
+
+                <div class="col-md-5">
+                    <div class="card card-bordered border-primary">
+                        <div class="card-header bg-light">
+                            <div class="card-title">
+                                <h3 class="card-label">Preview</h3>
+                            </div>
+                        </div>
+                        <div class="card-body" id="cardContainer">
+                            @*<partial name="/Views/Content/_ContentCard.cshtml" model=@Model.ContentCard></partial>*@
+                        </div>
+                        
+                    </div>
+
+                   
+                </div>      
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalEditName">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Card Name / Description</h5>
+
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+						</svg>
+					</span>
+                </div>
+
+            </div>
+
+            <div class="modal-body">
+                <div class="mt-4">
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Card Name</label>
+						<input id="cardName" type="text" class="form-control form-control-solid" placeholder="Enter Name here ..." />
+						<span id="cardName_Invalid" class="text-danger d-none">Card Name is required.</span>
+					</div>
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Card Description</label>
+						<textarea id="cardDescription" rows="3" class="form-control form-control-solid" placeholder="Enter description here ..."></textarea>
+						<span id="cardDescription_Invalid" class="text-danger d-none">Card Description is required.</span>
+					</div>
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Notification Message</label>
+						<textarea id="cardNotificationMessage" rows="3" class="form-control form-control-solid" placeholder="Enter message here ..."></textarea>
+                        <div class="alert alert-info">
+                            Note: use <i>{firstname}</i> as a placeholder and the notification system will replace it with the client's first name.
+                        </div>
+						<span id="cardNotificationMessage_Invalid" class="text-danger d-none">Notification Message is required.</span>
+					</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateCardName();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalUpdateImage">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload Card Image</h5>
+
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+						</svg>
+					</span>
+                </div>
+
+            </div>
+
+            <div class="modal-body">
+                <form class="form" action="#" method="post">
+                    <div class="fv-row">
+                        <div class="dropzone" id="cardImageDropZone">
+                            <div class="dz-message needsclick">
+                                <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop file here or click to upload.</h3>
+                                    <span class="fs-7 fw-bold text-gray-400">You may upload 1 PNG file</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateCardImage();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalAddItem">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Item</h5>
+
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+						</svg>
+					</span>
+                </div>
+
+            </div>
+
+            <div class="modal-body">
+                <div id="itemTypePrompt">
+                    <p>Select the type of item you would like to add:</p>
+				    <select id="addItemType" class="form-select form-select-solid fw-bolder" onchange="onItemTypeChange();">
+                        <option value="-1" disabled>Select item type ...</option>
+                        <option value="0">Video</option>
+                        @*<option value="1">Image</option>*@
+                        <option value="2">PDF Document</option>
+                        <option value="3">Web Link</option>
+                        <option value="4">Text</option>
+                    </select>
+                </div>
+
+                <div id="itemTypeForm_File" class="mt-4 d-none">
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-bold mb-2">Title</label>
+						<input id="contentItemDocumentTitle" type="text" class="form-control form-control-solid" placeholder="Enter Document Title here ..." />
+						<span id="contentItemDocumentTitle_Invalid" class="text-danger d-none">Document Title is required.</span>
+                        <br /><br />
+                        <label class="fs-6 fw-bold mb-2">Description</label>
+						<input id="contentItemDocumentDescription" type="text" class="form-control form-control-solid" placeholder="Enter Description here ..." />
+                        <br /><br />
+						
+                        <form class="form" action="#" method="post">
+                            <div class="fv-row">
+                                <div class="dropzone" id="contentFileDropZone">
+                                    <div class="dz-message needsclick">
+                                        <i class="bi bi-file-earmark-arrow-up text-primary fs-3x"></i>
+                                        <div class="ms-4">
+                                            <h3 class="fs-5 fw-bolder text-gray-900 mb-1">Drop file here or click to upload.</h3>
+                                            <span class="fs-7 fw-bold text-gray-400">You may upload 1 PDF file</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+					</div>
+                </div>
+                
+                <div id="itemTypeForm_Text" class="mt-4 d-none">
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Item Text</label>
+						<input id="contentItemText" type="text" class="form-control form-control-solid" placeholder="Enter Text here ..." name="selectItemDisplayText" />
+						<span id="contentItemText_Invalid" class="text-danger d-none">Content Item Text is required.</span>
+
+                        <div class="form-check form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="" id="contentItemTextIsCaption"/>
+                            <label class="form-check-label" for="contentItemTextIsCaption">
+                                Show Text Emphasized as Caption
+                            </label>
+                        </div>
+
+					</div>
+                </div>
+
+                <div id="itemTypeForm_WebLink" class="mt-4 d-none">
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Link Text</label>
+						<input id="contentItemWebLinkText" type="text" class="form-control form-control-solid" placeholder="Enter link text here ..." />
+						<span id="contentItemWebLinkText_Invalid" class="text-danger d-none">Link Text is required.</span>
+                        <br /><br />
+                        <label class="required fs-6 fw-bold mb-2">Link Url</label>
+						<input id="contentItemWebLinkUrl" type="text" class="form-control form-control-solid" placeholder="Enter link url here ..." />
+						<span id="contentItemWebLinkUrl_Invalid" class="text-danger d-none">Link Url is required.</span>
+                        <br /><br />
+					</div>
+                </div>
+
+                <div id="itemTypeForm_Video" class="mt-4 d-none">
+                    <div class="fv-row mb-7">
+						<label class="required fs-6 fw-bold mb-2">Title</label>
+						<input id="contentItemVideoTitle" type="text" class="form-control form-control-solid" placeholder="Enter Title here ..." />
+						<span id="contentItemVideoTitle_Invalid" class="text-danger d-none">Video Title is required.</span>
+                        <br /><br />
+                        <label class="fs-6 fw-bold mb-2">Description</label>
+						<input id="contentItemVideoDescription" type="text" class="form-control form-control-solid" placeholder="Enter Description here ..." />
+                        <br /><br />
+                        <label class="required fs-6 fw-bold mb-2">Youtube Video ID</label>
+						<input id="contentItemVideoId" type="text" class="form-control form-control-solid" placeholder="Enter Video ID here ..." />
+						<span id="contentItemVideoId_Invalid" class="text-danger d-none">Youtube video id is required.</span>
+					</div>
+                </div>
+            </div>
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="addItemSave();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalConfirmRemoveItem">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Remove Item?</h5>
+
+                <!--begin::Close-->
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                    <span class="svg-icon svg-icon-2x">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+							<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+							<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+						</svg>
+					</span>
+                </div>
+                <!--end::Close-->
+            </div>
+
+            <div class="modal-body">
+                <p>Are you sure you want to remove this Item from the Card?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="removeItem();">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/assets/plugins/custom/draggable/draggable.bundle.js"></script>
+    <script src="/js/content-card.js"></script>
+    <script type="text/javascript">
+        var contentCardId = @Model.ContentCard.ContentCardId;
+        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video)) {
+            var contentItem = member.ContentItem;
+
+            <text>
+            var videoItem = {
+                Id : @contentItem.ContentItemId,
+                Url : "@contentItem.Url"
+            };
+            videoContentItems.push(videoItem);
+            </text>
+        }
+   
+
+        var itemTypeIds = {
+            Video : 0,
+            Image : 1,
+            PDFDocument : 2,
+            WebLink : 3,
+            Text : 4
+        };
+
+        var uploadedContentFileId;
+        var uploadedImageFileId;
+
+        $(document).ready(function () {
+            
+            loadItems();
+            loadPreviewInitial();
+            InitDropZone();
+
+            
+        });
+
+        function InitDropZone(){
+            var contentFileDropzone = new Dropzone("#contentFileDropZone", {
+                url: "/ContentAdmin/UploadFile", // Set the url for your upload script location
+                paramName: "file", // The name that will be used to transfer the file
+                maxFiles: 1,
+                maxFilesize: 10, // MB
+                addRemoveLinks: true,
+                success: function(file, response){
+                    //console.log(response);
+                    uploadedContentFileId = response.contentFileId;
+                    console.log("set uploadedContentFileId = " + response.contentFileId);
+                },
+                accept: function(file, done) {
+                    console.log(done);
+                    console.log(file);
+                    if (file.name.endsWith(".pdf")) {
+                        done();
+                    } else {
+                        done("Only PDF file uploads are allowed.");
+                    }
+                }
+            });
+
+            var cardImageDropzone = new Dropzone("#cardImageDropZone", {
+                url: "/ContentAdmin/UploadFile", // Set the url for your upload script location
+                paramName: "file", // The name that will be used to transfer the file
+                maxFiles: 1,
+                maxFilesize: 3, // MB
+                addRemoveLinks: true,
+                success: function(file, response){
+                    //console.log(response);
+                    uploadedImageFileId = response.contentFileId;
+                    console.log("set uploadedImageFileId = " + response.contentFileId);
+                },
+                accept: function(file, done) {
+                    console.log(done);
+                    console.log(file);
+                    done();
+                    //if (file.name.endsWith(".pdf")) {
+                    //    done();
+                    //} else {
+                    //    done("Only PDF file uploads are allowed.");
+                    //}
+                }
+            });
+        }
+
+		function InitDraggable(){
+			// Draggable Container
+			var containers = document.querySelectorAll(".draggable-zone");
+
+            if (containers.length === 0) {
+                return false;
+            }
+
+            var swappable = new Swappable.default(containers, {
+                draggable: ".draggable",
+                handle: ".draggable .draggable-handle",
+                mirror: {
+                    //appendTo: selector,
+                    appendTo: "body",
+                    constrainDimensions: true
+                }
+            });
+
+            swappable.on("swappable:stop", (e) => {
+                // update the content card with the new order
+                //console.log("dropped");
+                //console.log(e);
+                var t = e.data.dragEvent.sourceContainer.childNodes;
+                //console.log(t);
+                SaveCardItemOrder();
+            });
+		}
+
+        function SaveCardItemOrder(){
+            showBusySpinner();
+            var ids = [];
+            var items = $("#contentCardItems").get()[0].children;
+            //console.log("=====================================");
+            //console.log(items);
+            //console.log("=====================================");
+			for (i = 0; i < items.length; i++){
+				var item = items[i];
+				var itemId = item.id.replace("contentItem_","");
+                if (!ids.includes(itemId)){
+                    ids.push(itemId);
+                }
+			}
+			//console.log(ids);
+
+            
+            var serviceUrl = "/ContentAdmin/ReOrderCard";
+            var sortOrderModel = {};
+            sortOrderModel.ContentCardId = @Model.ContentCard.ContentCardId;
+            sortOrderModel.ContentItemIds = ids;
+
+            console.log(sortOrderModel);
+
+            $.ajax({
+                url: serviceUrl,
+                type: "post",
+                data: JSON.stringify(sortOrderModel),
+				contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                       $("#cardContainer").html(response.html);
+                       initVideo();
+                       onYouTubeIframeAPIReady();
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                    hideBusySpinner();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function loadItems(){
+            showBusySpinner();
+            var serviceUrl = "/ContentAdmin/CardBuilderItems/@Model.ContentCard.ContentCardId";
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                       $("#divCardBuilderItems").html(response.html);
+                       InitDraggable();
+                       
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                    hideBusySpinner();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function updatePreview(){
+            showBusySpinner();
+            var serviceUrl = "/Content/Card/@Model.ContentCard.ContentCardId";
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                contentType: "application/json",
+                success: function (html) {
+                    $("#cardContainer").html(html);
+                    initVideo();
+                    onYouTubeIframeAPIReady();
+                    hideBusySpinner();
+                    
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function loadPreviewInitial(){
+            showBusySpinner();
+            var serviceUrl = "/Content/Card/@Model.ContentCard.ContentCardId";
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                contentType: "application/json",
+                success: function (html) {
+                    $("#cardContainer").html(html);
+                    initVideo();
+                    hideBusySpinner();
+                    
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function addItem(){
+            $("#addItemType").val("-1");
+            $("#modalAddItem").modal("show");
+        }
+        
+
+        function addItemSave(){
+            showBusySpinner();
+            var addItemObj = getAddItemObject();
+            console.log(addItemObj);
+            var serviceUrl = "/ContentAdmin/AddContentItem";
+            $.ajax({
+                url: serviceUrl,
+                type: "post",
+                data: JSON.stringify(addItemObj),
+				contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                        loadItems();
+                        updatePreview();
+                        $("#modalAddItem").modal("hide");
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                    hideBusySpinner();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function onItemTypeChange(){
+            var itemTypeId = $("#addItemType").find(":selected").val();
+            
+            if (itemTypeId == itemTypeIds.Video){
+                $("#itemTypeForm_Video").removeClass("d-none");
+            } else {
+                $("#itemTypeForm_Video").addClass("d-none");
+            }
+
+            if (itemTypeId == itemTypeIds.Text){
+                $("#itemTypeForm_Text").removeClass("d-none");
+            } else {
+                $("#itemTypeForm_Text").addClass("d-none");
+            }
+
+            if (itemTypeId == itemTypeIds.WebLink){
+                $("#itemTypeForm_WebLink").removeClass("d-none");
+            } else {
+                $("#itemTypeForm_WebLink").addClass("d-none");
+            }
+
+            if (itemTypeId == itemTypeIds.PDFDocument){
+                $("#itemTypeForm_File").removeClass("d-none");
+            } else {
+                $("#itemTypeForm_File").addClass("d-none");
+            }
+        }
+
+        function getAddItemObject(){
+            var addItemObj = {};
+            addItemObj.ContentCardId = @Model.ContentCard.ContentCardId;
+            addItemObj.ItemType = parseInt($("#addItemType").find(":selected").val(),10);
+
+            addItemObj.Name = "";
+            addItemObj.Text = "";
+            addItemObj.Url = "";
+            addItemObj.ContentFileId = null;
+            addItemObj.IsCaption = false;
+
+            if (addItemObj.ItemType == itemTypeIds.Video){
+                addItemObj.Name = $("#contentItemVideoTitle").val();
+                addItemObj.Text = $("#contentItemVideoDescription").val();
+                addItemObj.Url = $("#contentItemVideoId").val();
+            }
+
+            if (addItemObj.ItemType == itemTypeIds.Text){
+                addItemObj.Text = $("#contentItemText").val();
+                addItemObj.IsCaption = document.getElementById("contentItemTextIsCaption").checked;
+            }
+
+            if (addItemObj.ItemType == itemTypeIds.WebLink){
+                addItemObj.Text = $("#contentItemWebLinkText").val();
+                addItemObj.Url = $("#contentItemWebLinkUrl").val();
+            }
+
+            if (addItemObj.ItemType == itemTypeIds.PDFDocument){
+                addItemObj.Name = $("#contentItemDocumentTitle").val();
+                addItemObj.Text = $("#contentItemDocumentDescription").val();
+                addItemObj.ContentFileId = uploadedContentFileId;
+            }
+
+            return addItemObj;
+        }
+
+        //var initVideo = function(contentItemId, videoId) {
+
+        //    console.log("initVideo(" + contentItemId + "," + videoId + ")");
+
+        //    window.addEventListener("resize", function(){
+        //        var dheight = (document.getElementById("cardContainer").offsetWidth - 40) * .5625;
+        //        var dwidth = document.getElementById("cardContainer").offsetWidth - 40;
+        //        $("#ytplayer_" + contentItemId).width(dwidth);
+        //        $("#ytplayer_" + contentItemId).height(dheight);
+        //    });
+
+        //    // Load the IFrame Player API code asynchronously.
+        //    var tag = document.createElement('script');
+        //    tag.src = "https://www.youtube.com/player_api";
+        //    var firstScriptTag = document.getElementsByTagName('script')[0];
+        //    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        //    // Replace the 'ytplayer' element with an <iframe> and
+        //    // YouTube player after the API code downloads.
+        //    var player;
+        //    function onYouTubePlayerAPIReady() {
+        //        player = new YT.Player('ytplayer_' + contentItemId, {
+        //            height: (document.getElementById("cardContainer").offsetWidth - 40) * .5625,
+        //            width: document.getElementById("cardContainer").offsetWidth - 40,
+        //            //height: '289',
+        //            //width: '200',
+        //            //width: '100%',
+        //            videoId: videoId,
+        //            playerVars: {
+        //                'playsinline': 1,
+        //                'modestbranding': 1,
+        //                'controls': 1
+        //            }
+        //        });
+        //    }
+        //}
+
+        var contentItemIdToRemove;
+        function confirmRemoveItem(id){
+            contentItemIdToRemove = id;
+            $("#modalConfirmRemoveItem").modal("show");
+        }
+
+        function removeItem(){
+            showBusySpinner();
+            var serviceUrl = "/ContentAdmin/RemoveContentItem/" + @Model.ContentCard.ContentCardId + "/" + contentItemIdToRemove;
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                success: function (response) {
+                    if (response.success) {
+                        loadItems();
+                        updatePreview();
+                        $("#modalConfirmRemoveItem").modal("hide");
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                    hideBusySpinner();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function editCardName(){
+            $("#cardName").val($("#contentCardName").html());
+            $("#cardDescription").val($("#contentCardDescription").html())
+            $("#cardNotificationMessage").val($("#contentCardNotificationMessage").html())
+            $("#modalEditName").modal("show");
+        }
+
+        function updateCardName(){
+            showBusySpinner();
+            var serviceUrl = "/ContentAdmin/UpdateCardName";
+            var updateNameObj = {
+                ContentCardId : @Model.ContentCard.ContentCardId ,
+                Name: $("#cardName").val(),
+                Description: $("#cardDescription").val(),
+                NotificationMessage: $("#cardNotificationMessage").val()
+            };
+            $.ajax({
+                url: serviceUrl,
+                type: "post",
+                data: JSON.stringify(updateNameObj),
+				contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                        $("#contentCardName").html(updateNameObj.Name);
+                        $("#contentCardDescription").html(updateNameObj.Description);
+                        $("#contentCardNotificationMessage").html(updateNameObj.NotificationMessage);
+                        $("#modalEditName").modal("hide");
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                    hideBusySpinner();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+                }
+            });
+        }
+
+        function editCardImage(){
+            $("#modalUpdateImage").modal("show");
+        }
+
+        function updateCardImage(){
+            showBusySpinner();
+            var serviceUrl = "/ContentAdmin/UpdateCardImage/" + @Model.ContentCard.ContentCardId + "/" + uploadedImageFileId;
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                success: function (response) {
+                    if (response.success) {
+                        $("#cardImagePreview").attr("src", response.imageSrc);
+                        $("#modalUpdateImage").modal("hide");
+                        hideBusySpinner();
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                }
+            });
+        }
+
+
+    </script>
+
+
+
+    @* <script type="text/javascript">
+        window.addEventListener("resize", function(){
+            var dheight = (document.getElementById("cardContainer").offsetWidth - 40) * .5625;
+            var dwidth = document.getElementById("cardContainer").offsetWidth - 40;
+            $("#ytplayer").width(dwidth);
+            $("#ytplayer").height(dheight);
+        });
+
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Replace the 'ytplayer' element with an <iframe> and
+        // YouTube player after the API code downloads.
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: (document.getElementById("cardContainer").offsetWidth - 40) * .5625,
+                width: document.getElementById("cardContainer").offsetWidth - 40,
+                //height: '289',
+                //width: '200',
+                //width: '100%',
+                videoId: 'MRiN9pjyBKo',
+                playerVars: {
+                    'playsinline': 1,
+                    'modestbranding': 1,
+                    'controls': 1
+                }
+            });
+        }
+    </script>*@
+
+}

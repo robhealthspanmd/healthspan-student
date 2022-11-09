@@ -1,0 +1,123 @@
+﻿@model CalculatorInputResultViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">HealthSpan Age Calculator</h1>
+    This UI is intended for internal use only.
+    <hr />
+    <form asp-controller="Home" asp-action="CalculateAge" method="post">
+        <div class="row mt-2">
+
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label asp-for="Input.Name"></label>
+                    <input asp-for="Input.Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Age"></label>
+                    <input asp-for="Input.Age" class="form-control" />
+                </div>
+                <div class="form-group">
+
+                    @Html.RadioButtonFor(model => model.Input.Sex, healthspanmd.core.Services.HealthAgeCalculator_v2.HealthAgeCalculatorInputModel.SexType.Male) Male<br />
+                    @Html.RadioButtonFor(model => model.Input.Sex, healthspanmd.core.Services.HealthAgeCalculator_v2.HealthAgeCalculatorInputModel.SexType.Female) Female
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HeightInInches"></label>
+                    <input asp-for="Input.HeightInInches" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.WeightInPounds"></label>
+                    <input asp-for="Input.WeightInPounds" class="form-control" />
+                </div>
+
+                
+                <div class="form-group">
+                    <label asp-for="Input.WaistCircumference"></label>
+                    <input asp-for="Input.WaistCircumference" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.BodyFatPercentage"></label>
+                    <input asp-for="Input.BodyFatPercentage" class="form-control" />
+                </div>
+
+                
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Input.ModerateActivityMinutes"></label>
+                    <input asp-for="Input.ModerateActivityMinutes" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.VigorousActivityMinutes"></label>
+                    <input asp-for="Input.VigorousActivityMinutes" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.StrengthTrainingMinutes"></label>
+                    <input asp-for="Input.StrengthTrainingMinutes" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.RedFoodCount"></label>
+                    <input asp-for="Input.RedFoodCount" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.SleepHours"></label>
+                    <input asp-for="Input.SleepHours" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Smoker"></label>
+                    @Html.EditorFor(model => model.Input.Smoker)
+                </div>
+
+
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="Input.TotalCholesterol"></label>
+                    <input asp-for="Input.TotalCholesterol" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HDLCholesterol"></label>
+                    <input asp-for="Input.HDLCholesterol" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.BloodPressureSystolic"></label>
+                    <input asp-for="Input.BloodPressureSystolic" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.BloodPressureDiastolic"></label>
+                    <input asp-for="Input.BloodPressureDiastolic" class="form-control" />
+                </div>
+                
+                <div class="form-group">
+                    <label asp-for="Input.DiabetesOrPreDiabetes"></label>
+                    @Html.EditorFor(model => model.Input.DiabetesOrPreDiabetes)
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.HemoglobinA1c"></label>
+                    <input asp-for="Input.HemoglobinA1c" class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary btn-lg p-3" />
+                </div>
+                <div class="alert-success rounded p-3 ml-3 mr-3">
+                    <h3>Health Age: @Math.Round(Model.Result.HealthAge, 2)</h3>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

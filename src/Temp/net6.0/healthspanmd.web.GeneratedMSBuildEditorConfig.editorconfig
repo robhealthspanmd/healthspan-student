@@ -1,0 +1,200 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = healthspanmd.web
+build_property.RootNamespace = healthspanmd.web
+build_property.ProjectDir = C:\Users\kennethhoffman\source\repos\HealthSpanMD\platform-gen1\src\healthspanmd.web\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\kennethhoffman\source\repos\HealthSpanMD\platform-gen1\src\healthspanmd.web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/AdminDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBZG1pbkRldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/ClientList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDbGllbnRMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/ClientListInactive.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDbGllbnRMaXN0SW5hY3RpdmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/ContentAssignments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb250ZW50QXNzaWdubWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxTZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/_BasicInfoForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfQmFzaWNJbmZvRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/_ClientListData.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfQ2xpZW50TGlzdERhdGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/_PersonalizedContentNotificationDialog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfUGVyc29uYWxpemVkQ29udGVudE5vdGlmaWNhdGlvbkRpYWxvZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Account/_SendContentNotificationDialog.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxfU2VuZENvbnRlbnROb3RpZmljYXRpb25EaWFsb2cuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Analytics/ApexChart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEFwZXhDaGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Analytics/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hbHl0aWNzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/Card.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXENhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/CardBuilder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXENhcmRCdWlsZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/ContentCards.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXENvbnRlbnRDYXJkcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/_ContentBuilder_Items.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXF9Db250ZW50QnVpbGRlcl9JdGVtcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/Card.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxDYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/CardView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxDYXJkVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_CardPreview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxfQ2FyZFByZXZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_ContentCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxfQ29udGVudENhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/DailyTracker/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFpbHlUcmFja2VyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/DailyTracker/_DailyTracker.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFpbHlUcmFja2VyXF9EYWlseVRyYWNrZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/Progress.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9ncmVzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/TestEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0RW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/TestLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZXN0TG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/WeeklyReflection.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWVrbHlSZWZsZWN0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Home/Welcome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWxjb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Metric/AdminMetricDetailForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0cmljXEFkbWluTWV0cmljRGV0YWlsRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Metric/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0cmljXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Metric/_AdminMetricList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWV0cmljXF9BZG1pbk1ldHJpY0xpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_Footer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Gb290ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_LeftNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MZWZ0TmF2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_LeftSelector.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MZWZ0U2VsZWN0b3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_LeftUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MZWZ0VXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_PopoutNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Qb3BvdXROYXYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TZXR0aW5ncy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_TopBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub3BCYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_TopBar_Breadcrumbs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub3BCYXJfQnJlYWRjcnVtYnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_TopBar_SearchRibbon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ub3BCYXJfU2VhcmNoUmliYm9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

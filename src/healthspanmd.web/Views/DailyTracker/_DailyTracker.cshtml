@@ -1,0 +1,391 @@
+﻿@using healthspanmd.core.CQRS.MetricTrackingEntries
+@model healthspanmd.web.Models.DailyTracker.DailyTrackerViewModel
+
+@if (!Model.EditMode && Model.ExistingTrackingFound)
+{
+    <div class="mb-3">
+        <a href="javascript:void(0);" onclick="onEditClick();">
+            <div class="timeline-icon symbol symbol-circle symbol-40px">
+			    <div class="symbol-label bg-light">
+				    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+				    <span class="svg-icon svg-icon-2 svg-icon-gray-500">
+					    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+						    <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
+						    <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black"></path>
+					    </svg>
+				    </span>
+				    <!--end::Svg Icon-->
+			    </div>
+		    </div> 
+            <span class="fs-3">Edit these entries</span>
+        </a>
+    </div>
+    
+}
+<div id="kt_content_container" class="container-xxl">
+    @if (Model.ExistingTrackingFound && !Model.EditMode)
+    {
+        @foreach (var metric in Model.Metrics)
+        {
+            var trackingDatum = Model.TrackingData.Where(d => d.MetricId == metric.MetricId).FirstOrDefault();
+
+            if (trackingDatum != null)
+            {
+                <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10 bg-light-success">
+                    <label class="fs-6 fw-bold mb-2">
+                        <span>@metric.Name</span><br>
+                        <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                    </label>
+                    <div class="w-200px fs-2 text-primary fw-bold">
+                        @switch ((healthspanmd.core.CQRS.Metrics.MetricDataType)metric.DataType)
+                        {
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.YesNo:
+                                <span>
+                                    @(trackingDatum.EntryValues.FirstOrDefault().ValueAsBoolean.Value ? "Yes" : "No")
+                                </span>
+                                break;
+
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Alpha_Select:
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Alpha:
+                                <span>
+                                    @string.Join(", ", trackingDatum.EntryValues.Select(ev => ev.ValueAsString))
+                                </span>
+                                break;
+
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Decimal:
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer:
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_Slider:
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_Dial:
+                                <span>
+                                    @trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber
+                                </span>
+                                break;
+
+                            case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_2Values:
+                                <span>
+                                    @trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber / @trackingDatum.EntryValues.FirstOrDefault().Value2AsNumber
+                                </span>
+                                break;
+                        }
+                    </div>
+                </div>
+            }
+
+        }
+    }
+    else
+    {
+        if (Model.IsTrackingEnabled)
+        {
+            @foreach (var metric in Model.Metrics)
+            {
+                MetricTrackingEntryModel trackingDatum = null;
+                if (Model.ExistingTrackingFound)
+                {
+                    trackingDatum = Model.TrackingData.Where(d => d.MetricId == metric.MetricId).FirstOrDefault();
+                }
+
+
+                switch ((healthspanmd.core.CQRS.Metrics.MetricDataType)metric.DataType)
+                {
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.YesNo:
+                        bool isChecked = false;
+                        if (trackingDatum != null)
+                        {
+                            if (trackingDatum.EntryValues.FirstOrDefault().ValueAsBoolean.Value)
+                            {
+                                isChecked = true;
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <div class="d-flex flex-stack col-md-4">
+                                <div class="me-5">
+                                    <label class="fs-6 fw-bold form-label">@metric.Name</label>
+                                    <div class="fs-7 fw-bold text-gray-400">@metric.Description</div>
+                                </div>
+                                <label class="form-check form-switch form-check-custom form-check-solid">
+                                    @if (isChecked)
+                                    {
+                                        <input id="metric_@metric.MetricId" class="form-check-input" type="checkbox" checked value="0" />
+                                    }
+                                    else
+                                    {
+                                        <input id="metric_@metric.MetricId" class="form-check-input" type="checkbox" value="0" />
+                                    }
+                                    <span class="form-check-label fw-bold text-gray-400">Yes</span>
+                                </label>
+                                <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                            </div>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Alpha_Select:
+                        if (metric.AllowMultipleValues)
+                        {
+                            <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                                <label class="fs-6 fw-bold mb-2">
+                                    <span>@metric.Name</span><br>
+                                    <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                                </label>
+                                <div class="row py-5 px-lg-17">
+                                    @foreach (var option in metric.SelectItems.OrderBy(o => o.SortOrder))
+                                    {
+                                        bool optionIsSelected = false;
+                                        if (trackingDatum != null)
+                                        {
+                                            foreach (var selectedValue in trackingDatum.EntryValues)
+                                            {
+                                                if (selectedValue.ValueAsString == option.ItemValue)
+                                                {
+                                                    optionIsSelected = true;
+                                                }
+                                            }
+                                        }
+                                        
+                                        <div class="form-check form-check-custom form-check-solid col-md-4 mb-3">
+                                            @if (optionIsSelected)
+                                            {
+                                                <input name="metric_@metric.MetricId-checkedValues" class="form-check-input" type="checkbox" value="@option.ItemValue" id="metric_@metric.MetricId-option_@option.MetricSelectItemId" checked />
+                                            }
+                                            else
+                                            {
+                                                <input name="metric_@metric.MetricId-checkedValues" class="form-check-input" type="checkbox" value="@option.ItemValue" id="metric_@metric.MetricId-option_@option.MetricSelectItemId" />
+                                            }
+                                            
+                                            <label class="form-check-label" for="metric_@metric.MetricId-option_@option.MetricSelectItemId">
+                                                @option.ItemDisplayText
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                                <label class="fs-6 fw-bold mb-2">
+                                    <span>@metric.Name</span><br>
+                                    <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                                </label>
+                                <select id="metric_@metric.MetricId" class="form-select form-select-solid fw-bolder">
+                                    <option value="-1" disabled selected>Select @metric.Name</option>
+                                    @foreach (var option in metric.SelectItems.OrderBy(o => o.SortOrder))
+                                    {
+                                        bool optionIsSelected = false;
+                                        if (trackingDatum != null)
+                                        {
+                                            foreach (var selectedValue in trackingDatum.EntryValues)
+                                            {
+                                                if (selectedValue.ValueAsString == option.ItemValue)
+                                                {
+                                                    optionIsSelected = true;
+                                                }
+                                            }
+                                        }
+                                        if (optionIsSelected)
+                                        {
+                                            <option value="@option.ItemValue" selected>@option.ItemDisplayText</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@option.ItemValue">@option.ItemDisplayText</option>
+                                        }
+                                        
+                                    }
+                                </select>
+                                <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                            </div>
+                        }
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Decimal:
+                        string existingValue = "";
+                        if (trackingDatum != null)
+                        {
+                            var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                            if (entry.HasValue)
+                            {
+                                existingValue = entry.Value.ToString();
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <div class="w-200px">
+                                <input id="metric_@metric.MetricId" type="number" class="form-control" placeholder="@metric.Name" value="@existingValue" />
+                            </div>
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer:
+                        string existingIntValue = "";
+                        if (trackingDatum != null)
+                        {
+                            var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                            if (entry.HasValue)
+                            {
+                                existingIntValue = entry.Value.ToString();
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <div class="w-200px">
+                                <input id="metric_@metric.MetricId" type="number" step="1" class="form-control" placeholder="@metric.Name" value="@existingIntValue" />
+                            </div>
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_2Values:
+                        string existing2vValue1 = "";
+                        string existing2vValue2 = "";
+                        if (trackingDatum != null)
+                        {
+                            var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                            if (entry.HasValue)
+                            {
+                                existing2vValue1 = entry.Value.ToString();
+                            }
+                            var entry2 = trackingDatum.EntryValues.FirstOrDefault().Value2AsNumber;
+                            if (entry2.HasValue)
+                            {
+                                existing2vValue2 = entry2.Value.ToString();
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <div class="input-group mb-5 w-200px">
+                                <input id="metric_@metric.MetricId" type="number" class="form-control" value="@existing2vValue1" />
+                                <span class="input-group-text">/</span>
+                                <input id="metric2_@metric.MetricId" type="number" class="form-control" value="@existing2vValue2" />
+                            </div>
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_Slider:
+                        string existingSliderValue = "";
+                        if (trackingDatum != null)
+                        {
+                            var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                            if (entry.HasValue)
+                            {
+                                existingSliderValue = entry.Value.ToString();
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <div class="pb-10">
+                                <div id="metric_slider_@metric.MetricId"></div>
+                            </div>
+
+
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_Dial:
+                        string existingDialValue = "";
+                        if (trackingDatum != null)
+                        {
+                            var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                            if (entry.HasValue)
+                            {
+                                existingDialValue = entry.Value.ToString();
+                            }
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <div class="input-group w-150px"
+                                 data-kt-dialer="true"
+                                 data-kt-dialer-min="@metric.MinValue"
+                                 data-kt-dialer-max="@metric.MaxValue"
+                                 data-kt-dialer-step="1">
+                                <button class="btn btn-icon btn-outline btn-outline-secondary" type="button" data-kt-dialer-control="decrease">
+                                    <i class="bi bi-dash fs-1"></i>
+                                </button>
+                                <input id="metric_@metric.MetricId" type="text" class="form-control text-center fs-2 p-0" readonly placeholder="Amount" value="@metric.MinValue" data-kt-dialer-control="input" value="@existingDialValue" />
+                                <button class="btn btn-icon btn-outline btn-outline-secondary" type="button" data-kt-dialer-control="increase">
+                                    <i class="bi bi-plus fs-1"></i>
+                                </button>
+                            </div>
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+
+                    case healthspanmd.core.CQRS.Metrics.MetricDataType.Alpha:
+                        string existingAlphaValue = "";
+                        if (trackingDatum != null)
+                        {
+                            existingAlphaValue = trackingDatum.EntryValues.FirstOrDefault().ValueAsString;
+                        }
+                        <div class="row border-dashed rounded min-w-125px py-3 px-4 me-6 mb-10">
+                            <label class="fs-6 fw-bold mb-2">
+                                <span>@metric.Name</span><br>
+                                <span class="fs-7 fw-bold text-gray-400">@metric.Description</span>
+                            </label>
+                            <input id="metric_@metric.MetricId" type="text" class="form-control" placeholder="@metric.Name" value="@existingAlphaValue" />
+                            <span id="metricInvalid_@metric.MetricId" class="text-danger d-none">Please select a Data Type.</span>
+                        </div>
+                        break;
+                }
+            }
+
+            <div id="containerSubmitButton" class="modal-footer flex-center">
+                <button type="button" id="buttonSubmitTracker" class="btn btn-primary" onclick="submitTracker();">
+                    <span id="buttonSubmitTrackerLabel" class="indicator-label">Submit Daily Tracker</span>
+                    <span id="buttonSubmitTrackerBusyLabel" class="indicator-progress">
+                        Please wait...
+                        <span id="buttonSubmitTrackerBusySpinner" class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning d-flex align-items-center p-5 mb-10">
+				<span class="svg-icon svg-icon-2hx svg-icon-warning me-4">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black"></path>
+						<path d="M10.5606 11.3042L9.57283 10.3018C9.28174 10.0065 8.80522 10.0065 8.51412 10.3018C8.22897 10.5912 8.22897 11.0559 8.51412 11.3452L10.4182 13.2773C10.8099 13.6747 11.451 13.6747 11.8427 13.2773L15.4859 9.58051C15.771 9.29117 15.771 8.82648 15.4859 8.53714C15.1948 8.24176 14.7183 8.24176 14.4272 8.53714L11.7002 11.3042C11.3869 11.6221 10.874 11.6221 10.5606 11.3042Z" fill="black"></path>
+					</svg>
+				</span>
+				<div class="d-flex flex-column">
+					<h4 class="mb-1 text-warning">Tracking not available.</h4>
+					<span>We're sorry but tracking is no longer available for this date.</span>
+				</div>
+			</div>
+        }
+    }
+    
+
+    <div id="containerSubmitOK" class="alert bg-light-success  d-flex flex-column flex-center flex-sm-row p-5 mb-10 d-none">
+        <i class="far fa-smile text-primary fs-3x"></i>
+        <div class="d-flex flex-column flex-center pe-0 pe-sm-10">
+            <h5 class="mb-1">
+
+                Your progress has been saved!
+            </h5>
+        </div>
+        <div class="d-flex flex-column flex-center text-center pe-0 pe-sm-10 mt-3">
+            <a href="/Analytics" class="btn btn-success">See your progress</a>
+        </div>
+    </div>
+
+</div>

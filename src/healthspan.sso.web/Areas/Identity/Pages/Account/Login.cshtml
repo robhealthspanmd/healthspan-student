@@ -1,0 +1,270 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+
+    if (ViewData.ContainsKey("LoginError"))
+    {
+        var boguws = 1;
+    }
+
+    var modelState = ViewData.ModelState;
+    var errors = modelState.Values.SelectMany(v => v.Errors).ToList();
+ 
+}
+
+
+<div class="d-flex flex-column flex-root">
+	<!--begin::Authentication - Sign-in -->
+	<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+		<!--begin::Aside-->
+		<div class="d-flex flex-column flex-lg-row-auto bg-primary w-xl-600px positon-xl-relative">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
+                <!--begin::Header-->
+                <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
+                    <!--begin::Logo-->
+                    <a href="../dist/index.html" class="py-9 pt-lg-20">
+                        <img alt="Logo" src="/images/healthspanmd.logo.4.png" class="h-80px" />
+                    </a>
+                    <!--end::Logo-->
+                    <!--begin::Title-->
+                    <h1 class="fw-bolder text-white fs-2qx pb-5 pb-md-10">Increase your Healthspan</h1>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <p class="fw-bold fs-2 text-white">
+                        Proven strategies to live a long, healthy life you love. Made simple
+                    </p>
+                    <!--end::Description-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Illustration-->
+               @* <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-350px">
+                    <img src="/images/headshot-md-1.png" style="width:100px; height:100px;" />
+                </div>*@
+                <!--end::Illustration-->
+            </div>
+            <!--end::Wrapper-->
+        </div>
+		<!--begin::Aside-->
+		<!--begin::Body-->
+		<div class="d-flex flex-column flex-lg-row-fluid py-10">
+			<!--begin::Content-->
+			<div class="d-flex flex-center flex-column flex-column-fluid">
+				<!--begin::Wrapper-->
+				<div class="w-lg-500px p-10 p-lg-15 mx-auto">
+					<!--begin::Form-->
+                    
+					<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="post">
+						<!--begin::Heading-->
+						<div class="text-center mb-10">
+							<!--begin::Title-->
+							<h1 class="text-dark mb-3">Sign In to HealthspanMD</h1>
+							<!--end::Title-->
+							<!--begin::Link-->
+							<div class="text-gray-400 fw-bold fs-4">New Here?
+							<a href="/identity/account/register?returnUrl=@Model.ReturnUrl" class="link-primary fw-bolder">Create an Account</a></div>
+							<!--end::Link-->
+						</div>
+						<!--begin::Heading-->
+						<!--begin::Input group-->
+						
+						<div class="fv-row mb-10">
+							<label asp-for="Input.Email" class="form-label fs-6 fw-bolder text-dark"></label>
+                            <input asp-for="Input.Email" class="form-control form-control-lg form-control-solid" type="email" autocomplete="off" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+							<!--begin::Label-->
+							@*<label class="form-label fs-6 fw-bolder text-dark">Email</label>
+							<!--end::Label-->
+							<!--begin::Input-->
+							<input class="form-control form-control-lg form-control-solid" type="text" name="email" autocomplete="off" />*@
+							<!--end::Input-->
+                            
+                        </div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="fv-row mb-10">
+							<!--begin::Wrapper-->
+							<div class="d-flex flex-stack mb-2">
+								<label asp-for="Input.Password" class="form-label fw-bolder text-dark fs-6 mb-0"></label>
+                                
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                
+                                
+								<!--begin::Link-->
+								<a href="identity/account/ForgotPassword" class="link-primary fs-6 fw-bolder">Forgot Password ?</a>
+								<!--end::Link-->
+							</div>
+							<!--end::Wrapper-->
+							<input asp-for="Input.Password" class="form-control form-control-lg form-control-solid" type="password"/>
+						@*	<!--begin::Input-->
+							<input class="form-control form-control-lg form-control-solid" type="password" name="password" autocomplete="off" />
+							<!--end::Input-->*@
+						</div>
+						<div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+						<div class="text-center">
+							<!--begin::Submit button-->
+							<button type="submit" id="kt_sign_in_submit" class="btn btn-light-primary btn-lg fw-bolder my-2">
+								<span class="indicator-label">Sign In</span>
+								<span class="indicator-progress">Please wait...
+								<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+							</button>
+							<!--end::Submit button-->
+							<!--begin::Google link-->
+							@*<a href="#" class="btn btn-light-primary btn-lg fw-bolder my-2">*@
+							@*<img alt="Logo" src="assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-3" />Sign in with Google</a>*@
+							<!--end::Google link-->
+                            @if (errors.Count > 0)
+                            {
+                                <div class="text-danger">
+                                    <ul>
+                                        @foreach (var error in errors)
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+						</div>
+						<!--end::Actions-->
+					</form>
+					<!--end::Form-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Content-->
+			<!--begin::Footer-->
+			<div class="d-flex flex-center flex-wrap fs-6 p-5 pb-0">
+				<!--begin::Links-->
+				<div class="d-flex flex-center fw-bold fs-6">
+					<a href="mailto:support@healthspanmd.com" class="text-muted text-hover-primary px-2" target="_blank">Support</a>
+				</div>
+				<!--end::Links-->
+			</div>
+			<!--end::Footer-->
+		</div>
+		<!--end::Body-->
+	</div>
+	<!--end::Authentication - Sign-in-->
+</div>
+
+
+
+
+
+
+
+
+
+
+@*
+<main class="main" id="top">
+    <div class="container" data-layout="container">
+        <script>
+    var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+            if (isFluid) {
+                var container = document.querySelector('[data-layout]');
+                container.classList.remove('container');
+                container.classList.add('container-fluid');
+            }</script>
+        <div class="row flex-center min-vh-100 py-6">
+            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <a class="d-flex flex-center mb-4" href="/index.html"><img class="me-2" src="~/assets/img/logo-transparent-1000.png" alt="" width="400" /></a>
+                <div class="card">
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="row flex-between-center mb-2">
+                            <div class="col-auto">
+                                <h5>Log in</h5>
+                            </div>
+                            <div class="col-auto fs--1 text-600"><span class="mb-0 undefined">or</span> <span><a href="/Identity/Account/Register?returnUrl=@Model.ReturnUrl">Create an account</a></span></div>
+                        </div>
+
+                        <form id="account" method="post">
+                            <h4>Use a local account to log in.</h4>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Input.Email"></label>
+                                <input asp-for="Input.Email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label asp-for="Input.RememberMe">
+                                        <input asp-for="Input.RememberMe" />
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Log in</button>
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                </p>
+                                <p>
+                                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                                </p>
+                                <p>
+                                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>*@
+@*<div class="col-md-6 col-md-offset-2">
+        <section>
+            <h4>Use another service to log in.</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                            for details on setting up this ASP.NET application to support logging in via external services.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+        </section>
+    </div>*@
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="assets/js/custom/authentication/sign-in/general.js"></script>
+}

@@ -1,0 +1,422 @@
+﻿@using healthspanmd.core.CQRS.MetricTrackingEntries
+@model healthspanmd.web.Models.DailyTracker.DailyTrackerViewModel
+@{
+    ViewData["Title"] = "Daily Tracker";
+    ViewData["LeftNav_ActiveItem"] = "DailyTracker";
+
+    var daysBack = DateTime.Today.Subtract(Model.TrackingDate.Date).TotalDays;
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+            <button class="btn btn-icon btn-outline btn-outline-success" type="button" onclick="onTrackingDateDecrease();"><i class="bi bi-dash fs-1"></i></button>
+            <input id="inputTrackingDate" type="text" class="form-control text-center fs-2 p-0 bg-light-success" readonly placeholder="Amount" value="@Model.TrackingDate.ToString("ddd, MMMM d, yyyy")" />
+            <button id="buttonTrackingDateIncrease" class="btn btn-icon btn-outline btn-outline-success" type="button" onclick="onTrackingDateIncrease();"><i class="bi bi-plus fs-1"></i></button>
+        </div>
+    </div>
+</div>
+
+
+<div class="content d-flex flex-column flex-column-fluid mt-10" id="containerDailyTracker">
+    <partial name="_DailyTracker" model=Model />
+</div>
+
+@if (Model.ContentCardPreviews.Count > 0)
+{
+    <div class="row mt-8">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h3 class="card-title">Content for you</h3>
+                </div>
+                <div class="card-body">
+                    <partial name="/Views/Content/_CardPreview.cshtml" model=@Model.ContentCardPreviews.FirstOrDefault()></partial>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts {
+<link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+<script src="/assets/plugins/global/plugins.bundle.js"></script>
+<script src="/js/luxon.min.js"></script>
+<script type="text/javascript">
+    var DateTime = luxon.DateTime;
+    Date.prototype.addDays = function(days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+
+    //var trackingDate = new Date(@DateTime.Today.Year,@(DateTime.Today.Month-1),@DateTime.Today.Day,0,0,0,0);
+    console.log("Server DateTime.Now: @DateTime.Now.ToString()");
+
+
+    //var trackingDate = DateTime.local();
+    //var trackingDate = DateTime.now();
+    var trackingDate = DateTime.local(@DateTime.Today.Year, @DateTime.Today.Month, @DateTime.Today.Day);
+     console.log("initial tracking date: " + trackingDate.toLocaleString(DateTime.DATETIME_FULL));
+
+    console.log("daysback: " + @daysBack);
+
+    trackingDate = trackingDate.minus({days:@daysBack});
+    console.log("adjusted tracking date: " + trackingDate.toLocaleString(DateTime.DATETIME_FULL));
+
+    
+    
+    var metrics = @Html.Raw(Model.MetricsJson);
+    
+    $(document).ready(function () {
+        prepControls();
+
+        setStateOfNextDayButton();
+    });
+
+    function debugPrintMetrics(){
+        console.log("--------------------------------");
+        console.log("------ metrics -----------------");
+        console.log(metrics);
+        console.log("------ metrics -----------------");
+    }
+
+    function prepControls(){
+        
+        prepValidState();
+
+        @foreach (var metric in Model.Metrics){
+            if ((healthspanmd.core.CQRS.Metrics.MetricDataType)metric.DataType == healthspanmd.core.CQRS.Metrics.MetricDataType.Numeric_Integer_Slider) {
+                
+                string startValue = metric.MinValue;
+                MetricTrackingEntryModel trackingDatum = null;
+                if (Model.ExistingTrackingFound)
+                {
+                    trackingDatum = Model.TrackingData.Where(d => d.MetricId == metric.MetricId).FirstOrDefault();
+                    if (trackingDatum != null){
+                        var entry = trackingDatum.EntryValues.FirstOrDefault().ValueAsNumber;
+                        if (entry.HasValue){
+                            startValue = entry.Value.ToString();
+                        }
+                    }
+                }
+                <text>
+                
+                InitNumberSlider(@metric.MetricId, @metric.MinValue, @metric.MaxValue, @startValue);
+                </text>
+
+            }
+        }
+    }
+
+    //function InitSlider(){
+    //    // Create dialer object and initialize a new instance
+    //    var dialerElement = $("#")
+    //    var dialerObject = new KTDialer(dialerElement, {
+    //        min: 1000,
+    //        max: 50000,
+    //        step: 1000,
+    //        prefix: "$",
+    //        decimals: 2
+    //    });
+    //}
+
+    function submitButtonIsBusy(isBusy){
+        if (isBusy){
+            $("#buttonSubmitTrackerLabel").hide;
+            $("#buttonSubmitTrackerBusyLabel").show;
+            $("#buttonSubmitTrackerBusySpinner").show;
+        } else {
+            $("#buttonSubmitTrackerLabel").show;
+            $("#buttonSubmitTrackerBusyLabel").hide;
+            $("#buttonSubmitTrackerBusySpinner").hide;
+        }
+    }
+
+    function submitTracker(){
+        clearValidationMessages();
+        if (validateInput()){
+            showBusySpinner();
+            submitButtonIsBusy(true);
+
+            var submissionObject = getSubmissionObject();
+
+            var serviceUrl = "/DailyTracker/Submit"
+			$.ajax({
+				url: serviceUrl,
+				type: "post",
+				data: JSON.stringify(submissionObject),
+				contentType: "application/json",
+				success: function (response) {
+                    submitButtonIsBusy(false);
+					if (response.success) {
+						$("#containerSubmitButton").hide();
+                        $("#containerSubmitOK").removeClass("d-none");
+                        hideBusySpinner();
+					} else {
+						console.log(serviceUrl + " did not succeed");
+						if (response.fieldMessages.email) {
+							$("#userEmail_Invalid").html(response.fieldMessages.email);
+							$("#userEmail_Invalid").show();
+						}
+						if (response.fieldMessages.phone) {
+							$("#userPhone_Invalid").html(response.fieldMessages.phone);
+							$("#userPhone_Invalid").show();
+						}
+                        hideBusySpinner();
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(serviceUrl + " failed");
+                    hideBusySpinner();
+				}
+			});
+        }
+    }
+
+
+    function getSubmissionObject(){
+        var metricValues = [];
+        for (i = 0; i < metrics.length; i++){
+            var metric = metrics[i];
+            if (metric.DataType == 0){
+                metricValues.push({
+                    MetricId : metric.MetricId,
+                    Values : [
+                        document.getElementById("metric_" + metric.MetricId).checked.toString()
+                    ]
+                });
+            }
+            if (metric.DataType == 1 || metric.DataType == 2 || metric.DataType == 3 || metric.DataType == 5 || metric.DataType == 6){
+                metricValues.push({
+                    MetricId : metric.MetricId,
+                    Values : [
+                        $("#metric_" + metric.MetricId).val().trim()
+                    ]
+                });
+            }
+            if (metric.DataType == 7){
+                metricValues.push({
+                    MetricId : metric.MetricId,
+                    Values : [
+                        GetSliderValue(metric.MetricId)
+                    ]
+                });
+            }
+            if (metric.DataType == 8){
+                metricValues.push({
+                    MetricId : metric.MetricId,
+                    Values : [
+                        $("#metric_" + metric.MetricId).val().trim(),
+                        $("#metric2_" + metric.MetricId).val().trim()
+                    ]
+                });
+            }
+            if (metric.DataType == 4){
+                if (metric.AllowMultipleValues){
+                    var selectedValues = getMultiSelectCheckedValues(metric);
+                    metricValues.push({
+                        MetricId : metric.MetricId,
+                        Values : selectedValues
+                    });
+                } else {
+                    metricValues.push({
+                        MetricId : metric.MetricId,
+                        Values : [
+                            $("#metric_" + metric.MetricId).find(":selected").val()
+                        ]
+                    });
+                }
+            }
+        }
+        var submissionObject = {
+            TrackingData : metricValues,
+            TrackingDataForDateStr : trackingDate.toFormat('yyyy-LL-dd')
+        };
+        return submissionObject;
+    }
+
+
+    function clearValidationMessages(){
+        for (i = 0; i < metrics.length; i++){
+            var metric = metrics[i];
+            $("#metricInvalid_" + metric.MetricId).hide();
+        }
+    }
+
+
+    function validateInput(){
+        var valid = true;
+        for (i = 0; i < metrics.length; i++){
+            var metric = metrics[i];
+
+            if (metric.DataType == 1 || metric.DataType == 2 || metric.DataType == 3 || metric.DataType == 5){
+                if ($("#metric_" + metric.MetricId).val().trim().length == 0){
+                    valid = false;
+                    $("#metricInvalid_" + metric.MetricId).text("Please enter an answer.");
+                    $("#metricInvalid_" + metric.MetricId).show();
+                }
+            }
+
+            if (metric.DataType == 4){
+                if (metric.AllowMultipleValues){
+                    var selectedValues = getMultiSelectCheckedValues(metric);
+                    if (selectedValues.length == 0){
+                        valid = false;
+                        $("#metricInvalid_" + metric.MetricId).text("Please check at least one.");
+                        $("#metricInvalid_" + metric.MetricId).show();
+                    }
+                } else {
+                    if ($("#metric_" + metric.MetricId).find(":selected").val() == "-1"){
+                        valid = false;
+                        $("#metricInvalid_" + metric.MetricId).text("Please enter an answer.");
+                        $("#metricInvalid_" + metric.MetricId).show();
+                    }
+                }
+            }
+
+            if (metric.DataType == 8){
+                if ($("#metric_" + metric.MetricId).val().trim().length == 0 || $("#metric2_" + metric.MetricId).val().trim().length == 0){
+                    valid = false;
+                    $("#metricInvalid_" + metric.MetricId).text("Please enter a value for each.");
+                    $("#metricInvalid_" + metric.MetricId).show();
+                }
+            }
+
+        }
+        return valid;
+    }
+
+    function getMultiSelectCheckedValues(metric){
+        @*metric_@metric.MetricId-option_@option.MetricSelectItemId*@
+        var result = [];
+        for (i = 0; i < metric.SelectItems.length; i++){
+            var selectItem = metric.SelectItems[i];
+            var checkboxid = "metric_" + metric.MetricId + "-option_" + selectItem.MetricSelectItemId;
+            if (document.getElementById(checkboxid).checked){
+                result.push(selectItem.ItemValue);
+            }
+        }
+        return result;
+    }
+
+    function prepValidState(){
+        for (i = 0; i < metrics.length; i++){
+            var metric = metrics[i];
+            $("#metricInvalid_" + metric.MetricId).removeClass("d-none");
+            $("#metricInvalid_" + metric.MetricId).hide();
+        }
+    }
+
+    function GetSliderValue(metricId){
+        var slider = document.querySelector("#metric_slider_" + metricId);
+        return slider.noUiSlider.get();
+    }
+
+    function InitNumberSlider(id, minValue, maxValue, startValue){
+        console.log("InitNumberSlider(" + id + ", " + minValue + ", " + maxValue + ", " + startValue + ")");
+        var rangeDensity = (maxValue - minValue) * 2;
+        var numberOfPips = maxValue - minValue;
+        var slider = document.querySelector("#metric_slider_" + id);
+        if (slider){
+            noUiSlider.create(slider, {
+                start: startValue,
+                range: {
+                    min: minValue,
+                    max: maxValue
+                },
+                step: 1,
+                pips: {
+                    mode: "count",
+                    values: numberOfPips,
+                    density: rangeDensity,
+                    stepped: true
+                }
+            });
+
+
+            var pips = slider.querySelectorAll('.noUi-value');
+
+            function clickOnPip() {
+                var value = Number(this.getAttribute('data-value'));
+                slider.noUiSlider.set(value);
+            }
+
+            for (var i = 0; i < pips.length; i++) {
+
+                // For this example. Do this in CSS!
+                pips[i].style.cursor = 'pointer';
+                pips[i].addEventListener('click', clickOnPip);
+            }
+        }
+        
+    }
+
+
+    function onEditClick(){
+        $("#inputTrackingDate").val(trackingDate.toFormat('DDDD'));
+        getDailyTrackerForDate(trackingDate.toFormat('yyyy-LL-dd'), true);
+    }
+
+   
+    function onTrackingDateDecrease(){
+        trackingDate = trackingDate.minus({days:1});
+        $("#inputTrackingDate").val(trackingDate.toFormat('DDDD'));
+        setStateOfNextDayButton();
+        getDailyTrackerForDate(trackingDate.toFormat('yyyy-LL-dd'), false);
+    }
+
+    function onTrackingDateIncrease(){
+        trackingDate = trackingDate.plus({days:1});
+        $("#inputTrackingDate").val(trackingDate.toFormat('DDDD'));
+        setStateOfNextDayButton();
+        getDailyTrackerForDate(trackingDate.toFormat('yyyy-LL-dd'), false);
+    }
+
+    function setStateOfNextDayButton(){
+        // get date segment of now
+        
+        var today = DateTime.now().set({hour:0,minute:0,second:0,millisecond:0});
+        if (trackingDate >= today){
+            $("#buttonTrackingDateIncrease").prop("disabled",true);
+        } else {
+            $("#buttonTrackingDateIncrease").prop("disabled",false);
+        }
+    }
+
+    function getDailyTrackerForDate(dateStr,editMode){
+        showBusySpinner();
+        serviceUrl = "/DailyTracker/GetDailyTrackerForDay/" + dateStr;
+        if (editMode){
+            serviceUrl = serviceUrl + "/edit";
+        }
+		$.ajax({
+			url: serviceUrl,
+			type: "get",
+			success: function (response) {
+				if (response.success) {
+					metrics = JSON.parse(response.metrics);
+                    $("#containerDailyTracker").html(response.html);
+                    KTDialer.createInstances();
+                    prepControls();
+                    hideBusySpinner();
+				} else {
+					console.log(serviceUrl + " did not succeed");
+                    hideBusySpinner();
+				}
+				//hideBusySpinner();
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(serviceUrl + " failed");
+                hideBusySpinner();
+				//hideBusySpinner();
+			}
+		});
+    }
+
+
+</script>
+}

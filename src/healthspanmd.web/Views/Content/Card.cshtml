@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "My first content card";
+    ViewData["LeftNav_ActiveItem"] = "Content";
+}
+
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="container-xxl" id="cardContainer">
+
+        <h1>Creating COMMITMENT with a compelling WHY</h1>
+
+        <p>
+            Motivation and commitment are not the same thing, don't get them confused! :) This first lesson is a powerful one.
+        </p>
+        <p>
+            <a href="https://www.healthspanmd.com" class="btn btn-primary w-100">
+                This is my link button.
+            </a>
+        </p>
+        <p>
+            Watch the video below to level up from just being motivated (or not motivated at all) to fully COMMITTED and CONNECTED to your future self and health goals.
+        </p>
+
+        <hr />
+        <p>
+            This is a YouTube player in an iframe
+        </p>
+
+        @*<iframe id="ytplayer" type="text/html" 
+            src="https://www.youtube.com/embed/GXddMQm5sZI" frameborder="0"></iframe>*@
+
+        <div id="ytplayer"></div>
+
+        <!-- lightbox example -->
+        <hr />
+        <p>
+            This is a LightBox example ...
+        </p>
+        <a
+            class="d-block bgi-no-repeat bgi-size-cover bgi-position-center rounded position-relative min-h-175px"
+            style="background-image:url('/assets/media/stock/600x400/img-50.jpg')"
+            data-fslightbox="lightbox-youtube" 
+            href="https://www.youtube.com/embed/GXddMQm5sZI"
+            >
+            <img src="/assets/media/svg/misc/video-play.svg"  class="position-absolute top-50 start-50 translate-middle" alt=""/>
+        </a>
+
+         <hr />
+        <p>
+            Read this document ...
+        </p>
+
+        <a href="/pdf/testdoc.pdf" target="_blank">
+            <div class="rounded-2 bg-success p-5">
+                
+                    <i class="fa fa-solid fa-file-invoice fs-5tx text-danger float-start m-4"></i>
+                    <span class="fs-3"><b>Just open the PDF directly</b></span>
+                    <br />
+                    There might be a description here as well. 
+                    AND it might be a very long description so let's see how that wraps!
+            </div>
+        </a>
+
+        <br /><br />
+
+        <div class="clearfix">
+            <a href="javascript:void(0);" onclick="toggleEmbeddedPDF();">
+                <div class="rounded-2 bg-success p-5">
+                
+                    <i class="fa fa-solid fa-file-invoice fs-5tx text-danger float-start m-4"></i>
+                        <span class="fs-3"><b>This is my document title</b></span>
+                        <br />
+                        @*There might be a description here as well. 
+                        AND it might be a very long description so let's see how that wraps!*@
+
+                    @*<div class="col-md-2">
+                        <i class="fa fa-solid fa-file-invoice fs-5tx text-primary"></i>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="fs-3">This is my document title</span>
+                        <br />
+                        There might be a description here as well. 
+                        AND it might be a very long description so let's see how that wraps!
+                    </div>*@
+                </div>
+            </a>
+        </div>
+        
+        
+        <div id="embeddedPdf" class="collapse">
+            @*<embed src="/pdf/testdoc.pdf" type="application/pdf" class="w-100 h-600px" />*@
+            <object data="/pdf/testdoc.pdf" type="application/pdf" class="w-100 h-600px"></object>
+        </div>
+        
+       
+         <div>
+              Will the MVP have feedback questions to answer?
+         </div>
+       
+    </div>
+</div>
+
+@section HeaderTags {
+
+}
+
+@section Scripts {
+
+    <script src="/assets/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            
+
+            window.addEventListener("resize", function(){
+                var dheight = (document.getElementById("cardContainer").offsetWidth - 40) * .5625;
+                var dwidth = document.getElementById("cardContainer").offsetWidth - 40;
+                $("#ytplayer").width(dwidth);
+                $("#ytplayer").height(dheight);
+            });
+        });
+
+
+        function toggleEmbeddedPDF(){
+            $("#embeddedPdf").collapse("toggle");
+            //window.scrollTo(0, document.body.scrollHeight);
+            //window.scrollTo(0, document.querySelector(".scrollingContainer").scrollHeight);
+            //document.getElementById("scrollToGoal").scrollIntoView({behavior:"smooth"});
+        }
+
+
+        // Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/player_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+       
+
+        // Replace the 'ytplayer' element with an <iframe> and
+        // YouTube player after the API code downloads.
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('ytplayer', {
+                height: (document.getElementById("cardContainer").offsetWidth - 40) * .5625,
+                width: document.getElementById("cardContainer").offsetWidth - 40,
+                //height: '289',
+                //width: '200',
+                //width: '100%',
+                videoId: 'MRiN9pjyBKo',
+                playerVars: {
+                  'playsinline': 1,
+                  'modestbranding': 1,
+                  'controls': 1
+                },
+                events: {
+                    'onStateChange': onYouTubePlayerStateChange
+                }
+            });
+        }
+
+        function onYouTubePlayerStateChange(event){
+            if (event.data == 0){
+                // the video has ended
+                // notify the app that the user has completed the video
+
+            }
+        }
+
+    </script>
+}

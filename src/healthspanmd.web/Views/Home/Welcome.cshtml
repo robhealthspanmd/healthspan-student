@@ -1,0 +1,195 @@
+﻿@model healthspanmd.web.Models.Home.DashboardViewModel
+@*@inject healthspanmd.core.CQRS.Users.IUserQueries userQueries;
+*@@{
+    ViewData["Title"] = "Dashboard";
+    //var user = userQueries.GetUserDetailModel(User.Identity.Name, false);
+}
+
+	
+@*<a href="/" class="py-9 pt-lg-20">
+    <img alt="Logo" src="/images/healthspanmd.logo.4.png" class="h-80px" />
+</a>*@
+@*<div class="mt-5">
+<h1 class="fw-bolder fs-2qx pb-3 pb-md-10">Increase your Healthspan</h1>
+<p class="fw-bold fs-2 ">
+    Welcome @user.FullName
+</p>
+ <a href="/DailyTracker" class="btn btn-primary mt-3">Daily Tracker</a><br />
+<a href="/Analytics" class="btn btn-primary mt-3">Progress</a>
+</div>*@
+               
+
+<div class="mt-5">
+@*<h1 class="fw-bolder fs-2qx pb-3 pb-md-10">Increase your Healthspan</h1>
+<p class="fw-bold fs-2 ">
+    Proven strategies to live a long, healthy life you love. Made simple
+</p>*@
+   
+    
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <a href="/Home/Welcome" class="btn btn-primary mt-3">Login</a>
+    }
+    else {
+        <div class="d-none">
+            <a href="/DailyTracker" class="btn btn-primary">Daily Tracker</a>
+            <br><br>
+            <a href="/Analytics" class="btn btn-primary">Progress</a>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header">
+                            <h3 class="card-title">Daily Tracker</h3>
+                            <div class="card-toolbar d-none" id="trackerPreviewMetricsFound">
+                                <div class="fs-3 text-success">Complete</div>
+                                <div class="ml-4">
+                                    <i class="bi bi-check2-square fs-4x text-success p-3"></i>
+                                </div>
+                            </div>
+                            <div class="card-toolbar d-none" id="trackerPreviewMetricsNotFound">
+                                <div class="fs-3 text-danger">Incomplete</div>
+                                <div class="ml-4">
+                                    <i class="bi bi-square fs-3x text-danger p-4"></i> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="input-group">
+                                <button class="btn btn-icon btn-outline btn-outline-success" type="button" onclick="onTrackingDateDecrease();"><i class="bi bi-dash fs-1"></i></button>
+                                <input id="inputTrackingDate" type="text" class="form-control text-center fs-2 p-0 bg-light-success" readonly value="@DateTime.Today.ToString("ddd, MMMM d, yyyy")" />
+                                <button id="buttonTrackingDateIncrease" class="btn btn-icon btn-outline btn-outline-success" type="button" onclick="onTrackingDateIncrease();"><i class="bi bi-plus fs-1"></i></button>
+                            </div>
+                            <a href="javascript:void(0);" onclick="gotoTracker();">
+                                <div class="w-100 text-center mt-6 text-success fs-2x d-none" id="gotoworksheetlink" >
+                                    Enter your daily metrics 
+                                    <i class="bi bi-arrow-right-circle-fill text-success fs-2x"></i>
+                                </div>
+                            </a>                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.ContentCardPreviews.Count > 0)
+            {
+                <div class="row mt-8">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h3 class="card-title">Content for you</h3>
+                            </div>
+                            <div class="card-body">
+                                <partial name="/Views/Content/_CardPreview.cshtml" model=@Model.ContentCardPreviews.FirstOrDefault()></partial>
+                            </div>
+
+                        </div>
+                
+                    </div>
+                </div>
+            }
+        </div>
+        
+        
+
+    }
+
+
+</div>
+               
+@section Scripts {
+
+    <script src="/js/luxon.min.js"></script>
+
+    <script type="text/javascript">
+    
+        var DateTime = luxon.DateTime;
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var trackingDate;
+
+        $(document).ready(function () {
+            
+            trackingDate = DateTime.now();
+            setStateOfNextDayButton();
+            setTrackerVisibility();
+        });
+
+        function gotoTracker(){
+            var dateStr = trackingDate.toFormat('yyyy-LL-dd');
+            window.location.href = "/DailyTracker/" + dateStr;
+        }
+
+
+        function setTrackerVisibility(){
+            getMetricsFoundForDate(trackingDate.toFormat('yyyy-LL-dd'));
+        }
+
+        function setTrackerVisibilityCallback(foundMetrics){
+            if (foundMetrics){
+                console.log("show good, hide bad");
+                $("#trackerPreviewMetricsFound").removeClass("d-none");
+                $("#trackerPreviewMetricsNotFound").addClass("d-none");
+                $("#gotoworksheetlink").addClass("d-none");
+            } else {
+                console.log("show bad, hide good");
+                $("#trackerPreviewMetricsFound").addClass("d-none");
+                $("#trackerPreviewMetricsNotFound").removeClass("d-none");
+                $("#gotoworksheetlink").removeClass("d-none");
+            }
+        }
+
+
+        function onTrackingDateDecrease(){
+            trackingDate = trackingDate.minus({days:1});
+            $("#inputTrackingDate").val(trackingDate.toFormat('DDDD'));
+            setStateOfNextDayButton();
+            setTrackerVisibility();
+        }
+
+        function onTrackingDateIncrease(){
+            trackingDate = trackingDate.plus({days:1});
+            $("#inputTrackingDate").val(trackingDate.toFormat('DDDD'));
+            setStateOfNextDayButton();
+            setTrackerVisibility();
+        }
+
+        function setStateOfNextDayButton(){
+            var today = DateTime.now().set({hour:0,minute:0,second:0,millisecond:0});
+            if (trackingDate >= today){
+                $("#buttonTrackingDateIncrease").prop("disabled",true);
+            } else {
+                $("#buttonTrackingDateIncrease").prop("disabled",false);
+            }
+        }
+
+        function getMetricsFoundForDate(dateStr){
+        serviceUrl = "/DailyTracker/GetMetricsFoundForDay/" + dateStr;
+		$.ajax({
+			url: serviceUrl,
+			type: "get",
+			success: function (response) {
+				if (response.success) {
+                    console.log("response.foundMetrics = " + response.foundMetrics);
+					setTrackerVisibilityCallback(response.foundMetrics);
+				} else {
+					console.log(serviceUrl + " did not succeed");
+				}
+				return false;
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				console.log(serviceUrl + " failed");
+				return false;
+			}
+		});
+    }
+
+    
+    </script>
+}
+
+		

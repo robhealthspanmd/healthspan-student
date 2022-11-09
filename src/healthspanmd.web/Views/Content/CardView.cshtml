@@ -1,0 +1,35 @@
+﻿@model healthspanmd.web.Models.Content.ContentCardViewModel
+@{
+    ViewData["Title"] = Model.ContentCard.Name;
+}
+
+<div class="row">
+    <div class="col-md-4" id="cardContainer">
+        <partial name="_ContentCard" model=@Model.ContentCard></partial>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/js/content-card.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            initVideo();
+        });
+
+        var contentCardId = @Model.ContentCard.ContentCardId;
+        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video)) {
+            var contentItem = member.ContentItem;
+
+            <text>
+            var videoItem = {
+                Id : @contentItem.ContentItemId,
+                Url : "@contentItem.Url"
+            };
+            videoContentItems.push(videoItem);
+            </text>
+        }
+    
+    </script>
+
+}

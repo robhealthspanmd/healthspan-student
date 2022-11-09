@@ -1,0 +1,445 @@
+﻿@model healthspanmd.web.Models.Account.ContentAssignmentsViewModel
+@{
+    ViewData["Title"] = Model.TargetUser.FullName + " - Content Assignments";
+	ViewData["LeftNav_ActiveItem"] = "Clients";
+}
+
+
+<div class="row row-cols-lg-3 g-10">
+
+    <!-- LIBRARY -->
+    <div class="col">
+        <div class="card card-bordered bg-light-primary mb-10">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Library</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 g-10 draggable-zone" id="zoneLibrary">
+                    <div class="col draggable d-none" id="libraryZoneNoElements">
+                        <div class="card bg-light">
+                            
+                            <div class="card-body">
+                                You can remove cards from Active Assignments by dragging them back here to the Library.
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var contentCard in Model.ContentCardLibrary)
+                    {
+                        if (!Model.TargetUser.ContentCardAssignments.Any(a => a.ContentCardId == contentCard.ContentCardId))
+                        {
+                            <div class="col draggable" id="contentCard_@contentCard.ContentCardId">
+                                <div class="card bg-light">
+                                    <div class="card-header">
+                                        <div class="card-title w-75" id="cardTitle_@contentCard.ContentCardId">
+                                            <h3 class="card-label">@contentCard.Name</h3>
+                                        </div>
+                                        <div class="card-toolbar">
+                                            <a href="#" id="buttonEditMessage_@contentCard.ContentCardId" class="d-none" onclick="showEditNotification(@contentCard.ContentCardId);">
+                                                <img src="/assets/media/icons/duotune/general/gen055.svg" class="svg-icon-2x" />
+                                            </a>
+                                            <a href="#" id="buttonSendMessage_@contentCard.ContentCardId" class="d-none" onclick="showSendNotificationDialog(@contentCard.ContentCardId);">
+                                                <img src="/assets/media/icons/duotune/general/gen016.svg" class="svg-icon-2x" />
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-hover-light-primary draggable-handle">
+                                                <img src="/assets/media/icons/duotune/abstract/abs015.svg" class="svg-icon-2x" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVE ASSIGNMENTS -->
+    <div class="col">
+        <div class="card card-bordered bg-light-success">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Active Assignments</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 g-10 draggable-zone" id="zoneActiveAssignments">
+
+                    <div class="col draggable d-none" id="activeZoneNoElements">
+                        <div class="card bg-light">
+                            
+                            <div class="card-body">
+                                Drop a Content Card here to make an assignment.
+                            </div>
+                        </div>
+                    </div>
+
+                    @foreach (var contentCardAssignment in Model.TargetUser.ContentCardAssignments.OrderBy(a => a.SortOrder))
+                    {
+                        if (!contentCardAssignment.CompletedUtc.HasValue)
+                        {
+                            var contentCard = contentCardAssignment.ContentCard;
+                            <div class="col draggable" id="contentCard_@contentCard.ContentCardId">
+                                <div class="card bg-light">
+                                    <div class="card-header">
+                                        <div class="card-title w-50"  id="cardTitle_@contentCard.ContentCardId">
+                                            <h3 class="card-label">@contentCard.Name</h3>
+                                        </div>
+                                        <div class="card-toolbar">
+                                            <a href="#" id="buttonEditMessage_@contentCard.ContentCardId" onclick="showEditNotification(@contentCard.ContentCardId);">
+                                                <img src="/assets/media/icons/duotune/general/gen055.svg" class="svg-icon-2x" />
+                                            </a>
+                                            <a href="#" id="buttonSendMessage_@contentCard.ContentCardId" onclick="showSendNotificationDialog(@contentCard.ContentCardId);">
+                                                <img src="/assets/media/icons/duotune/general/gen016.svg" class="svg-icon-2x" />
+                                            </a>
+                                            <a href="#" class="btn btn-icon btn-hover-light-primary draggable-handle">
+                                                <img src="/assets/media/icons/duotune/abstract/abs015.svg" class="svg-icon-2x" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    @*<div class="card-body">
+                                        <h3 class="card-label">@contentCard.Name</h3>
+                                    </div>*@
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- COMPLETED ASSIGNMENTS -->
+    <div class="col">
+        <div class="card card-bordered bg-light-info">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">Completed Assignments</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 g-10">
+                    @foreach (var contentCardAssignment in Model.TargetUser.ContentCardAssignments)
+                    {
+                        if (contentCardAssignment.CompletedUtc.HasValue)
+                        {
+                            var contentCard = contentCardAssignment.ContentCard;
+                            <div class="col draggable" id="contentCard_@contentCard.ContentCardId">
+                                <div class="card bg-light">
+                                    <div class="card-header">
+                                        <div class="card-title">
+                                            <h3 class="card-label">@contentCard.Name</h3>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        Completed on @contentCardAssignment.CompletedUtc.Value.ToString("MM/dd/yyyy")
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" id="modalEditNotificationMessage"></div>
+<div class="modal fade" tabindex="-1" id="modalSendNotificationMessage"></div>
+
+@section Scripts {
+    <script src="/assets/plugins/custom/draggable/draggable.bundle.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            InitDraggable();
+
+            var activeContentCards = $("#zoneActiveAssignments").get()[0].children;
+            console.log("activeContentCards.length = " + activeContentCards.length);
+            if (activeContentCards.length == 1){
+                $("#activeZoneNoElements").removeClass("d-none");
+            } else {
+                $("#activeZoneNoElements").addClass("d-none");
+            }
+            SetLibraryPlaceholderIsVisible();
+        });
+
+        function showSendNotificationDialog(contentCardId){
+            showBusySpinner();
+            var serviceUrl = "/Account/ShowContentNotificationConfirmSend/" + @Model.TargetUser.UserId + "/" + contentCardId;
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                success: function (response) {
+                    if (response.success) {
+                       hideBusySpinner();
+                       $("#modalSendNotificationMessage").html(response.html);
+                       $("#modalSendNotificationMessage").modal("show");
+                    } else {
+                        hideBusySpinner();
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    hideBusySpinner();
+                    console.log(serviceUrl + " failed");
+                }
+            });
+        }
+
+        function sendNotificationMessage(contentCardId){
+            showBusySpinner();
+            var serviceUrl = "/Account/SendContentNotification/" + @Model.TargetUser.UserId + "/" + contentCardId;
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                success: function (response) {
+                    if (response.success) {
+                       hideBusySpinner();
+                       showAppConfirmation("Message Sent", "The content notification has been sent.");
+                    } else {
+                        hideBusySpinner();
+                        console.log(serviceUrl + " did not succeed");
+                        showAppError("Send Failed", "There was a problem sending the content notification message.");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    hideBusySpinner();
+                    console.log(serviceUrl + " failed");
+                    showAppError("Send Failed", "There was a problem sending the content notification message.");
+                }
+            });
+        }
+
+        function showEditNotification(contentCardId){
+            showBusySpinner();
+            var serviceUrl = "/Account/GetPersonalizedMessageDialog/" + @Model.TargetUser.UserId + "/" + contentCardId;
+            $.ajax({
+                url: serviceUrl,
+                type: "get",
+                success: function (response) {
+                    if (response.success) {
+                       hideBusySpinner();
+                       $("#modalEditNotificationMessage").html(response.html);
+                       $("#modalEditNotificationMessage").modal("show");
+                    } else {
+                        hideBusySpinner();
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    hideBusySpinner();
+                    console.log(serviceUrl + " failed");
+                }
+            });
+        }
+
+        function updateAssignmentNotificationMessage(contentCardId){
+            showBusySpinner();
+            var serviceUrl = "/Account/SetPersonalizedNotificationMessage";
+            var updateMessageObj = {};
+            updateMessageObj.UserId = @Model.TargetUser.UserId;
+            updateMessageObj.ContentCardId = contentCardId;
+            updateMessageObj.NotificationMessage = $("#cardNotificationMessage").val();
+
+
+            $.ajax({
+                url: serviceUrl,
+                type: "post",
+                data: JSON.stringify(updateMessageObj),
+				contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                       hideBusySpinner();
+                       $("#modalEditNotificationMessage").modal("hide");
+                       showAppConfirmation("Message Updated", "The personalized message has been updated.");
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                        hideBusySpinner();
+                        $("#modalEditNotificationMessage").modal("hide");
+                        showAppError("Update Failed", "There was a problem updating the personalized message.");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                    showAppError("Update Failed", "There was a problem updating the personalized message.");
+                    hideBusySpinner();
+                    $("#modalEditNotificationMessage").modal("hide");
+                }
+            });
+        }
+
+
+        function InitDraggable(){
+			// Draggable Container
+			var containers = document.querySelectorAll(".draggable-zone");
+
+            if (containers.length === 0) {
+                return false;
+            }
+
+            var sortable = new Sortable.default(containers, {
+                draggable: ".draggable",
+                handle: ".draggable .draggable-handle",
+                mirror: {
+                    //appendTo: selector,
+                    appendTo: "body",
+                    constrainDimensions: true
+                }
+            });
+
+            //swappable.on("sortable:sort", (e) => {console.log("sortable:sort");OnSortableStop();});
+            //swappable.on("sortable:sorted", (e) => {console.log("sortable:sorted");OnSortableStop();});
+            sortable.on("sortable:stop", (e) => {OnSortableStop(e);});
+            //$("#draggable-zone").mouseup(function(e){console.log("mouseup");OnSortableStop(e)});
+		}
+
+        function OnSortableStop(e){
+            //console.log(e);
+            var activeAssignmentsContainerNodes = e.data.newContainer.childNodes;
+            var droppedNode = e.data.dragEvent.data.originalSource.id;
+            var droppedNewIndex = e.data.newIndex;
+            var oldIndex = e.data.oldIndex;
+            //console.log(droppedNewIndex);
+            if (e.data.newContainer.id != "zoneActiveAssignments") {
+                activeAssignmentsContainerNodes = e.data.oldContainer.childNodes;
+                droppedNewIndex = 99999;
+            }
+            //console.log(droppedNode + " dropped at " + droppedNewIndex);
+            var orderedIdArray = GetContentCards(activeAssignmentsContainerNodes, droppedNode, droppedNewIndex, oldIndex);
+
+            SetActiveAssignmentPlaceholdIsVisible(orderedIdArray);
+            SetLibraryPlaceholderIsVisible();
+            UpdateUser(orderedIdArray);
+
+            
+        }
+
+        function setButtonStatus(orderedIdArray){
+            // set button status on all active assignments
+            for (i = 0; i < orderedIdArray.length; i++){
+                var activeCardId = orderedIdArray[i];
+                $("#buttonEditMessage_" + activeCardId).removeClass("d-none");
+                $("#buttonSendMessage_" + activeCardId).removeClass("d-none");
+                $("#cardTitle_" + activeCardId).removeClass("w-75");
+                $("#cardTitle_" + activeCardId).addClass("w-50");
+            }
+
+
+            // set button status on all library cards
+            var zoneLibraryChildren = $("#zoneLibrary").children();
+            //console.log(zoneLibraryChildren);
+            for (i = 0; i < zoneLibraryChildren.length; i++){
+                var libraryCard = zoneLibraryChildren[i];              
+                if (libraryCard.id.startsWith("contentCard_")){
+                    var libraryCardId = libraryCard.id.replace("contentCard_","");
+                    if (!orderedIdArray.includes(libraryCardId)){
+                        $("#buttonEditMessage_" + libraryCardId).addClass("d-none");
+                        $("#buttonSendMessage_" + libraryCardId).addClass("d-none");
+                        $("#cardTitle_" + libraryCardId).removeClass("w-50");
+                        $("#cardTitle_" + libraryCardId).addClass("w-75");
+                    }
+                }
+            }
+        }
+
+        function GetContentCards(children, droppedNode, newIndex, oldIndex){
+            var droppedNodeId = droppedNode.replace("contentCard_","");
+            var contentCards = [];
+            for (x = 0; x < children.length; x++){
+                var node = children[x];
+                if (node.id){
+                    //console.log(node.id);
+                    //console.log("node: " + node.id + ", length = " + contentCards.length);
+                    if (node.id.startsWith("contentCard_")){
+                        var contentCardId = node.id.replace("contentCard_","");
+
+                        var addThisId = true;
+                        if (droppedNodeId == contentCardId && newIndex > oldIndex){
+                            // might be the phantom duplicate
+                            if (newIndex > 1 && contentCards.length == 0) {
+                                addThisId = false;
+                            } else {
+                                if (contentCards.length > 0) {
+                                    for (y = x + 1; y < children.length; y ++){
+                                        if (children[y].id == node.id){
+                                            addThisId = false;
+                                        }
+                                    }
+                                }
+                            }
+                            if (newIndex == 99999 && droppedNodeId == contentCardId){
+                                addThisId = false;
+                            }
+                        }
+                        
+                        if (addThisId){
+                            if (!contentCards.includes(contentCardId)){
+                                contentCards.push(contentCardId);
+                            }
+                        } 
+                        //else {
+                        //    console.log("skipping " + node.id);
+                        //}
+
+                    }
+                }
+                
+            }
+            return contentCards;
+        }
+
+        function SetActiveAssignmentPlaceholdIsVisible(activeContentCards){
+            if (activeContentCards.length == 0){
+                $("#activeZoneNoElements").removeClass("d-none");
+            } else {
+                $("#activeZoneNoElements").addClass("d-none");
+            }
+        }
+
+        function SetLibraryPlaceholderIsVisible(){
+            var libraryContentCards = $("#zoneLibrary").get()[0].children;
+            if (libraryContentCards.length == 1){
+                $("#libraryZoneNoElements").removeClass("d-none");
+            } else {
+                $("#libraryZoneNoElements").addClass("d-none");
+            }
+        }
+
+        function UpdateUser(activeContentCards){
+            showBusySpinner();
+
+            var serviceUrl = "/Account/SetContentAssignments";
+            var sortOrderModel = {};
+            sortOrderModel.UserId = @Model.TargetUser.UserId;
+            sortOrderModel.ContentCardIds = activeContentCards;
+
+            $.ajax({
+                url: serviceUrl,
+                type: "post",
+                data: JSON.stringify(sortOrderModel),
+				contentType: "application/json",
+                success: function (response) {
+                    if (response.success) {
+                       setButtonStatus(activeContentCards);
+                       hideBusySpinner();
+                    } else {
+                        console.log(serviceUrl + " did not succeed");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(serviceUrl + " failed");
+                }
+            });
+        }
+
+
+    </script>
+}

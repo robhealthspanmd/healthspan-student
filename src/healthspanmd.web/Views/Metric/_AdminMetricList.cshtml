@@ -1,0 +1,104 @@
+﻿@model healthspanmd.web.Models.Metric.MetricListViewModel
+<div class="card">
+	<div class="card-header border-0 pt-6">
+		<div class="card-title">
+			<div class="d-flex align-items-center position-relative my-1">
+				<span class="svg-icon svg-icon-1 position-absolute ms-6">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+						<rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black" />
+						<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
+					</svg>
+				</span>
+				<input type="text" data-kt-metrics-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Metrics" />
+			</div>
+		</div>
+		<div class="card-toolbar">
+			<div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+				<a href="/Metric/Detail/0" class="btn btn-primary">Add Metric</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body pt-0">
+		<table class="table align-middle table-row-dashed table-row-gray-500 fs-6 gy-5" id="kt_metrics_table">
+			<thead>
+				<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+					<th>Id</th>
+					<th>Name</th>
+					<th>Active</th>
+					<th>Description</th>
+					<th>Type</th>
+					<th>Active for Users Count</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody class="fw-bold text-gray-600">
+				@foreach (var item in Model.Items.OrderByDescending(m => m.IsActive).ThenBy(m => m.Name))
+				{
+					<tr>
+						<td>@item.MetricId</td>
+						<td>
+							<a href="/Metric/Detail/@item.MetricId">@item.Name</a>
+						</td>
+						<td class="min-w-100px">
+							@if (item.IsActive)
+							{
+								<span class="svg-icon svg-icon-success svg-icon-2hx">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<path d="M9.89557 13.4982L7.79487 11.2651C7.26967 10.7068 6.38251 10.7068 5.85731 11.2651C5.37559 11.7772 5.37559 12.5757 5.85731 13.0878L9.74989 17.2257C10.1448 17.6455 10.8118 17.6455 11.2066 17.2257L18.1427 9.85252C18.6244 9.34044 18.6244 8.54191 18.1427 8.02984C17.6175 7.47154 16.7303 7.47154 16.2051 8.02984L11.061 13.4982C10.7451 13.834 10.2115 13.834 9.89557 13.4982Z" fill="black"/>
+									</svg>
+								</span>
+								<span>Active</span>
+							}
+							else
+							{
+								<span class="svg-icon svg-icon-warning svg-icon-2hx">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black"/>
+									<rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black"/>
+									<rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black"/>
+									</svg>
+								</span>
+								<i>Inactive</i>
+							}
+						</td>
+						<td>@item.Description</td>
+						<td>@item.MetricType</td>
+						<td class="text-center">@item.UsersCount</td>
+						<td class="text-end">
+							<a href="#" class="btn btn-sm btn-light btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions
+								<span class="svg-icon svg-icon-5 m-0">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="black" />
+									</svg>
+								</span>
+							</a>
+
+							<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+								<div class="menu-item px-3">
+									<a href="/Metric/Detail/@item.MetricId" class="menu-link px-3">Edit</a>
+								</div>
+								@if (item.IsActive)
+								{
+									<div class="menu-item px-3">
+										<a href="javascript:void(0);" onclick="confirmDeactivateMetric(@item.MetricId);" class="menu-link px-3" >Deactivate</a>
+									</div>
+								}
+								else
+								{
+									<div class="menu-item px-3">
+										<a href="javascript:void(0);" onclick="activateMetric(@item.MetricId);" class="menu-link px-3" >Activate</a>
+									</div>
+								}
+								<div class="menu-item px-3">
+									<a href="javascript:void(0);" onclick="confirmDeleteMetric(@item.MetricId);" class="menu-link px-3" >Delete</a>
+								</div>
+
+							</div>
+						</td>
+					</tr>
+				}
+						
+			</tbody>
+		</table>
+	</div>
+</div>
