@@ -2,19 +2,24 @@
 
 @{
     var dailyTrackerActive = "";
-
+    var libraryActive = "";
 
     var adminMenuShow = "";
     var clientsActive = "";
     var metricsActive = "";
     var progressActive = "";
     var contentActive = "";
+    var contentTagsActive = "";
     if (ViewData.ContainsKey("LeftNav_ActiveItem"))
     {
         switch (ViewData["LeftNav_ActiveItem"].ToString())
         {
             case "DailyTracker":
                 dailyTrackerActive = "active";
+                break;
+
+            case "Library":
+                libraryActive = "active";
                 break;
 
             case "Metrics":
@@ -32,9 +37,14 @@
                 progressActive = "active";
                 break;
 
-            case "Content":
+            case "ContentCards":
                 adminMenuShow = "show";
                 contentActive = "active";
+                break;
+
+            case "ContentTags":
+                adminMenuShow = "show";
+                contentTagsActive = "active";
                 break;
         }
     }
@@ -86,11 +96,11 @@
                         </div>
                     }*@
                 
-                    @*<div class="menu-item">
-                        <a class="menu-link" href="#">
+                    <div class="menu-item">
+                        <a class="menu-link" @libraryActive href="/Content">
                             <span class="menu-title">Library</span>
                         </a>
-                    </div>*@
+                    </div>
 
                     @if (user.AuthorizedRoles.Any(a => a.UserRole.Name == "Admin" || a.UserRole.Name == "Coach"))
                     {
@@ -107,7 +117,6 @@
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Clients</span>
-                            
                                         </span>
                                     </a>
                                 </div>
@@ -118,7 +127,6 @@
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Metrics</span>
-                            
                                         </span>
                                     </a>
                                 </div>
@@ -129,11 +137,19 @@
                                                 <span class="bullet bullet-dot"></span>
                                             </span>
                                             <span class="menu-title">Content</span>
-                            
                                         </span>
                                     </a>
                                 </div>
-                    
+                                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                    <a href="/ContentAdmin/ContentTags">
+                                        <span class="menu-link @contentTagsActive">
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">Content Tags</span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     }

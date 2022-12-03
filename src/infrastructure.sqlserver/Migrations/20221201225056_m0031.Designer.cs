@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using infrastructure.sqlserver.Data;
 
@@ -11,9 +12,10 @@ using infrastructure.sqlserver.Data;
 namespace infrastructure.sqlserver.Migrations
 {
     [DbContext(typeof(HealthSpanMdDbContext))]
-    partial class HealthSpanMdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221201225056_m0031")]
+    partial class m0031
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

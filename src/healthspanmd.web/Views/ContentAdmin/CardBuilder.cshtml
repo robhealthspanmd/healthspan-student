@@ -28,7 +28,11 @@
                             <div class="mt-1 w-100">
                                 <div class="text-sm-start text-info">Notification Message:</div>
                                 <div id="contentCardNotificationMessage">@Model.ContentCard.NotificationMessage</div>
-                            </div>                                                      
+                            </div>    
+                            <div class="mt-1 w-100">
+                                <div class="text-sm-start text-info">Tags:</div>
+                                <input class="form-control form-control-solid" value="@Model.ContentCard.ContentCardTagNamesAsCommaDelimited" readonly id="contentCardTags"/>
+                            </div>
                         </div>
                         <div class="card-body border">
                             <div class="w-100">
@@ -123,6 +127,11 @@
                         </div>
 						<span id="cardNotificationMessage_Invalid" class="text-danger d-none">Notification Message is required.</span>
 					</div>
+                    <div class="fv-row mb-7">
+                        <label class="required fs-6 fw-bold mb-2">Tags</label>
+                        <input class="form-control form-control-solid" value="@Model.ContentCard.ContentCardTagNamesAsCommaDelimited" id="contentTags"/>
+                        
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -314,8 +323,13 @@
     </div>
 </div>
 
+@section HeaderTags{
+    <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+}
+
 @section Scripts {
     <script src="/assets/plugins/custom/draggable/draggable.bundle.js"></script>
+    <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/js/content-card.js"></script>
     <script type="text/javascript">
         var contentCardId = @Model.ContentCard.ContentCardId;
@@ -349,8 +363,21 @@
             loadPreviewInitial();
             InitDropZone();
 
-            
-        });
+            var tagsReadOnlyInput = document.querySelector("#contentCardTags");
+            new Tagify(tagsReadOnlyInput);
+
+            var tagsSelector = document.querySelector("#contentTags");
+            new Tagify(tagsSelector, {
+                whitelist: [@Html.Raw(Model.ContentTagsAsCommaDelimitedAndQuoted)],
+                maxTags: 10,
+                dropdown: {
+                    maxItems: 20,           // <- mixumum allowed rendered suggestions
+                    classname: "tagify__inline__suggestions", // <- custom classname for this dropdown, so it could be targeted
+                    enabled: 0,             // <- show suggestions on focus
+                    closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+                }
+            });
+                    });
 
         function InitDropZone(){
             var contentFileDropzone = new Dropzone("#contentFileDropZone", {
@@ -715,8 +742,10 @@
                 ContentCardId : @Model.ContentCard.ContentCardId ,
                 Name: $("#cardName").val(),
                 Description: $("#cardDescription").val(),
-                NotificationMessage: $("#cardNotificationMessage").val()
+                NotificationMessage: $("#cardNotificationMessage").val(),
+                SelectedTags: $("#contentTags").val()
             };
+            console.log(updateNameObj);
             $.ajax({
                 url: serviceUrl,
                 type: "post",
@@ -727,6 +756,7 @@
                         $("#contentCardName").html(updateNameObj.Name);
                         $("#contentCardDescription").html(updateNameObj.Description);
                         $("#contentCardNotificationMessage").html(updateNameObj.NotificationMessage);
+                        $("#contentCardTags").val(response.selectedTagListStr);
                         $("#modalEditName").modal("hide");
                     } else {
                         console.log(serviceUrl + " did not succeed");

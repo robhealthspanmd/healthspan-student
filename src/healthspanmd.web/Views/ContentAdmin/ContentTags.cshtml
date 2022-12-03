@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Content Tags";
+    ViewData["LeftNav_ActiveItem"] = "ContentTags";
+}
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<div id="clientListDataContainer" class="container-xxl">	
+		<div id="contentCardListContainer">
+@*            <div class="card-toolbar mb-4">
+			    <div class="d-flex justify-content-end" data-kt-client-table-toolbar="base">
+				    <button class="btn btn-primary" type="button" onclick="createNewContentCard();">Create New Content Card</button>
+			    </div>
+		    </div>*@
+
+
+            @(Html.Kendo().Grid<healthspanmd.core.CQRS.Content.ContentTagModel>()
+                .Name("grid")
+                .Columns(columns =>
+                {
+                    columns.Bound(s => s.Name).Title("Name").Width(300);
+                    columns.Bound(s => s.Description);
+                    columns.Command(commands =>
+                    {
+                        commands.Edit(); // The "edit" command will edit and update data items.
+                        commands.Destroy(); // The "destroy" command removes data items.
+                    }).Title("Commands").Width(300);
+                })
+                .ToolBar(toolbar => toolbar.Create().Text("Add New Tag")) // The "create" command adds new data items.
+                .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use the inline edit mode.                        
+                .DataSource(dataSource =>
+                    dataSource.Ajax()
+                        .Model(model =>
+                        {
+                            model.Id(s => s.ContentTagId); // Specify the property which is the unique identifier of the model.
+                        })
+                        .Create(create => create.Action("ContentTag_Create", "ContentAdmin")) // Action invoked when the user saves a new data item.
+                        .Read(read => read.Action("ContentTag_Read", "ContentAdmin"))  // Action invoked when the Grid needs data.
+                        .Update(update => update.Action("ContentTag_Update", "ContentAdmin"))  // Action invoked when the user saves an updated data item.
+                        .Destroy(destroy => destroy.Action("ContentTag_Destroy", "ContentAdmin")) // Action invoked when the user removes a data item.
+                )
+                .Scrollable(sc => sc.Endless(true))
+                .Filterable()
+                .Pageable()
+                .Sortable()
+            )
+
+        </div>
+	</div>
+</div>

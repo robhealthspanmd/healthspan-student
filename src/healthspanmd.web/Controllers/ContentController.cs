@@ -17,6 +17,7 @@ namespace healthspanmd.web.Controllers
         private readonly IUserCommands _userCommands;
         private readonly IUserQueries _userQueries;
 
+
         public ContentController(
             IFileSystemManager fileSystemManager, 
             IContentQueries contentQueries,
@@ -30,9 +31,19 @@ namespace healthspanmd.web.Controllers
             _userQueries = userQueries;
         }
 
+
+        [HttpGet]
+        [Route("/Content")]
         public IActionResult Index()
         {
-            return View();
+            // for dev, just choose all cards
+            var model = new ContentLibraryViewModel
+            {
+                AssignedContent = _contentQueries.GetList(new GetContentCardListQueryFilter { ActiveOnly = true }),
+                Tags = _contentQueries.GetContentTags()
+            };
+
+            return View(model);
         }
 
 

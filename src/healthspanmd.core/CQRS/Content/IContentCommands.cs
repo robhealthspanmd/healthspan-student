@@ -89,5 +89,13 @@ namespace healthspanmd.core.CQRS.Content
         ContentFileModel CreateContentFile(ContentFileModel model);
 
         void UpdateContentFile(ContentFileModel model);
+
+
+        ContentTagModel CreateContentTag(ContentTagModel model);
+        void UpdateContentTag(ContentTagModel model);
+        void DeleteContentTag(int contentTagId);
+        ContentTagAssignmentModel CreateContentTagAssignment(ContentTagAssignmentModel model);
+        void UpdateContentTagAssignment(ContentTagAssignmentModel model);
+        void DeleteContentTagAssignment(int contentTagAssignmentId);    
     }
 }

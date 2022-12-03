@@ -8,8 +8,10 @@ using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace healthspanmd.web.Controllers
@@ -60,6 +62,8 @@ namespace healthspanmd.web.Controllers
             return Json(result.ToDataSourceResult(request));
         }
 
+        
+
 
         [HttpGet]
         [Route("/ContentAdmin/CardBuilderItems/{contentCardId}")]
@@ -79,7 +83,8 @@ namespace healthspanmd.web.Controllers
         {
             var model = new CardBuilderViewModel
             {
-                ContentCard = _contentQueries.GetContentCard(contentCardId)
+                ContentCard = _contentQueries.GetContentCard(contentCardId),
+                ContentTags = _contentQueries.GetContentTags()
             };
 
             if (model.ContentCard.ImageFileId.HasValue)
@@ -220,9 +225,28 @@ namespace healthspanmd.web.Controllers
             card.Name = model.Name;
             card.Description = model.Description;
             card.NotificationMessage = model.NotificationMessage;
+
+            // translate the list of Tagify Tags into a List of TagIds
+            var selectedTags = JsonSerializer.Deserialize<List<TagifyTag>>(model.SelectedTags);
+            var tags = _contentQueries.GetContentTags();
+            var tagIds = new List<int>();
+            foreach (var tag in selectedTags)
+            {
+                var contentTag = tags.Where(t => t.Name == tag.value).FirstOrDefault();
+                if (contentTag != null)
+                    tagIds.Add(contentTag.ContentTagId);
+            }
+
+            card.SetTags(tagIds);
+
             _contentCommands.UpdateContentCard(card);
-            return Json(new { success = true });
+
+            var selectedTagList = selectedTags.Select(t => t.value).ToList();
+            var selectedTagListStr = string.Join(",", selectedTagList);
+            return Json(new { success = true, selectedTagListStr });
         }
+
+        
 
         [HttpGet]
         [Route("/ContentAdmin/UpdateCardImage/{contentCardId}/{contentFileId}")]
@@ -302,6 +326,55 @@ namespace healthspanmd.web.Controllers
             contentCard = _contentQueries.GetContentCard(sortModel.ContentCardId);
             var html = await this.RenderViewAsync("/Views/Content/_ContentCard.cshtml", contentCard, true);
             return Json(new { success = true, html });
+        }
+
+        [HttpGet]
+        [Route("/ContentAdmin/ContentTags")]
+        public IActionResult ContentTags()
+        {
+            return View();
+        }
+
+
+        [Route("/ContentAdmin/ContentTag_Read")]
+        public IActionResult ContentTag_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            var result = _contentQueries.GetContentTags().OrderBy(t => t.Name).AsEnumerable();
+            return Json(result.ToDataSourceResult(request));
+        }
+
+        [Route("/ContentAdmin/ContentTag_Create")]
+        public IActionResult ContentTag([DataSourceRequest] DataSourceRequest request, ContentTagModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model = _contentCommands.CreateContentTag(model);
+            }
+            // Return the updated product. Also return any validation errors.
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+        }
+
+
+        [Route("/ContentAdmin/ContentTag_Destroy")]
+        public IActionResult ContentTag_Destroy([DataSourceRequest] DataSourceRequest request, ContentTagModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contentCommands.DeleteContentTag(model.ContentTagId);
+            }
+            // Return the updated product. Also return any validation errors.
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+        }
+
+        [Route("/ContentAdmin/ContentTag_Update")]
+        public IActionResult ContentTag_Update([DataSourceRequest] DataSourceRequest request, ContentTagModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contentCommands.UpdateContentTag(model);
+            }
+            // Return the updated product. Also return any validation errors.
+            return Json(new[] { model }.ToDataSourceResult(request, ModelState));
         }
 
     }

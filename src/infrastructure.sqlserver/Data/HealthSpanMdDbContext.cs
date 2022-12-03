@@ -30,5 +30,7 @@ namespace infrastructure.sqlserver.Data
         public DbSet<ContentFile> ContentFiles { get; set; }
         public DbSet<ContentCardAssignment> ContentCardsAssignments { get; set; }
         public DbSet<ContentCardMember> ContentCardsMembers { get; set; }
+        public DbSet<ContentTag> ContentTags { get; set; }
+        public DbSet<ContentTagAssignment> ContentTagAssignments { get; set; }
     }
 }

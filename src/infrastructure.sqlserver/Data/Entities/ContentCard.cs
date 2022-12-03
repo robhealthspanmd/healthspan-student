@@ -15,5 +15,6 @@ namespace infrastructure.sqlserver.Data.Entities
         public ICollection<ContentCardMember> ContentCardMembers { get; set; }
         public bool IsActive { get; set; }
         public string NotificationMessage { get; set; }
+        public ICollection<ContentTagAssignment> ContentTagAssignments { get; set; }
     }
 }

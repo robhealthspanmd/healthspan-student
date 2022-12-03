@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace healthspanmd.core.CQRS.Content
 {
-    public class GetContentCardListQueryFilter
+    public class ContentTagModel
     {
-        public bool? ActiveOnly { get; set; }
-        public int? ContentTagId { get; set; }
+        public int ContentTagId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
