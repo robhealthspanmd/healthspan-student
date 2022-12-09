@@ -83,12 +83,29 @@ namespace infrastructure.sqlserver.CQRS.Content
             }
         }
 
-        public ICollection<ContentTagModel> GetContentTags()
+        public ICollection<ContentTagModel> GetAllContentTags()
         {
             using (var scope = _scopeFactory.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
                 return dbContext.ContentTags
+                    .Select(t => t.ToContentTagModel())
+                    .ToList();
+            }
+        }
+
+        public ICollection<ContentTagModel> GetContentTagsWithAssignments()
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+
+                var assignedContentTags = dbContext.ContentTagAssignments
+                    .Select(a => a.ContentTagId).Distinct()
+                    .ToList();
+
+                return dbContext.ContentTags
+                    .Where(t => assignedContentTags.Contains(t.ContentTagId))
                     .Select(t => t.ToContentTagModel())
                     .ToList();
             }

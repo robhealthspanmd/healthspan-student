@@ -43,6 +43,18 @@ namespace healthspanmd.core.CQRS.Content
                 ContentTagAssignments.Remove(ContentTagAssignments.Where(a => a.ContentTagId.Equals(tagId)).FirstOrDefault());
             
         }
+
+        public string Tags
+        {
+            get
+            {
+                if (ContentTagAssignments == null)
+                    return "";
+
+                var tags = ContentTagAssignments.Select(a => a.ContentTag.Name).ToList();
+                return string.Join(", ", tags);
+            }
+        }
         public string ContentCardTagIdsAsCommaDelimited
         {
             get

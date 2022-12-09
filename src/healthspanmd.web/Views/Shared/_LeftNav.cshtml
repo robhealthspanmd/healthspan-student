@@ -96,14 +96,19 @@
                         </div>
                     }*@
                 
-                    <div class="menu-item">
+                    @*<div class="menu-item">
                         <a class="menu-link" @libraryActive href="/Content">
                             <span class="menu-title">Library</span>
                         </a>
-                    </div>
+                    </div>*@
 
                     @if (user.AuthorizedRoles.Any(a => a.UserRole.Name == "Admin" || a.UserRole.Name == "Coach"))
                     {
+                        <div class="menu-item">
+                            <a class="menu-link" @libraryActive href="/Content">
+                                <span class="menu-title">Library</span>
+                            </a>
+                        </div>
                         <div data-kt-menu-trigger="click" class="menu-item menu-accordion @adminMenuShow">
                             <span class="menu-link">
                                 <span class="menu-title">Admin</span>

@@ -255,6 +255,24 @@ namespace infrastructure.sqlserver.CQRS.Content
                 var contentCard = card.ToContentCard();
                 dbContext.ContentCards.Update(contentCard);
                 dbContext.SaveChanges();
+
+                // new ContentTagAssignments will be added here,
+                // but any that should have been removed are still in the database
+
+                // remove ContentTagAssignments that no longer exist
+                var assignmentToContentTagIds = card.ContentTagAssignments.Select(a => a.ContentTagId).ToList();
+                var updatedContentCard = dbContext.ContentCards
+                    .Where(c => c.ContentCardId == card.ContentCardId)
+                    .Include(c => c.ContentTagAssignments)
+                    .FirstOrDefault();
+                var assignmentIdsToDelete = updatedContentCard.ContentTagAssignments
+                    .Where(a => !assignmentToContentTagIds.Contains(a.ContentTagId))
+                    .Select(a => a.ContentTagAssignmentId)
+                    .ToList();
+                foreach (var assignmentId in assignmentIdsToDelete)
+                    DeleteContentTagAssignment(assignmentId);
+
+                contentCard = ContentQueries.GetContentCardEntity(card.ContentCardId, dbContext);
                 return contentCard.ToContentCardModel();
             }
         }

@@ -84,7 +84,7 @@ namespace healthspanmd.web.Controllers
             var model = new CardBuilderViewModel
             {
                 ContentCard = _contentQueries.GetContentCard(contentCardId),
-                ContentTags = _contentQueries.GetContentTags()
+                ContentTags = _contentQueries.GetAllContentTags()
             };
 
             if (model.ContentCard.ImageFileId.HasValue)
@@ -227,8 +227,10 @@ namespace healthspanmd.web.Controllers
             card.NotificationMessage = model.NotificationMessage;
 
             // translate the list of Tagify Tags into a List of TagIds
-            var selectedTags = JsonSerializer.Deserialize<List<TagifyTag>>(model.SelectedTags);
-            var tags = _contentQueries.GetContentTags();
+            var selectedTags = new List<TagifyTag>();
+            if (model.SelectedTags.Count() > 0)
+                selectedTags = JsonSerializer.Deserialize<List<TagifyTag>>(model.SelectedTags);
+            var tags = _contentQueries.GetAllContentTags();
             var tagIds = new List<int>();
             foreach (var tag in selectedTags)
             {
@@ -339,7 +341,7 @@ namespace healthspanmd.web.Controllers
         [Route("/ContentAdmin/ContentTag_Read")]
         public IActionResult ContentTag_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var result = _contentQueries.GetContentTags().OrderBy(t => t.Name).AsEnumerable();
+            var result = _contentQueries.GetAllContentTags().OrderBy(t => t.Name).AsEnumerable();
             return Json(result.ToDataSourceResult(request));
         }
 

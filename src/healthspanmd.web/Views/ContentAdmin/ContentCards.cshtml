@@ -25,6 +25,8 @@
 
                     columns.Bound(s => s.Description);
 
+                    columns.Bound(s => s.Tags);
+
                     columns.Bound(s => s.IsActive)
                             .Title("Status")
                             .ClientTemplate(@"#if (IsActive){#
