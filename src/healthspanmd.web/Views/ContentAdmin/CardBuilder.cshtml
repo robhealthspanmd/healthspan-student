@@ -204,7 +204,8 @@
                     <p>Select the type of item you would like to add:</p>
 				    <select id="addItemType" class="form-select form-select-solid fw-bolder" onchange="onItemTypeChange();">
                         <option value="-1" disabled>Select item type ...</option>
-                        <option value="0">Video</option>
+                        <option value="0">Video - YouTube</option>
+                        <option value="5">Video - Vimeo</option>
                         @*<option value="1">Image</option>*@
                         <option value="2">PDF Document</option>
                         <option value="3">Web Link</option>
@@ -276,7 +277,7 @@
                         <label class="fs-6 fw-bold mb-2">Description</label>
 						<input id="contentItemVideoDescription" type="text" class="form-control form-control-solid" placeholder="Enter Description here ..." />
                         <br /><br />
-                        <label class="required fs-6 fw-bold mb-2">Youtube Video ID</label>
+                        <label class="required fs-6 fw-bold mb-2" id="videoIdLabel">Youtube Video ID</label>
 						<input id="contentItemVideoId" type="text" class="form-control form-control-solid" placeholder="Enter Video ID here ..." />
 						<span id="contentItemVideoId_Invalid" class="text-danger d-none">Youtube video id is required.</span>
 					</div>
@@ -331,9 +332,10 @@
     <script src="/assets/plugins/custom/draggable/draggable.bundle.js"></script>
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/js/content-card.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script type="text/javascript">
         var contentCardId = @Model.ContentCard.ContentCardId;
-        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video)) {
+        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video_YouTube)) {
             var contentItem = member.ContentItem;
 
             <text>
@@ -347,7 +349,8 @@
    
 
         var itemTypeIds = {
-            Video : 0,
+            Video_YouTube : 0,
+            Video_Vimeo : 5,
             Image : 1,
             PDFDocument : 2,
             WebLink : 3,
@@ -601,8 +604,10 @@
         function onItemTypeChange(){
             var itemTypeId = $("#addItemType").find(":selected").val();
             
-            if (itemTypeId == itemTypeIds.Video){
+            if (itemTypeId == itemTypeIds.Video_YouTube || itemTypeId == itemTypeIds.Video_Vimeo){
                 $("#itemTypeForm_Video").removeClass("d-none");
+                if (itemTypeId == itemTypeIds.Video_YouTube) { $("#videoIdLabel").html("YouTube Video ID"); }
+                if (itemTypeId == itemTypeIds.Video_Vimeo) { $("#videoIdLabel").html("Vimeo Video ID"); }
             } else {
                 $("#itemTypeForm_Video").addClass("d-none");
             }
@@ -637,7 +642,7 @@
             addItemObj.ContentFileId = null;
             addItemObj.IsCaption = false;
 
-            if (addItemObj.ItemType == itemTypeIds.Video){
+            if (addItemObj.ItemType == itemTypeIds.Video_YouTube || addItemObj.ItemType == itemTypeIds.Video_Vimeo){
                 addItemObj.Name = $("#contentItemVideoTitle").val();
                 addItemObj.Text = $("#contentItemVideoDescription").val();
                 addItemObj.Url = $("#contentItemVideoId").val();

@@ -188,8 +188,9 @@ namespace healthspanmd.web.Controllers
                     contentCard = _contentCommands.AddContentItemToContentCard(model.ContentCardId, model.Text, model.Url);
                     break;
 
-                case ContentItemType.Video:
-                    contentCard = _contentCommands.AddContentItemToContentCard(model.ContentCardId, model.Name, model.Text, model.Url);
+                case ContentItemType.Video_YouTube:
+                case ContentItemType.Video_Vimeo:
+                    contentCard = _contentCommands.AddContentItemToContentCard(model.ContentCardId, model.ItemType, model.Name, model.Text, model.Url);
                     break;
 
                 case ContentItemType.PDFDocument:

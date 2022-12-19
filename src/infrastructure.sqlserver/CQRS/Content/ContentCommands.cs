@@ -60,7 +60,7 @@ namespace infrastructure.sqlserver.CQRS.Content
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Add VIDEO ContentItem
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        public ContentCardModel AddContentItemToContentCard(int contentCardId, string title, string description, string youTubeVideoId)
+        public ContentCardModel AddContentItemToContentCard(int contentCardId, ContentItemType itemType, string title, string description, string videoId)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
@@ -69,8 +69,8 @@ namespace infrastructure.sqlserver.CQRS.Content
 
                 var contentItem = new ContentItem
                 {
-                    ItemType = ContentItemType.Video,
-                    Url = youTubeVideoId,
+                    ItemType = itemType,
+                    Url = videoId,
                     Name = title,
                     Text = description
                 };

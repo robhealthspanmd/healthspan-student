@@ -8,10 +8,11 @@ namespace healthspanmd.core.CQRS.Content
 {
     public enum ContentItemType
     {
-        Video = 0,
+        Video_YouTube = 0,
         Image = 1,
         PDFDocument = 2,
         WebLink = 3,
-        Text = 4
+        Text = 4,
+        Video_Vimeo = 5
     }
 }

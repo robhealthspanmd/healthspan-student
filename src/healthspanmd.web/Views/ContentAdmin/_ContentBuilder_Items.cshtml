@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-toolbar">
                         <a href="javascript:void(0);" class="btn btn-icon btn-sm btn-hover-light-primary" 
-                            onclick="confirmRemoveItem(@contentItem.ContentItemId);">
+                            onclick="confirmRemoveItem(@member.ContentCardMemberId);">
                             <img src="/assets/media/icons/duotune/abstract/abs012.svg"/>
                         </a>
                         
@@ -40,7 +40,7 @@
                         <i>Url:</i> @contentItem.Url
                         break;
 
-                    case healthspanmd.core.CQRS.Content.ContentItemType.Video:
+                    case healthspanmd.core.CQRS.Content.ContentItemType.Video_YouTube:
                         <i>Title:</i> @contentItem.Name<br />
                         <i>Description: </i> @contentItem.Text<br />
                         <i>YouTube ID: </i> @contentItem.Url
