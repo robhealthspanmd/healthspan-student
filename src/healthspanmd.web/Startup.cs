@@ -33,6 +33,7 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using healthspanmd.core.Services.Messaging;
 using infrastructure.notifications;
+using healthspanmd.web.Helpers;
 
 namespace healthspanmd.web
 {
@@ -98,6 +99,7 @@ namespace healthspanmd.web
             services.AddTransient<INotificationSender, NotificationSender>();
             services.AddTransient<IHtmlEmailSender, HtmlEmailSender>();
             services.AddTransient<INotificationCommands, NotificationCommands>();
+            services.AddTransient<IViewHelper, ViewHelper>();
             
             // Authorization Services
             services.AddAuthorization(options =>

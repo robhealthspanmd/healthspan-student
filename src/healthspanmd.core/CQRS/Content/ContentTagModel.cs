@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace healthspanmd.core.CQRS.Content
 {
-    public enum ContentItemType
+    public class ContentTagModel
     {
-        Video_YouTube = 0,
-        Image = 1,
-        PDFDocument = 2,
-        WebLink = 3,
-        Text = 4,
-        Video_Vimeo = 5
+        public int ContentTagId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

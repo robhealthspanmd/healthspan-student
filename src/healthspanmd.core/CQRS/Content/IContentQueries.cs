@@ -11,5 +11,8 @@ namespace healthspanmd.core.CQRS.Content
         ContentCardModel GetContentCard(int contentCardId);
         ContentFileModel GetContentFile(int contentFileId);
         ICollection<ContentCardModel> GetList(GetContentCardListQueryFilter filter);
+        ICollection<ContentTagModel> GetAllContentTags();
+        ICollection<ContentTagModel> GetContentTagsWithAssignments();
+
     }
 }

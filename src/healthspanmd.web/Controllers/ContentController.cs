@@ -6,6 +6,7 @@ using healthspanmd.web.Models.Content;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Linq;
 
 namespace healthspanmd.web.Controllers
 {
@@ -16,6 +17,7 @@ namespace healthspanmd.web.Controllers
         private readonly IContentQueries _contentQueries;
         private readonly IUserCommands _userCommands;
         private readonly IUserQueries _userQueries;
+
 
         public ContentController(
             IFileSystemManager fileSystemManager, 
@@ -30,10 +32,47 @@ namespace healthspanmd.web.Controllers
             _userQueries = userQueries;
         }
 
+
+        [HttpGet]
+        [Route("/Content")]
         public IActionResult Index()
         {
-            return View();
+            var user = _userQueries.GetUserDetailModel(User.Identity.Name, true);
+            var model = new ContentLibraryViewModel
+            {
+                AssignedContent = user.ContentCardAssignments
+                    .Where(a => !a.CompletedUtc.HasValue)
+                    .OrderBy(a => a.SortOrder)
+                    .Select(a => a.ContentCard)
+                    .ToList(),
+                Tags = _contentQueries.GetContentTagsWithAssignments()
+            };
+
+            this.AddBreadCrumb("Library");
+            return View(model);
         }
+
+
+        [HttpGet]
+        [Route("/Content/Tag/{contentTagId}")]
+        public IActionResult ContentTagListing(int contentTagId)
+        {
+            var model = new ContentTagListingViewModel
+            {
+                TaggedContent = _contentQueries.GetList(new GetContentCardListQueryFilter
+                {
+                    ActiveOnly = true,
+                    ContentTagId = contentTagId
+                }),
+                Tags = _contentQueries.GetContentTagsWithAssignments(),
+            };
+            model.SelectedTag = model.Tags.Where(t => t.ContentTagId == contentTagId).FirstOrDefault();
+
+            this.AddBreadCrumb("Library", "/Content");
+            this.AddBreadCrumb(model.SelectedTag.Name);
+            return View(model);
+        }
+
 
 
         [HttpGet]

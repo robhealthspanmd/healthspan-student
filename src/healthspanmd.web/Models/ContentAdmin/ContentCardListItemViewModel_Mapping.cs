@@ -11,7 +11,8 @@ namespace healthspanmd.web.Models.ContentAdmin
                 ContentCardId = c.ContentCardId,
                 Name = c.Name,
                 Description = c.Description,
-                IsActive = c.IsActive
+                IsActive = c.IsActive,
+                Tags = c.Tags
             };
         }
     }

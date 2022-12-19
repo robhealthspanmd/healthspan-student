@@ -33,11 +33,12 @@ namespace healthspanmd.core.CQRS.Content
         /// Create and add a video ContentItem to a ContentCard
         /// </summary>
         /// <param name="contentCardId"></param>
-        /// <param name="Title"></param>
-        /// <param name="Description"></param>
-        /// <param name="youTubeVideoId"></param>
+        /// <param name="itemType"></param>
+        /// <param name="title"></param>
+        /// <param name="description"></param>
+        /// <param name="videoId"></param>
         /// <returns></returns>
-        ContentCardModel AddContentItemToContentCard(int contentCardId, string Title, string Description, string youTubeVideoId);
+        ContentCardModel AddContentItemToContentCard(int contentCardId, ContentItemType itemType, string title, string description, string videoId);
 
 
         /// <summary>
@@ -89,5 +90,13 @@ namespace healthspanmd.core.CQRS.Content
         ContentFileModel CreateContentFile(ContentFileModel model);
 
         void UpdateContentFile(ContentFileModel model);
+
+
+        ContentTagModel CreateContentTag(ContentTagModel model);
+        void UpdateContentTag(ContentTagModel model);
+        void DeleteContentTag(int contentTagId);
+        ContentTagAssignmentModel CreateContentTagAssignment(ContentTagAssignmentModel model);
+        void UpdateContentTagAssignment(ContentTagAssignmentModel model);
+        void DeleteContentTagAssignment(int contentTagAssignmentId);    
     }
 }

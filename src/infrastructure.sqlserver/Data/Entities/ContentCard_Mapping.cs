@@ -20,6 +20,7 @@ namespace infrastructure.sqlserver.Data.Entities
                 Description = c.Description,
                 ImageFileId = c.ImageFileId,
                 NotificationMessage = c.NotificationMessage,
+                ContentTagAssignments = c.ContentTagAssignments != null ? c.ContentTagAssignments.Select(a => a.ToContentTagAssignmentModel()).ToList() : null, 
             };
         }
 
@@ -33,7 +34,8 @@ namespace infrastructure.sqlserver.Data.Entities
                 IsActive = c.IsActive,
                 Description = c.Description,
                 ImageFileId = c.ImageFileId,
-                NotificationMessage = c.NotificationMessage
+                NotificationMessage = c.NotificationMessage,
+                ContentTagAssignments = c.ContentTagAssignments != null ? c.ContentTagAssignments.Select(a => a.ToContentTagAssignment()).ToList() : null,
             };
         }
     }

@@ -29,12 +29,18 @@ namespace infrastructure.sqlserver.CQRS.Content
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
 
-                var query = dbContext.ContentCards.AsQueryable();
+                var query = dbContext.ContentCards
+                    .Include(c => c.ContentTagAssignments)
+                        .ThenInclude(a => a.ContentTag)
+                    .AsQueryable();
 
 
                 if (filter.ActiveOnly.HasValue)
                     if (filter.ActiveOnly.Value)
                         query = query.Where(c => c.IsActive);
+
+                if (filter.ContentTagId.HasValue)
+                    query = query.Where(c => c.ContentTagAssignments.Any(a => a.ContentTagId == filter.ContentTagId));
 
 
                 return query.Select(c => c.ToContentCardModel()).ToList();
@@ -61,6 +67,8 @@ namespace infrastructure.sqlserver.CQRS.Content
                 .Include(c => c.ContentCardMembers)
                     .ThenInclude(m => m.ContentItem)
                         .ThenInclude(i => i.ContentFile)
+                .Include(c => c.ContentTagAssignments)
+                    .ThenInclude(a => a.ContentTag)
                 .FirstOrDefault();
             return contentCard;
         }
@@ -72,6 +80,34 @@ namespace infrastructure.sqlserver.CQRS.Content
                 var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
                 var contentFile = dbContext.ContentFiles.Find(contentFileId);
                 return contentFile.ToContentFileModel();
+            }
+        }
+
+        public ICollection<ContentTagModel> GetAllContentTags()
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                return dbContext.ContentTags
+                    .Select(t => t.ToContentTagModel())
+                    .ToList();
+            }
+        }
+
+        public ICollection<ContentTagModel> GetContentTagsWithAssignments()
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+
+                var assignedContentTags = dbContext.ContentTagAssignments
+                    .Select(a => a.ContentTagId).Distinct()
+                    .ToList();
+
+                return dbContext.ContentTags
+                    .Where(t => assignedContentTags.Contains(t.ContentTagId))
+                    .Select(t => t.ToContentTagModel())
+                    .ToList();
             }
         }
     }

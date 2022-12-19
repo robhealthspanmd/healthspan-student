@@ -71,6 +71,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXENvbnRlbnRDYXJkcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/ContentTags.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXENvbnRlbnRUYWdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/ContentAdmin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudEFkbWluXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -87,8 +91,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxDYXJkVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/ContentTagListing.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxDb250ZW50VGFnTGlzdGluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_CardPreview.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxfQ2FyZFByZXZpZXcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_CardPreviewFeatured.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxfQ2FyZFByZXZpZXdGZWF0dXJlZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_CardPreviewVertical.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGVudFxfQ2FyZFByZXZpZXdWZXJ0aWNhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kennethhoffman/source/repos/HealthSpanMD/platform-gen1/src/healthspanmd.web/Views/Content/_ContentCard.cshtml]
