@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "healthspanmd.calculator.desktop (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "healthspanmd.calculator.desktop (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
