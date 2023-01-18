@@ -60,7 +60,7 @@ namespace infrastructure.sqlserver.CQRS.Content
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         // Add VIDEO ContentItem
         // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        public ContentCardModel AddContentItemToContentCard(int contentCardId, string title, string description, string youTubeVideoId)
+        public ContentCardModel AddContentItemToContentCard(int contentCardId, ContentItemType itemType, string title, string description, string videoId)
         {
             using (var scope = _scopeFactory.CreateScope())
             {
@@ -69,8 +69,8 @@ namespace infrastructure.sqlserver.CQRS.Content
 
                 var contentItem = new ContentItem
                 {
-                    ItemType = ContentItemType.Video,
-                    Url = youTubeVideoId,
+                    ItemType = itemType,
+                    Url = videoId,
                     Name = title,
                     Text = description
                 };
@@ -255,6 +255,24 @@ namespace infrastructure.sqlserver.CQRS.Content
                 var contentCard = card.ToContentCard();
                 dbContext.ContentCards.Update(contentCard);
                 dbContext.SaveChanges();
+
+                // new ContentTagAssignments will be added here,
+                // but any that should have been removed are still in the database
+
+                // remove ContentTagAssignments that no longer exist
+                var assignmentToContentTagIds = card.ContentTagAssignments.Select(a => a.ContentTagId).ToList();
+                var updatedContentCard = dbContext.ContentCards
+                    .Where(c => c.ContentCardId == card.ContentCardId)
+                    .Include(c => c.ContentTagAssignments)
+                    .FirstOrDefault();
+                var assignmentIdsToDelete = updatedContentCard.ContentTagAssignments
+                    .Where(a => !assignmentToContentTagIds.Contains(a.ContentTagId))
+                    .Select(a => a.ContentTagAssignmentId)
+                    .ToList();
+                foreach (var assignmentId in assignmentIdsToDelete)
+                    DeleteContentTagAssignment(assignmentId);
+
+                contentCard = ContentQueries.GetContentCardEntity(card.ContentCardId, dbContext);
                 return contentCard.ToContentCardModel();
             }
         }
@@ -294,5 +312,72 @@ namespace infrastructure.sqlserver.CQRS.Content
             }
         }
 
+        public ContentTagModel CreateContentTag(ContentTagModel model)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var contentTag = model.ToContentTag();
+                dbContext.ContentTags.Add(contentTag);
+                dbContext.SaveChanges();
+                return contentTag.ToContentTagModel();
+            }
+        }
+
+        public void UpdateContentTag(ContentTagModel model)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var contentTag = model.ToContentTag();
+                dbContext.ContentTags.Update(contentTag);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteContentTag(int contentTagId)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var tagToDelete = dbContext.ContentTags.Find(contentTagId);
+                dbContext.ContentTags.Remove(tagToDelete);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public ContentTagAssignmentModel CreateContentTagAssignment(ContentTagAssignmentModel model)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var assignment = model.ToContentTagAssignment();
+                dbContext.ContentTagAssignments.Add(assignment);
+                dbContext.SaveChanges();
+                return assignment.ToContentTagAssignmentModel();
+            }
+        }
+
+        public void UpdateContentTagAssignment(ContentTagAssignmentModel model)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var assignment = model.ToContentTagAssignment();
+                dbContext.ContentTagAssignments.Update(assignment);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void DeleteContentTagAssignment(int contentTagAssignmentId)
+        {
+            using (var scope = _scopeFactory.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<HealthSpanMdDbContext>();
+                var assignmentToDelete = dbContext.ContentTagAssignments.Find(contentTagAssignmentId);
+                dbContext.ContentTagAssignments.Remove(assignmentToDelete);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }

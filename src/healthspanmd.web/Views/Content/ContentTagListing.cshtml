@@ -1,0 +1,27 @@
+﻿@inject healthspanmd.web.Helpers.IViewHelper viewHelper
+@model healthspanmd.web.Models.Content.ContentTagListingViewModel
+
+@{
+    ViewData["Title"] = @Model.SelectedTag.Name;
+    ViewData["LeftNav_ActiveItem"] = "Content";
+}
+
+
+<div class="alert alert-info d-flex align-items-center p-5 mb-10">
+	<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M16.0077 19.2901L12.9293 17.5311C12.3487 17.1993 11.6407 17.1796 11.0426 17.4787L6.89443 19.5528C5.56462 20.2177 4 19.2507 4 17.7639V5C4 3.89543 4.89543 3 6 3H17C18.1046 3 19 3.89543 19 5V17.5536C19 19.0893 17.341 20.052 16.0077 19.2901Z" fill="black"/>
+        </svg></span>
+	<div class="d-flex flex-column">
+        <h4 class="mb-1 text-dark">@Model.SelectedTag.Name</h4>
+        <span>@Model.SelectedTag.Description</span>
+    </div>
+</div>
+
+
+@foreach (var card in Model.TaggedContent)
+{
+    var previewModel = viewHelper.GetContentCardPreviewViewModel(card);
+    <div class="mx-2 mb-4">
+        <partial name="_CardPreviewFeatured" model=previewModel></partial>
+    </div>
+}

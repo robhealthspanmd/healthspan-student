@@ -1,15 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Content Cards";
-    ViewData["LeftNav_ActiveItem"] = "Content";
+    ViewData["LeftNav_ActiveItem"] = "ContentCards";
 }
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-	
-	<div id="clientListDataContainer" class="container-xxl">
-		
+	<div id="clientListDataContainer" class="container-xxl">	
 		<div id="contentCardListContainer">
-			@*<partial name="_ClientListData" model=Model />*@
-
-
             <div class="card-toolbar mb-4">
 			    <div class="d-flex justify-content-end" data-kt-client-table-toolbar="base">
 				    <button class="btn btn-primary" type="button" onclick="createNewContentCard();">Create New Content Card</button>
@@ -29,6 +24,8 @@
                             .ClientTemplate("<a href='/ContentAdmin/CardBuilder/#=ContentCardId#'>#=Name#</a>");
 
                     columns.Bound(s => s.Description);
+
+                    columns.Bound(s => s.Tags);
 
                     columns.Bound(s => s.IsActive)
                             .Title("Status")

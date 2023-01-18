@@ -1,0 +1,38 @@
+﻿@model healthspanmd.web.Models.Content.ContentCardPreviewViewModel
+
+@* <div class="card shadow-sm w-lg-350px w-150px h-100">
+    <div class="card-body h-75">
+        <a href="/Content/@Model.ContentCardId" class="stretched-link">
+        <img src="@Model.CardImageSrc" class="w-100" />
+        </a>
+    </div>
+    <div class="card-footer p-2 h-75px h-lg-125px">
+        <div class="d-none d-lg-block">
+             <h3 class="card-title">@Model.Name</h3>
+            <div class="w-100">
+                @Model.Description
+            </div>
+        </div>
+        <div class="d-sm-block d-md-none">
+            @Model.Name
+        </div>
+    </div>
+</div>
+*@
+
+ <div class="flex-column w-lg-300px w-150px h-100">
+    <div>
+        <a href="/Content/@Model.ContentCardId">
+            <img src="@Model.CardImageSrc" class="center-cropped w-150px h-150px w-lg-300px h-lg-300px" />
+        </a>
+        <div class="d-none d-lg-block">
+             <h3 class="card-title">@Model.Name</h3>
+            <div class="w-100">
+                @Model.Description
+            </div>
+        </div>
+        <div class="d-sm-block d-md-none">
+            @Model.Name
+        </div>
+    </div> 
+</div>

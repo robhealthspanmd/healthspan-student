@@ -18,7 +18,7 @@
         });
 
         var contentCardId = @Model.ContentCard.ContentCardId;
-        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video)) {
+        @foreach(var member in Model.ContentCard.ContentCardMembers.Where(m => m.ContentItem.ItemType == healthspanmd.core.CQRS.Content.ContentItemType.Video_YouTube)) {
             var contentItem = member.ContentItem;
 
             <text>

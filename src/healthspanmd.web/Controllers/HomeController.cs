@@ -2,6 +2,7 @@
 using healthspanmd.core.CQRS.Users;
 using healthspanmd.core.Services.FileSystem;
 using healthspanmd.core.Services.Messaging;
+using healthspanmd.web.Helpers;
 using healthspanmd.web.Models;
 using healthspanmd.web.Models.Content;
 using healthspanmd.web.Models.Home;
@@ -31,6 +32,7 @@ namespace healthspanmd.web.Controllers
         private readonly IUserQueries _userQueries;
         private readonly IContentQueries _contentQueries;
         private readonly IFileSystemManager _fileSystemManager;
+        private readonly IViewHelper _viewHelper;
 
         public HomeController(
             IConfiguration config,
@@ -38,7 +40,8 @@ namespace healthspanmd.web.Controllers
             ILoggerFactory loggerFactory,
             IUserQueries userQueries,
             IContentQueries contentQueries,
-            IFileSystemManager fileSystemManager
+            IFileSystemManager fileSystemManager,
+            IViewHelper viewHelper
             )
         {
            
@@ -49,6 +52,7 @@ namespace healthspanmd.web.Controllers
             _userQueries = userQueries;
             _contentQueries = contentQueries;
             _fileSystemManager = fileSystemManager;
+            _viewHelper = viewHelper;
         }
 
         [AllowAnonymous]
@@ -79,25 +83,9 @@ namespace healthspanmd.web.Controllers
                 ContentCardPreviews = new List<ContentCardPreviewViewModel>()
             };
 
-
-
             foreach (var contentCardAssignment in model.User.ContentCardAssignments.Where(a => !a.CompletedUtc.HasValue).OrderBy(a => a.SortOrder))
-            {
-                var contentCardPreview = new ContentCardPreviewViewModel
-                {
-                    ContentCardId = contentCardAssignment.ContentCardId,
-                    Name = contentCardAssignment.ContentCard.Name,
-                    Description = contentCardAssignment.ContentCard.Description
-                };
-                if (contentCardAssignment.ContentCard.ImageFileId.HasValue)
-                {
-                    var imageContentFile = _contentQueries.GetContentFile(contentCardAssignment.ContentCard.ImageFileId.Value);
-                    var imageData = _fileSystemManager.GetFile("contentfiles", imageContentFile.FileSystemPath);
-                    var imageBase64Data = Convert.ToBase64String(imageData);
-                    contentCardPreview.CardImageSrc = $"data:image/{imageContentFile.FileExtension};base64,{imageBase64Data}";
-                }
-                model.ContentCardPreviews.Add(contentCardPreview);
-            }
+                model.ContentCardPreviews.Add(_viewHelper.GetContentCardPreviewViewModel(contentCardAssignment.ContentCard));
+            
 
             return model;
         }

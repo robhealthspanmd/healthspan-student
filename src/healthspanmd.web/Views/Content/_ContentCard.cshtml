@@ -37,7 +37,7 @@
 
 
 
-            case healthspanmd.core.CQRS.Content.ContentItemType.Video:
+            case healthspanmd.core.CQRS.Content.ContentItemType.Video_YouTube:
                 <p>
                     <div id="ytplayer_@item.ContentItemId" class="content_item_video"></div>
                     @*
@@ -73,7 +73,20 @@
                 </script>*@
                 break;
 
+            case healthspanmd.core.CQRS.Content.ContentItemType.Video_Vimeo:
+                <div style="padding:56.25% 0 0 0;position:relative;">
+                    <iframe 
+                        src="https://player.vimeo.com/video/@item.Url&badge=0autopause=0&player_id=0&app_id=58479" 
+                        frameborder="0" allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen 
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                        title="@item.Name">
+                    </iframe>
+                </div>
 
+                
+
+                break;
 
 
             case healthspanmd.core.CQRS.Content.ContentItemType.PDFDocument:

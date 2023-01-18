@@ -9,5 +9,6 @@ namespace healthspanmd.core.CQRS.Content
     public class GetContentCardListQueryFilter
     {
         public bool? ActiveOnly { get; set; }
+        public int? ContentTagId { get; set; }
     }
 }

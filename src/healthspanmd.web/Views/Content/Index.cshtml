@@ -1,0 +1,62 @@
+﻿@inject healthspanmd.web.Helpers.IViewHelper viewHelper
+@model healthspanmd.web.Models.Content.ContentLibraryViewModel
+@{
+    ViewData["Title"] = "Content Library";
+}
+
+@if (Model.AssignedContent.Count > 0)
+{
+    var featurePreviewModel = viewHelper.GetContentCardPreviewViewModel(Model.AssignedContent.FirstOrDefault());
+
+    <h3>Featured Content</h3>
+    <div class="mx-2">
+        <partial name="_CardPreviewFeatured" model=featurePreviewModel></partial>
+    </div>
+}
+
+
+@*
+@foreach (var card in Model.AssignedContent)
+{
+    var pm = viewHelper.GetContentCardPreviewViewModel(card);
+    <div class="mx-2">
+        <partial name="_CardPreviewFeatured" model=pm></partial>
+    </div>
+}*@
+
+@if (Model.AssignedContent.Count > 1)
+{
+    <h3 class="mt-6">Content For You</h3>
+    <div class="d-flex flex-row flex-nowrap overflow-auto p-3">
+        @foreach (var card in Model.AssignedContent.Skip(1))
+        {
+            var previewModel = viewHelper.GetContentCardPreviewViewModel(card);
+            <div class="mx-2">
+                <partial name="_CardPreviewVertical" model=previewModel></partial>
+            </div>
+        }
+    </div>
+}
+
+
+
+<h3 class="mt-6">Content Library</h3>
+<div class="row mt-4">
+    @foreach (var tag in Model.Tags)
+    {
+        <div class="col-12 col-lg-4 mb-3">
+            <a href="/Content/Tag/@tag.ContentTagId" class="btn btn-outline btn-outline-dashed btn-outline-default w-100">@tag.Name</a>
+        </div>
+    }
+</div>
+
+
+@section HeaderTags {
+    <style>
+        .center-cropped {
+          object-fit: cover;
+        }
+
+
+    </style>
+}
