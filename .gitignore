@@ -16,6 +16,9 @@
 # Mono auto generated files
 mono_crash.*
 
+# Temp folder
+/Temp
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
