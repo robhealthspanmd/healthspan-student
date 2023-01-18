@@ -17,7 +17,7 @@
 mono_crash.*
 
 # Temp folder
-/Temp
+src/[Tt]emp
 
 # Build results
 [Dd]ebug/
