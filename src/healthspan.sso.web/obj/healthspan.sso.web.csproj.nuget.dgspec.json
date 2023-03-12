@@ -1,0 +1,430 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspan.sso.web\\healthspan.sso.web.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspan.sso.web\\healthspan.sso.web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspan.sso.web\\healthspan.sso.web.csproj",
+        "projectName": "healthspan.sso.web",
+        "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspan.sso.web\\healthspan.sso.web.csproj",
+        "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspan.sso.web\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
+                "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\infrastructure.gmail.csproj"
+              },
+              "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
+                "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "Azure.Security.KeyVault.Keys": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "Azure.Security.KeyVault.Secrets": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "IdentityServer4.AspNetIdentity": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "IdentityServer4.EntityFramework": {
+              "target": "Package",
+              "version": "[4.1.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.Google": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.Azure.KeyVault": {
+              "target": "Package",
+              "version": "[3.0.5, )"
+            },
+            "Microsoft.Azure.Services.AppAuthentication": {
+              "target": "Package",
+              "version": "[1.6.2, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.IdentityModel.Clients.ActiveDirectory": {
+              "target": "Package",
+              "version": "[5.2.9, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Serilog.Sinks.AzureApp": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj",
+        "projectName": "healthspanmd.core",
+        "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj",
+        "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
+                "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\healthspanmd.shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
+        "projectName": "healthspanmd.shared",
+        "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
+        "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
+        "projectName": "infrastructure.gmail",
+        "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
+        "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.gmail\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Google.Apis.Gmail.v1": {
+              "target": "Package",
+              "version": "[1.57.0.2650, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
+        "projectName": "infrastructure.sqlserver",
+        "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
+        "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.sqlserver\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
+          "https://nuget.telerik.com/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
