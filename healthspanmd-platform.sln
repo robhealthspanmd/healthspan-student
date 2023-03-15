@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "infrastructure.mailerlite",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "healthspanmd.calculator.desktop", "src\healthspanmd.calculator.desktop\healthspanmd.calculator.desktop.csproj", "{4CC3A161-370B-434E-BCC3-5DA8C7E28ECE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "healthspanmd.calculator.website", "src\healthspanmd.calculator.website\healthspanmd.calculator.website.csproj", "{95D63484-A437-4067-878A-EBFECB2D0CB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -293,6 +295,22 @@ Global
 		{4CC3A161-370B-434E-BCC3-5DA8C7E28ECE}.Release|x86.ActiveCfg = Release|x86
 		{4CC3A161-370B-434E-BCC3-5DA8C7E28ECE}.Release|x86.Build.0 = Release|x86
 		{4CC3A161-370B-434E-BCC3-5DA8C7E28ECE}.Release|x86.Deploy.0 = Release|x86
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|arm64.Build.0 = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Debug|x86.Build.0 = Debug|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|arm64.ActiveCfg = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|arm64.Build.0 = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|x64.Build.0 = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{95D63484-A437-4067-878A-EBFECB2D0CB4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

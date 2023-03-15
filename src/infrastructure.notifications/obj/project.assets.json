@@ -8149,37 +8149,44 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kennethhoffman\\.nuget\\packages\\": {}
+    "C:\\Users\\grant\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
+      "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
       "projectName": "infrastructure.notifications",
-      "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
-      "packagesPath": "C:\\Users\\kennethhoffman\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\infrastructure.notifications\\obj\\",
+      "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
+      "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\kennethhoffman\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\kennethhoffman\\source\\repos\\DownloadedNuget": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.cloudsmith.io/orchardcore/preview/v3/index.json": {},
         "https://nuget.telerik.com/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-              "projectPath": "C:\\Users\\kennethhoffman\\source\\repos\\HealthSpanMD\\asu\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+            "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+              "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
             }
           }
         }
@@ -8226,7 +8233,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
