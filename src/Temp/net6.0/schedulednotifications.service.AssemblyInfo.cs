@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("dotnet-schedulednotifications.service-66C07805-DB0D-4F02-8136-628C461DF247")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("schedulednotifications.service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

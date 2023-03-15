@@ -1,0 +1,255 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<style>
+    /* Reset default styles */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Set basic styles for the page */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+
+    /* Set styles for the container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Set styles for the header */
+    h1 {
+        font-size: 36px;
+        margin: 20px 0;
+        text-align: center;
+        color: #0072c6;
+    }
+
+    /* Set styles for the form */
+    form {
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label {
+        margin-top: 20px;
+        font-weight: bold;
+        color: #0072c6;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+    }
+
+    input[type="submit"] {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #0072c6;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Set styles for the logo */
+    .logo {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Health Age Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="HealthspanMD Logo">
+        <h1>Health Age Calculator</h1>
+    </header>
+    <main>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="age">What is your age?</label>
+            <input type="number" id="age" name="age" required>
+            <br>
+            <label for="height-feet">Height:</label>
+            <input type="number" id="height-feet" name="height-feet" placeholder="Feet" required>
+            <input type="number" id="height-inches" name="height-inches" placeholder="Inches" required>
+            <br>
+            <label for="mod-activity">On average, how many minutes PER DAY do you spend on moderate physical activity?</label>
+            <select id="mod-activity" name="mod-activity">
+                <option value="less-than-5">Less than 5 minutes per day</option>
+                <option value="about-15">About 15 minutes per day</option>
+                <option value="about-30">About 30 minutes per day</option>
+                <option value="more-than-45">More than 45 minutes per day</option>
+            </select>
+            <br>
+            <label for="vig-activity">On average, how many minutes PER DAY do you spend on vigorous physical activity?</label>
+            <select id="vig-activity" name="vig-activity">
+                <option value="none">None</option>
+                <option value="about-10">About 10 minutes per day</option>
+                <option value="more-than-20">More than 20 minutes per day</option>
+            </select>
+            <br>
+            <label for="sugar-drink">On average, how many servings PER DAY do you have of sugar added drink (Examples include soda, flavored coffee, sports drink, lemonade, or sweet tea.)?</label>
+            <select id="sugar-drink" name="sugar-drink">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4-or-more">4 or more</option>
+            </select>
+            <br>
+            <label for="7A">Sugar added drink (Examples include soda, flavored coffee, sports drink, lemonade, or sweet tea.)</label>
+            <select id="7A" name="7A">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4 or more">4 or more</option>
+            </select>
+
+            <label for="7B">Foods high in added sugar. (Examples include cake, cookies, pie, candy, most desserts, and ice cream.)</label>
+            <select id="7B" name="7B">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4 or more">4 or more</option>
+            </select>
+
+            <label for="7C">Foods mostly made from white flour or other refined grain. (Examples include white bread, bagels, many cereals, pretzels, muffins, pancakes, biscuits, and baked goods.)</label>
+            <select id="7C" name="7C">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4 or more">4 or more</option>
+            </select>
+            <br />
+            <label for="deep-fried-foods">On average, how many servings PER DAY do you have of deep fried foods (Examples include French fries, chips, chicken tenders/nuggets, and fried chicken/shrimp/fish/vegetables)?</label>
+            <select id="deep-fried-foods" name="deep-fried-foods">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4-or-more">4 or more</option>
+            </select>
+            <br>
+            <label for="processed-meat-cheese">On average, how many servings PER DAY do you have of processed meat and cheese (Examples include hot dogs, bologna, salami, ham, bacon, sausage, canned meats, and American cheese)?</label>
+            <select id="processed-meat-cheese" name="processed-meat-cheese">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4-or-more">4 or more</option>
+            </select>
+            <br>
+            <label for="alcoholic-drinks">On average, how many alcoholic drinks do you have each day?</label>
+            <select id="alcoholic-drinks" name="alcoholic-drinks">
+                <option value="0-1">0-1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4-or-more">4 or more</option>
+            </select>
+            <br>
+            <label for="body-type">How would you describe your body type and amount of fat that you carry. The BMI ranges are provided as a guideline only. More helpful is your assessment of your body’s fat composition.</label>
+            <select id="body-type" name="body-type">
+                <option value="too-thin">Too thin or too little fat (Typical BMI < 18.5 kg/m2)</option>
+                <option value="healthy">My weight and body fat is within a healthy range (Typical BMI between 19 and 25 kg/m2)</option>
+                <option value="excess-fat">My weight is normal, but I carry too much fat in my midsection or belly. (Typical BMI between 19 and 25 kg/m2)</option>
+                <option value="mild-overweight">I am mildly overweight – my body fat is mildly increased (Typical BMI between 25 and 30 kg/m2)</option>
+                <option value="moderate-overweight">I am moderately overweight – my body fat is moderately increased (Typical BMI between 30 and 35 kg/m2)</option>
+                <option value="severe-overweight">I am severely overweight – my body fat is severely increased (Typical BMI between 35 and 40 kg/m2)</option>
+            </select>
+            <br>
+            <label for="sleep-hours">How much sleep do you get on average each night?</label>
+            <select id="sleep-hours" name="sleep-hours">
+                <option value="less-than-7">Less than 7 hours</option>
+                <option value="7-to-9">Between 7 and 9 hours</option>
+                <option value="more-than-9">More than 9 hours</option>
+            </select>
+            <br>
+            <label for="cholesterol-level">Is your cholesterol:</label>
+            <select id="cholesterol-level" name="cholesterol-level">
+                <option value="great">Great! (Total cholesterol minus HDL cholesterol less than 100 mg/dL)</option>
+                <option value="good">Good (Total cholesterol minus HDL cholesterol between 100 and 130 mg/dL)</option>
+                <option value="high">High (Total cholesterol minus HDL cholesterol between 130 and 160 mg/dL)</option>
+                <option value="really-high">Really high (Total cholesterol minus HDL cholesterol more than 190 mg/dL)</option>
+                <option value="dont-know">I don’t know</option>
+            </select>
+            <br>
+            <label for="blood-pressure">Is your blood pressure:</label>
+            <select id="blood-pressure" name="blood-pressure">
+                <option value="great">Great! Less than 120/80 mm Hg</option>
+                <option value="borderline-high">Borderline high (Systolic (top number) blood pressure between 120-129 mm Hg, and diastolic (bottom number) blood pressure less than 80 mm Hg.)</option>
+                <option value="high">High (Systolic (top number) blood pressure between 130-139 mm Hg, and diastolic (bottom number) blood pressure between 80 - 89 mm Hg)</option>
+                <option value="moderately-high">Moderately high (Systolic (top number) blood pressure between 140-159 mm Hg, and diastolic (bottom number) blood pressure between 90 - 99 mm Hg.)</option>
+                <option value="severely-elevated">Severely elevated (Systolic (top number) blood pressure greater than 160 mm Hg, and diastolic (bottom number) blood pressure greater than 100 mm Hg.)</option>
+                <option value="dont-know">I don’t know</option>
+            </select>
+            <br>
+            <label for="smoking-status">Do you smoke?</label>
+            <input type="radio" id="no-smoking" name="smoking-status" value="no-smoking">
+            <label for="no-smoking">I do not smoke.</label>
+            <input type="radio" id="currently-smoking" name="smoking-status" value="currently-smoking">
+            <label for="currently-smoking">I currently smoke.</label>
+            <br>
+
+            <label for="diabetes-status">Do you have diabetes or pre-diabetes or high blood sugar levels?</label>
+            <select id="diabetes-status" name="diabetes-status">
+                <option value="no-diabetes">No diabetes</option>
+                <option value="pre-diabetes">I have pre-diabetes (my blood sugar levels are mildly elevated)</option>
+                <option value="well-controlled-diabetes">I have diabetes, but it’s well-controlled (Hgb A1c < 7%)</option>
+                <option value="not-well-controlled-diabetes">I have diabetes, it’s NOT well-controlled (Hgb A1c > 7%)</option>
+                <option value="dont-know">I don’t know</option>
+            </select>
+            <br>
+            <label for="loneliness">Do you feel lonely?</label>
+            <select id="loneliness" name="loneliness">
+                <option value="rarely">Rarely</option>
+                <option value="sometimes">Sometimes</option>
+                <option value="often">Often</option>
+            </select>
+            <br>
+            <label for="stress-effect">How much does stress affect you and your health?</label>
+            <select id="stress-effect" name="stress-effect">
+                <option value="a-little">A little</option>
+                <option value="some">Some</option>
+                <option value="a-lot">A lot</option>
+            </select>
+            <br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+</body>
+</html>
