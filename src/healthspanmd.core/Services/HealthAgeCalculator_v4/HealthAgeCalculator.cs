@@ -49,7 +49,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
         }
         private double Z1_PhysicalActivity()
         {
-            return 0;
+           
             int activity = 0;
             if (_patient.moderateActivity.Equals("less-than-5"))
             {
