@@ -1,4 +1,5 @@
 ﻿using healthspanmd.calculator.website.Models;
+using healthspanmd.core.Services.HealthAgeCalculator_v3;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -27,6 +28,15 @@ namespace healthspanmd.calculator.website.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult HealthAge(Patient patient)
+        {
+            // Do something with the patient object
+            HealthAgeCalculator cal= new HealthAgeCalculator();
+            HealthAgeCalculatorResult result = cal.CalculateResult(patient);
+            return Content(result.HealthAge.ToString());
         }
     }
 }
