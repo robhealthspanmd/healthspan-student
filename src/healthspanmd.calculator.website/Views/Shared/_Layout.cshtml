@@ -7,43 +7,140 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/healthspanmd.calculator.website.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Google+Sans:400,500,700|Google+Sans+Text:400&amp;lang=en">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans+Text:400&amp;text=%E2%86%90%E2%86%92%E2%86%91%E2%86%93&amp;lang=en">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">healthspanmd.calculator.website</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div id="main-nav-container" class="fixed-top w-100">
+        <nav id="top-nav" class="navbar navbar-expand-lg navbar-light d-none d-lg-block flex-lg-wrap">
+            <ul class="navbar-nav col-lg-12 mx-auto justify-content-end">
+                <li class="nav-item d-flex" id="top-nav1">
+                    <a class="nav-link" href="/location/healthspan-md-phoenix-az-85016">Contact Us</a>
+                </li>
+                <div class="prac-social d-flex align-items-center">
+                    <a class="logo-align" href="https://www.linkedin.com/company/healthspanmd/" rel="nofollow" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin fa-lg" aria-label="linkedin"></i>
+                    </a>
+                    <a class="logo-align" href="https://www.facebook.com/healthspanmd" rel="nofollow" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook fa-lg" aria-label="facebook"></i>
+                    </a>
+                    <a class="logo-align" href="https://www.instagram.com/healthspanmd/" rel="nofollow" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram fa-lg" aria-label="instagram"></i>
+                        <span class="sr-only">(opens in new tab)</span>
+                    </a>
+                    <a class="logo-align" href="https://www.youtube.com/c/RToddHurstMD" rel="nofollow" target="_blank" title="Youtube">
+                        <i class="fab fa-youtube fa-lg" aria-label="youtube"></i><span class="sr-only">(opens in new tab)</span>
+                    </a>
+                    <a class="logo-align" href="https://open.spotify.com/show/57im0ie2ypxPJtpc2noeQA" rel="nofollow" target="_blank" title="Spotify">
+                        <i class="fab fa-spotify fa-lg" aria-label="spotify"></i>
+                        <span class="sr-only">(opens in new tab)</span>
+                    </a>
                 </div>
+            </ul>
+        </nav>
+
+        <nav id="main-nav" class="navbar navbar-expand-lg navbar-light flex-lg-wrap">
+            <a class="navbar-brand d-lg-none" href="https://www.healthspanmd.com">
+                <img class="prac-logo collapsed-logo" src="https://storage.googleapis.com/treatspace-prod-media/logo_thumb/p-2724/logowebpNone_1Mmr1Su.webp"
+                     onerror="this.onerror=null;this.src='https://storage.googleapis.com/treatspace-prod-media/logo_thumb/p-2724/logothumbNone_vxfs07F.png'"
+                     alt="HealthspanMD">
+            </a>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false"
+                    aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse mt-2 mt-lg-0 col-lg-12 justify-content-between" id="mainNavigation">
+                <div class="prac-logo-container my-auto col-auto py-2 d-none d-lg-block">
+                    <a href="https://www.healthspanmd.com"
+                       aria-label="Home Page">
+                        <img src="https://storage.googleapis.com/treatspace-prod-media/logo_thumb/p-2724/logowebpNone_1Mmr1Su.webp"
+                             onerror="this.onerror=null;this.src='https://storage.googleapis.com/treatspace-prod-media/logo_thumb/p-2724/logothumbNone_vxfs07F.png'"
+                             class="img-fluid prac-logo" alt="HealthspanMD">
+                    </a>
+                </div>
+                <ul class="navbar-nav col-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Health Age Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.healthspanmd.com/md/robert-hurst-md-facc-fase">Robert Todd Hurst, MD</a>
+                    </li>
+                </ul>
             </div>
         </nav>
-    </header>
+    </div>
+
+    <!------------
+    <div class="body-content" id="body-content" data-maps="AIzaSyCeSrc73BgBEA3KqHaR5eZxlL0mQRwVpEA">
+        <div class="container-fluid below-navbar">
+            <div class="row justify-content-center content-block round-img-block bg-white insure-bot">
+                <div>
+                    <h2>Health Age Calculator</h2>
+                    <p>Calculate your health age...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    ---------------------->
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - healthspanmd.calculator.website - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer-container">
+        <div class="col-lg-4">
+            <span class="powered-by">POWERED BY </span>
+            <a href="https://www.practicebeat.com/"
+               target="_blank" rel="nofollow">
+                <img class="ts-logo mr-auto" alt="Treatspace Logo"
+                     src="https://storage.googleapis.com/treatspace-prod-cdn/New/BasicFramework/images/PracticeBeatLogo.webp"
+                     data-src="https://storage.googleapis.com/treatspace-prod-cdn/New/BasicFramework/images/PracticeBeatLogo.webp"
+                     onerror="this.src='https://storage.googleapis.com/treatspace-prod-cdn/New/BasicFramework/images/PracticeBeatLogo.png'">
+                <span class="sr-only">(opens in new tab)</span>
+            </a>
+        </div>
+        <div class="row links-row justify-content-center">
+            <a href="https://www.treatspace.com/company/security-and-terms/privacy-policy/" target="_blank"
+               rel="nofollow">
+                Privacy Policy<span class="sr-only">(opens in new tab)</span>
+            </a>
+        </div>
+        <div class="row">
+            <a href="https://www.treatspace.com/company/security-and-terms/security-policy/" target="_blank"
+               rel="nofollow">
+                Data Security<span class="sr-only">(opens in new tab)</span>
+            </a>
+        </div>
+        <div class="row">
+            <a href="https://www.treatspace.com/company/security-and-terms/hippa-privacy-policy-statement/"
+               target="_blank" rel="nofollow">
+                HIPAA<span class="sr-only">(opens in new tab)</span>
+            </a>
+        </div>
+        <div class="row">
+            <a href="https://www.treatspace.com/company/security-and-terms/terms-of-use/" target="_blank"
+               rel="nofollow">
+                Terms of Use<span class="sr-only">(opens in new tab)</span>
+            </a>
+        </div>
+        <div class="col-lg-4 ts-copyright">
+            <span><i class="far fa-copyright"></i> Copyright 2023 HealthspanMD</span>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
