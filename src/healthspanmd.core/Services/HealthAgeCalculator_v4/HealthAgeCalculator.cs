@@ -11,7 +11,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
     public class HealthAgeCalculator
     {
 
-        private Patient _patient;
+        public Patient _patient;
 
         
         public HealthAgeCalculatorResult CalculateResult(Patient patient)
@@ -47,7 +47,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
 
             
         }
-        private double Z1_PhysicalActivity()
+        public double Z1_PhysicalActivity()
         {
            
             int activity = 0;
@@ -97,7 +97,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
         }
      
         
-        private double Z2_StrengthTraining()
+        public double Z2_StrengthTraining()
         {
             if (_patient.strengthTraining.Equals("less-than-30"))
                 return _patient.age * .04;
@@ -111,7 +111,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
 
             return 0;
         }
-        private double Z3_RedFoods()
+        public double Z3_RedFoods()
         {
             int servings = (redFoodServings(_patient.sugarAddedDrinks) + redFoodServings(_patient.addedSugar) + redFoodServings(_patient.refinedGrains)
                 + redFoodServings(_patient.deepFriedFoods) + redFoodServings(_patient.processedFoods) + redFoodServings(_patient.AlcoholicDrinks)) * 7;
@@ -128,7 +128,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
                 return _patient.age * .11;
             return 0;
         }
-        private double Z4_BMI()
+        public double Z4_BMI()
         {
             if (_patient.BMI.Equals("too-thin"))
                 return _patient.age * .02;
@@ -144,7 +144,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
                 return _patient.age * .10;
             return 0;
         }
-        private double Z5_Sleep()
+        public double Z5_Sleep()
         {
             if (_patient.sleep.Equals("less-than-7"))
                 return _patient.age * .03;
@@ -154,7 +154,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
                 return _patient.age * .05;
             return 0;
         }
-        private double Z6_Cholesterol()
+        public double Z6_Cholesterol()
         {
             if (_patient.cholesterol.Equals("great"))
                 return _patient.age * -.04;
@@ -167,7 +167,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             return 0;
         }
 
-        private double Z7_BloodPressure()
+        public double Z7_BloodPressure()
         {
             if (_patient.bloodPressure.Equals("great"))
                 return _patient.age * -.05;
@@ -182,14 +182,14 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             return 0;
         }
 
-        private double Z8_Smoking()
+        public double Z8_Smoking()
         {
             if (_patient.smoker.Equals("currently-smoking"))
                 return _patient.age * .12;
             return 0;
         }
 
-        private double Z9_Diabetes()
+        public double Z9_Diabetes()
         {
             if (_patient.diabetes.Equals("no-diabetes"))
                 return _patient.age * -.06;
@@ -201,7 +201,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
                 return _patient.age * .06;
             return 0;
         }
-        private double Z10_Lonely()
+        public double Z10_Lonely()
         {
             if (_patient.lonely.Equals("rarely"))
                 return _patient.age * -.03;
@@ -212,7 +212,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             
             return 0;
         }
-        private double Z11_Stress()
+        public double Z11_Stress()
         {
             if (_patient.stress.Equals("a-little"))
                 return _patient.age * -.03;
@@ -224,7 +224,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             return 0;
         }
 
-        private int redFoodServings(string s)
+        public int redFoodServings(string s)
         {
             if (s.Equals("4-or-more"))
             {

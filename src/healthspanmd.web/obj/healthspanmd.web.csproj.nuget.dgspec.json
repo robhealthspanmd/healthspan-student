@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.web\\healthspanmd.web.csproj": {}
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.web\\healthspanmd.web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj",
         "projectName": "healthspanmd.core",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -29,15 +29,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj"
               }
             }
           }
@@ -67,25 +66,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
         "projectName": "healthspanmd.shared",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\Source\\Repos\\healthspan-student\\src\\healthspanmd.shared\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -96,8 +95,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -136,25 +134,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.web\\healthspanmd.web.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.web\\healthspanmd.web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.web\\healthspanmd.web.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.web\\healthspanmd.web.csproj",
         "projectName": "healthspanmd.web",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.web\\healthspanmd.web.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.web\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.web\\healthspanmd.web.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -165,36 +163,35 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.shared\\healthspanmd.shared.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.shared\\healthspanmd.shared.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\infrastructure.email.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\infrastructure.email.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\infrastructure.email.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\infrastructure.email.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\infrastructure.gmail.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\infrastructure.gmail.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\infrastructure.notifications.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\infrastructure.notifications.csproj"
               },
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj"
               }
             }
           }
@@ -315,25 +312,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj",
         "projectName": "infrastructure.clicksend",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.clicksend\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\infrastructure.clicksend.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.clicksend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -344,15 +341,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -392,25 +388,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\infrastructure.email.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\infrastructure.email.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\infrastructure.email.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\infrastructure.email.csproj",
         "projectName": "infrastructure.email",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\infrastructure.email.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.email\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\infrastructure.email.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.email\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -421,15 +417,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -469,25 +464,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj",
         "projectName": "infrastructure.filesystem",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.filesystem\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\infrastructure.filesystem.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.filesystem\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -498,15 +493,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -542,25 +536,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\infrastructure.gmail.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
         "projectName": "infrastructure.gmail",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.gmail\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\infrastructure.gmail.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.gmail\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -571,15 +565,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -619,25 +612,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\infrastructure.notifications.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
         "projectName": "infrastructure.notifications",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.notifications\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\infrastructure.notifications.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.notifications\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -648,15 +641,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -703,25 +695,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
+    "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
+        "projectUniqueName": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
         "projectName": "infrastructure.sqlserver",
-        "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
-        "packagesPath": "C:\\Users\\grant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\infrastructure.sqlserver\\obj\\",
+        "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\infrastructure.sqlserver.csproj",
+        "packagesPath": "C:\\Users\\Ethan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\infrastructure.sqlserver\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\grant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Ethan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -732,15 +724,14 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.telerik.com/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
-                "projectPath": "C:\\Users\\grant\\source\\repos\\healthspan-student\\src\\healthspanmd.core\\healthspanmd.core.csproj"
+              "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj": {
+                "projectPath": "C:\\Users\\Ethan\\Desktop\\healthspanmd\\src\\healthspanmd.core\\healthspanmd.core.csproj"
               }
             }
           }
@@ -792,7 +783,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
