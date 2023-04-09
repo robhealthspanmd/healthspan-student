@@ -5,20 +5,21 @@ build_property.UsingMicrosoftNETSdkWeb =
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = infrastructure.notifications
 build_property.RootNamespace = infrastructure.notifications
-build_property.ProjectDir = C:\Users\grant\source\repos\healthspan-student\src\infrastructure.notifications\
+build_property.ProjectDir = C:\Users\Delaney\source\repos\healthspan-student\src\infrastructure.notifications\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\grant\source\repos\healthspan-student\src\infrastructure.notifications
+build_property.MSBuildProjectDirectory = C:\Users\Delaney\source\repos\healthspan-student\src\infrastructure.notifications
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/grant/source/repos/healthspan-student/src/infrastructure.notifications/Views/GenericEmailMessage.cshtml]
+[C:/Users/Delaney/source/repos/healthspan-student/src/infrastructure.notifications/Views/GenericEmailMessage.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJpY0VtYWlsTWVzc2FnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/grant/source/repos/healthspan-student/src/infrastructure.notifications/Views/_EmailLayout.cshtml]
+[C:/Users/Delaney/source/repos/healthspan-student/src/infrastructure.notifications/Views/_EmailLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX0VtYWlsTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
