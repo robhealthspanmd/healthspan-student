@@ -1,8 +1,11 @@
-﻿using System;
+﻿using healthspanmd.core.Services.HealthAgeCalculator_v4;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,22 +15,23 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
     {
 
         private Patient _patient;
+        public Email email;
 
-        
-        public HealthAgeCalculatorResult CalculateResult(Patient patient)
+
+        public async Task<HealthAgeCalculatorResult> CalculateResultAsync(Patient patient)
         {
             _patient = patient;
-
+            email = new Email();
             try
             {
                 var age = Convert.ToDouble(_patient.age);
 
                 var healthage = (Z1_PhysicalActivity() + Z2_StrengthTraining() +
-                    + Z3_RedFoods() + Z4_BMI() + Z5_Sleep() + Z6_Cholesterol() + Z7_BloodPressure()
+                    +Z3_RedFoods() + Z4_BMI() + Z5_Sleep() + Z6_Cholesterol() + Z7_BloodPressure()
                     + Z8_Smoking() + Z9_Diabetes() + Z10_Lonely() + Z11_Stress()) / 2;
 
                 healthage = healthage + age;
-
+                _ = await email.sendEmail();
                 return new HealthAgeCalculatorResult()
                 {
                     Success = true,
@@ -44,16 +48,15 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
                     Input = patient
                 };
             }
-
-            
         }
-        private double Z1_PhysicalActivity()
+            private double Z1_PhysicalActivity()
         {
            
             int activity = 0;
             if (_patient.moderateActivity.Equals("less-than-5"))
             {
                 activity += 5;
+                email.moderateActivity = true;
             }
             else if (_patient.moderateActivity.Equals("about-15"))
             {
@@ -70,6 +73,7 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             if (_patient.vigorousActivity.Equals("none"))
             {
                 activity += 0;
+                email.vigorousActivity = true;
             }
             else if (_patient.vigorousActivity.Equals("about-10"))
             {
@@ -100,7 +104,10 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
         private double Z2_StrengthTraining()
         {
             if (_patient.strengthTraining.Equals("less-than-30"))
+            {
+                email.strengthTraining = true;
                 return _patient.age * .04;
+            }
             else if (_patient.strengthTraining.Equals("30-50"))
                 return _patient.age * .01;
             else if (_patient.strengthTraining.Equals("60-119"))
@@ -115,17 +122,23 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
         {
             int servings = (redFoodServings(_patient.sugarAddedDrinks) + redFoodServings(_patient.addedSugar) + redFoodServings(_patient.refinedGrains)
                 + redFoodServings(_patient.deepFriedFoods) + redFoodServings(_patient.processedFoods) + redFoodServings(_patient.AlcoholicDrinks)) * 7;
-           
+
             if (servings <= 7)
-                return _patient.age * -.11;
+                return _patient.age * -.11;          
             else if (servings <= 12)
                 return _patient.age * -.05;
             else if (servings <= 20)
                 return _patient.age * .01;
             else if (servings <= 27)
+            {
+                email.diet = true;
                 return _patient.age * .06;
+            }
             else if (servings > 27)
+            {
+                email.diet = true;
                 return _patient.age * .11;
+            }
             return 0;
         }
         private double Z4_BMI()
@@ -137,17 +150,30 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.BMI.Equals("excess-fat"))
                 return _patient.age * -.01;
             else if (_patient.BMI.Equals("mild-overweight"))
+            {
+                email.BMI = true;
                 return _patient.age * .05;
+            }
             else if (_patient.BMI.Equals("moderate-overweight"))
+            {
+                email.BMI = true;
                 return _patient.age * .08;
+            }
             else if (_patient.BMI.Equals("severe-overweight"))
+            {
+                email.BMI = true;
                 return _patient.age * .10;
+            }
+                
             return 0;
         }
         private double Z5_Sleep()
         {
             if (_patient.sleep.Equals("less-than-7"))
-                return _patient.age * .03;
+            {
+                email.BMI = true;
+                return _patient.age * .10;
+            }
             else if (_patient.sleep.Equals("7-to-9"))
                 return _patient.age * -.03;
             else if (_patient.sleep.Equals("more-than-9"))
@@ -163,7 +189,10 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.cholesterol.Equals("high"))
                 return _patient.age * .02;
             else if (_patient.cholesterol.Equals("really-high"))
+            {
+                email.cholesterol = true;
                 return _patient.age * .04;
+            }
             return 0;
         }
 
@@ -178,14 +207,20 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.bloodPressure.Equals("moderately-high"))
                 return _patient.age * .05;
             else if (_patient.bloodPressure.Equals("severely-elevated"))
+            {
+                email.bloodPressure = true;
                 return _patient.age * .08;
+            }
             return 0;
         }
 
         private double Z8_Smoking()
         {
             if (_patient.smoker.Equals("currently-smoking"))
+            {
+                email.smoker = true;
                 return _patient.age * .12;
+            }
             return 0;
         }
 
@@ -198,7 +233,10 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.diabetes.Equals("well-controlled-diabetes"))
                 return _patient.age * .02;
             else if (_patient.diabetes.Equals("not-well-controlled-diabetes"))
+            {
+                email.diabetes = true;
                 return _patient.age * .06;
+            }
             return 0;
         }
         private double Z10_Lonely()
@@ -208,8 +246,11 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.lonely.Equals("sometimes"))
                 return _patient.age * -.01;
             else if (_patient.lonely.Equals("often"))
+            {
+                email.lonely = true;
                 return _patient.age * .03;
-            
+            }
+
             return 0;
         }
         private double Z11_Stress()
@@ -219,14 +260,18 @@ namespace healthspanmd.core.Services.HealthAgeCalculator_v3
             else if (_patient.stress.Equals("some"))
                 return _patient.age * -.01;
             else if (_patient.stress.Equals("a-lot"))
+            {
+                email.stress = true;
                 return _patient.age * .03;
+            }
+
 
             return 0;
         }
 
         private int redFoodServings(string s)
         {
-            if (s.Equals("4-or-more"))
+            if (s.Equals("4 or more"))
             {
                 return 4;
             }

@@ -31,12 +31,16 @@ namespace healthspanmd.calculator.website.Controllers
         }
 
         [HttpPost]
-        public IActionResult HealthAge(Patient patient)
+        public async Task<IActionResult> HealthAge(Patient patient)
         {
             // Do something with the patient object
-            HealthAgeCalculator cal= new HealthAgeCalculator();
-            HealthAgeCalculatorResult result = cal.CalculateResult(patient);
-            return Content(result.HealthAge.ToString());
+            HealthAgeCalculator cal = new HealthAgeCalculator();
+            HealthAgeCalculatorResult result = await cal.CalculateResultAsync(patient);
+            HealthAgeFinal healthAgeFinal = new HealthAgeFinal();
+            healthAgeFinal.result = result;
+            healthAgeFinal.patient = patient;
+
+            return View(healthAgeFinal);
         }
     }
 }

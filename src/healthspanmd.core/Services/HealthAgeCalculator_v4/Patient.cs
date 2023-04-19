@@ -4,6 +4,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenAI_API;
+using OpenAI_API.Chat;
+using OpenAI_API.Models;
 
 namespace healthspanmd.core.Services.HealthAgeCalculator_v3
 {
