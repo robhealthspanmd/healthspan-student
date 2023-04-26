@@ -1,39 +1,20 @@
-﻿using healthspanmd.calculator.website.Models;
-using healthspanmd.core.Services.HealthAgeCalculator_v3;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Net.Mail;
+using healthspanmd.core.Services.HealthAgeCalculator_v3;
+using healthspanmd.calculator.website.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace healthspanmd.calculator.website.Controllers
+namespace infrastructure.sendgrid
 {
-    public class HomeController : Controller
+    public class SendGridSender : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
         private Patient _patient;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
 
         [HttpPost]
         public async Task<IActionResult> HealthAge(Patient patient)
